@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    
+    <!-- jQuery -->
+    <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/themes/cupertino/jquery-ui.css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>     
+
+<!-- Bootstrap -->
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+
+<!-- Bootstrap -->
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+
+
+<style>
+.centered{
+    width: 50%;
+    height: 350px;
+    position: absolute;
+    top:-300px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+
+.modal-dialog{
+   background-color: white;
+   width: 70%;'
+}
+
+.modal-header{
+   background-color: rgb(224, 236, 247);
+}
+
+.modal-body{
+
+}
+.modal-footer{
+   
+}
+
+</style>
+
+
+
+<script>
+
+//preparar parametres i enviar 
+function enviarGenerar(){
+    //var regArray = new Array();
+
+    /*
+    regArray=$("#frmDades").serializeArray();   
+    //*
+    $.each( regArray, function( i, field ) {
+       console.log(field.name+": "+field.value);
+       alert(field.name+": "+field.value);
+    });
+    alert(regArray.length);
+    //*/
+    /*
+    var regArray='[{"nom": "'+$('#usuariNom').val()+'"},{"contrasenya": "'+$('#usuariContrasenya').val()+'"}]'
+    alert(regArray);
+    regArray=JSON.parse(regArray);
+    alert(regArray);    
+    //*/
+    var nom=$('#usuariNom').val();
+    var contrasenya=$('#usuariContrasenya').val();
+    google.script.run.withSuccessHandler(onSalvarDades).entradaNoXTEC(nom,contrasenya);         
+}
+
+//preparar parametres i enviar 
+function onSalvarDades(missatge){
+   //alert(missatge);
+   google.script.run.usuariCorrecte();
+   $("#missatge").html(missatge);
+   $('#finestraInfo').modal('show');
+
+}
+
+</script>
+
+
+</head>
+
+
+<body>
+  <div class="panel panel-default centered">
+  <? if (Capçalera=="S"){ ?>
+    <div class="panel-heading" id="capçalera">
+        <h3 class="panel-title">
+           <div class="row">
+              <div class="col-md-8">
+                <h1><?= Titol_aplicacio ?></h1>
+              </div>
+              <div class="col-md-4">
+                 <img width="120px" style="float: right;" src="<?= Icona ?>">
+              </div>
+           </div>
+        </h3>
+    </div>
+  <? } ?>
+  <div class="panel-body" style="height:500px">
+     <form id="form-course">
+        <div>
+          <p>Benvolgut <strong><?= userEmail ?> </strong>,          
+          <br>
+             <div class="row">
+                <div class="col-md-12">
+                    <? if(Tipus_missatge=="no_usuari") { ?>
+                        <p>No hi ha cap usuari <strong>@xtec</strong> actiu. Entreu al vostre correu <strong>@xtec</strong> i torneu a executar aquesta aplicació.</p>
+                        <p>O si no esteu donat d'alta a l'aplicació amb un usuari i contrasenya no <strong>@xtec</strong> podeu provar d'entrar les dades al següent formulari</p>
+                        <form id='frmDades'>
+                            <div style='width:90px; text-align:right; float: left'>Usuari:</div><div style='width:50px; float: left'><input type='text' name='usuariNom' id='usuariNom' value='Josep'/></div>
+                            <br><br><div style='width:90px; text-align:right; float: left'>Contrasenya:</div><div style='width:50px; float: left'><input type='text' name='usuariContrasenya' id='usuariContrasenya' value='12345'/></div>
+                            <input type='button' class='btn btn-primary' style='width: 25%; display: block; margin: 0 auto;' onclick="enviarGenerar();" value='Enviar respostes'/>
+                        </form>
+                     <? } else if (Tipus_missatge=="usuari_no_autoritzat") {?>            
+                     
+                        L'usuari que està actualment actiu, <strong><i><?= userEmail ?> </i></strong>, no està al llistat dels autoritzats per executar aquesta aplicació.
+                         <br><br>
+                         Per continuar, tanqueu l'usuari actual, obriu el correu amb un usuari autoritzat i torneu a executar aquesta aplicació.                      
+                     <? } ?>
+                     <hr>
+                     <b><?= Contacte ?></b>
+                </div>
+             </div>  
+       </div>
+     </form>
+  </div>
+</div>
+   
+</body>
+  
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+
+</html>
+
+
+
+
+<!-- Modal -->
+<div id="finestraInfo" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" width='90%'>
+  <div class="modal-dialog">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="modalHeader">Resultats de l'accès a l'aplicació</h3>
+    </div>
+    <div class="modal-body" id="missatge">
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Tancar</button>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
