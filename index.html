@@ -57,71 +57,52 @@ background-color: rgb(224, 236, 247);
 }
 
 </style>
-<title>Creació de Mapes</title>
+<title>Creació de Presentacions</title>
 </head>
 <body>
-<div style="top: 0px; height: 460px; left: 0px; width: 817px;"
+<div style="top: 0px; height: 460px; left: 0px; width: 75%;background-color:#cacaca"
 class="panel panel-default centered">
-<div class="panel-heading" id="capçalera">
+<div class="panel-heading" id="capçalera" style='background-color:grey'>
 <h3 class="panel-title">
-<div class="row">
-<div class="col-md-8">EINA DE CREACIÓ DE MAPES</div>
+<div class="row" style='background-color:grey'>
+<div class="col-md-12"><strong><h3 style='text-align:center'>Eina de creació de presentacions a partir d'un full de càlcul del Google Drive</h3></strong></div>
 </div>
 </h3>
 </div>
-<div class="panel-body" style="height: 500px;">
+<div class="panel-body" style="height: 500px">
 <form id="form-course">
 <div>
 <p>Benvolgut/da <strong> </strong>, <br>
 </p>
 <div class="row">
 <div class="col-md-12">
-<p><span style="font-family: Arial;">Aquesta eina crea un mapa a
-partir
-d'un full de dades d'un
-document de </span><span
-style="font-weight: bold; font-style: italic; font-family: Arial;">Google
-Sheets</span>.
+<p><span style="font-family: Arial;">Aquesta eina crea un mapa, una taula o una presentació de targes a partir d'un full de dades d'un document de </span><span
+style="font-weight: bold; font-style: italic; font-family: Arial;">Google Sheets</span>.
 El document ha de tenir una estructura com la d'aquest <a href="https://docs.google.com/spreadsheets/d/1FjYLjqfnb0iJ1UKHXXbOX-E3krihR1foLwT_KkyLLFk/edit?usp=sharing" target="blank">model de document</a>.<br>
-<span style="font-family: Arial;">L'eina crea un marcador en el mapa per
-a cada registre del full (fila).</span><br style="font-family: Arial;">
-<span style="font-family: Arial;">Un cop creat el mapa, si es clica
-el
-marcador apareix una fitxa
-informativa, creada a partir de les dades del registre.</span><br
+<span style="font-family: Arial;">Cal tenir present que les 3 primeres fileres tenen una <a href='https://docs.google.com/spreadsheets/d/1FjYLjqfnb0iJ1UKHXXbOX-E3krihR1foLwT_KkyLLFk/edit#gid=2069427191'>funció especifica</a> i per tant són espais reservats on s'indica: 
+el nom de les columnes, els filtres que s'utilitzaran i quins seran les columnes que es visualitzaran a les taules.</span><br style="font-family: Arial;">
+<br><span style="font-family: Arial;">L'eina crea un marcador al mapa, una tarja o una fila per a cada registre del full (fila).</span><br style="font-family: Arial;">
+<span style="font-family: Arial;">Un cop creat el mapa, la tarja o la fila, si es clica el marcador apareix una fitxa informativa, creada a partir de les dades del registre.</span><br
 style="font-family: Arial;">
-<span style="font-family: Arial;">Si hi ha diversos registres en una
-mateixa ubicació, es
-genera un marcador únic i la fitxa informativa inclou informació
-dels registres corresponents.</span></p>
+<span style="font-family: Arial;">Si hi ha diversos registres en una mateixa ubicació, es genera un marcador únic i la fitxa informativa inclou informació dels registres corresponents.</span></p>
 <ul>
-<li><span style="font-family: Arial;">Escriu a sota la ID del 
-document de Google Sheets que
-conté les dades, i el nom del full que conté informació de configuració
-addicional per
-a la creació del mapa.
+<li><span style="font-family: Arial;">Escriu a sota la URL del document de Google Sheets que conté les dades, i el nom del full que conté informació de configuració addicional per a la creació del mapa.
 </span></li>
-<li><span style="font-family: Arial;">Un cop s'hagi mostrat el
-mapa,
-conserva la URL que es mostra al navegador per
-utilitzar-la posteriorment (incrustar el mapa en un lloc web, per
-exemple).</span></li>
+<li><span style="font-family: Arial;">Un cop s'hagi mostrat el mapa, conserva la URL que es mostra al navegador per utilitzar-la posteriorment (incrustar el mapa en un lloc web, per exemple).</span></li>
 </ul>
 <br>
-<div style="width: 300px; text-align: right; float: left;">ID de Google Sheets amb les dades :<br>
+<div style="width: 300px; text-align: right; float: left;">URL de Google Sheets amb les dades: <br>
 </div>
 <div style="width: 200px; float: left;"><input name="usuariNom"
-id="fullID" type="text" value="1wy1GlY3PHlkfaUN1mQWKmyzbot8s0SSY1Akw5l2r87k"></div>
+id="fullID" type="text"></div>
 <br>
 <br>
-<div style="width: 300px; text-align: right; float: left;">Nom del
-full
-de configuració :</div>
+<div style="width: 300px; text-align: right; float: left;">Nom del full de configuració: </div>
 <div style="width: 200px; float: left;"><input
 name="usuariContrasenya" id="config" value="Configuració" type="text"></div>
 <div> <input class="btn btn-primary"
 style="margin: 0pt auto; width: 25%; display: block;"
-onclick="window.open('https://script.google.com/a/xtec.cat/macros/s/AKfycbyEj0VnpWsK02Il0ZEaS0d4p7U_bVPSP2JQSj-bdu5FnTDfj7Pc/exec?config='+document.getElementById('config').value+'&ID='+document.getElementById('fullID').value+'&tipus=mapa','_blank');"
+onclick="window.open('https://script.google.com/a/xtec.cat/macros/s/AKfycbzbQifWqMdZaP8E3Iqhp_6pziS0h1I3FcfwhuyUDb4v4ROBtDc/exec?config='+document.getElementById('config').value+'&ID='+document.getElementById('fullID').value,'_blank');"
 value="Crea i mostra el mapa" type="button"> </div>
 </div>
 <hr> </div>
@@ -136,7 +117,7 @@ aria-labelledby="myModalLabel" aria-hidden="true" width="90%">
 <div class="modal-dialog">
 <div class="modal-header"> <button type="button" class="close"
 data-dismiss="modal" aria-hidden="true">×</button>
-<h3 id="modalHeader">Resultats de l'accès a l'aplicació</h3>
+<h3 id="modalHeader">Resultats de l'accés a l'aplicació</h3>
 </div>
 <div class="modal-body" id="missatge"> </div>
 <div class="modal-footer"> <button class="btn" data-dismiss="modal"

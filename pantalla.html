@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    
+<!-- jQuery -->
+<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/themes/cupertino/jquery-ui.css">
+
+<!-- <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>  -->
+<!--<script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>-->
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>     
+
+
+<!--Datatables-->
+<!-- jQuery -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" >
+
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.0.3/css/buttons.dataTables.min.css"></script>
+
+<!-- buttons -->
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.flash.min.js"></script>
+<script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
+<script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.html5.min.js"></script>
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
+
+
+
+<!-- Bootstrap -->
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<style>
+.centered{
+    width: 85%;
+    /*height: 410px;*/
+    position: absolute;
+    /*top:-200px;*/
+    top: 40px;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.filtres{
+    height: 30px;*/
+    position: absolute;
+    /*top:-200px;*/
+    top: 50px!important;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.opcio{
+  color:blue;
+}
+
+.zoom {
+  width: 35px; 
+  height: 35px; 
+  margin: 5px;
+}
+
+.noZoom {
+  width: 0px; 
+  height: 35px; 
+  margin: 5px;
+}
+
+
+#tblDades{
+    font-size:12px;
+    line-height: 1;
+}
+
+
+#map {
+   height: 100%;
+}
+
+#divPresentacio {
+   height: 100%;
+}
+
+/* Optional: Makes the sample page fill the window. */
+html, body {
+   height: 90%;
+   margin: 0;
+   padding: 0;
+}
+
+
+.tblResultats{
+    border: 1px solid black;
+    width: 90%;
+    margin: 0 auto;  
+    max-height: 250px;
+    overflow-y:scroll;        
+}
+
+th{
+ background-color: #cacaca;
+}
+
+tr:hover {
+  background-color: #d9d9d9;
+}
+
+.modal-dialog{
+   background-color: white;
+   width: 70%;
+}
+
+.modal-header{
+   background-color: rgb(224, 236, 247);
+}
+
+.modal-body{
+
+}
+
+.modal-footer{
+
+}
+</style>
+
+
+</head>
+
+<body >
+    <div id="imgtemp" style="position: absolute; margin-left: 25%; margin-top: 5%; width: 50%; height: 300px; background-color: #A0AAD5; opacity:0.7; z-index: 99">
+         <input id="btnTancar" type="button" value="X"/>
+         <div style='text-align:center; line-height: 100px'>
+             Carregant dades
+             <br><img src="http://cdn.nirmaltv.com/images/generatorphp-thumb.gif" style="width: auto; display: block; margin: 0 auto" />
+         </div> 
+    </div>
+
+         <div class="panel-heading" id="capsalera" style="visibility: hidden;">
+         <h3 class="panel-title">
+            <div class="row">
+               <div class="col-md-8">
+                  <h1><?= Titol_aplicacio ?></h1>
+               </div>
+               <div class="col-md-4">
+                  <img width="120px" style="float: right;" src="<?= Icona ?>">
+               </div>
+            </div>
+         </h3>
+         </div>
+         
+         <div>
+         
+               <div class='container-fluid'>
+                 
+                  <!-- <div class='row filtres' id="filtres" style='font-size:14px; float: left'></div> -->
+                  <div class='row filtres' style='margin:10px 0px;visibility: hidden' id="divFiltres">
+                  </div>                  
+                  <div class='row filtres' style=' float:left; margin:10px 0px;visibility: hidden' id="divTipus">
+                  
+                       <select id="selTipus" onchange="aplicaTipus(this.value)" style='width:250px; height: 35px; font-size: 14px; margin: 5px '>
+                           <option value='taula'>Presentació en forma de Taula</option>
+                           <option value='tarja'>Presentació en forma de Targes</option>
+                           <option value='mapa'>Presentació en forma de Mapa</option>
+                        </select>
+                        <input id='botoCentrar' src="https://edumet.cat/edumet/icones/centrar.png" class="noZoom" type="image" onClick="limitsMapa()"> 
+                  </div> 
+                  <div style='font-size:14px; float: right;  margin:10px 0px; visibility: hidden' id="btnNovaPagina">
+                     <input type="button" id="btnB1" value="Anteriors" onclick="creaTarges(-1)"/>
+                     <input type="button" id="btnB2" value="Següents" onclick="creaTarges(1)"/>
+                  </div>
+                  <div style='font-size:14px; float: right; margin-right:10px; margin-top:10px' id='comptadorPagines'></div>
+               </div>
+            <div class="panel-body">
+               <div class='container-fluid'>
+                    <div id="divPresentacio" width="100%"></div>
+               </div>
+            </div>         
+         <div id='divBotons' style='display: none'>
+            <div style="width:50%; float: left">
+               <? if(prmEdit=='S') { ?>
+               <input type='button' class='btn btn-primary' id='btnPermis' style='width: 25%; display: block; margin: 0 auto' onclick="enviarGenerar()" value='Enviar respostes'/>
+               <? } else { ?>
+               <input type='button' class='btn btn-primary' id='btnPermis' style='width: 25%; display: block; margin: 0 auto; color: red' value='Enviar respostes'  onclick="missatgeError('No esteu autoritzat a guardar canvis')" title='No esteu autoritzat a guardar canvis'/>          
+               <? } ?>
+            </div>
+            <form>
+               <div style="width:50%; float: right"><button class='btn btn-primary' style="background-color:grey; width: 25%; display: block; margin: 0 auto"  onclick="self.close()"> Tancar </button></div>
+            </form>
+         </div>
+         <div>
+         </div>
+         </div>
+
+    <div id="map" style="clear:both"></div>
+
+
+<!-- Modal -->
+    <div id="finestraInfo" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" width='90%'>
+     <div class="modal-dialog">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="modalHeader">Resultats del procés de desar dades</h3>
+        </div>
+        <div class="modal-body" id="missatge">
+            <p>One fine body…</p>
+        </div>
+        <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Tancar</button>
+        </div>
+    </div>
+</div>
+
+</body>
+
+
+<!--script incials-->
+<script>
+var numPag=1;
+var Files_capsalera=3;
+var Num_files=0;
+var Num_columnes=0;
+var plantilla_1="";
+var plantilla_2="";
+var dades=new Array();
+var nTarFila=0;
+var row_var=new Array();
+var plantilles=new Array();
+var finalArray=new Array();
+var centres=[];
+var map;
+var markers;
+var marcadors=[];
+var infowindow=[];
+var bounds;
+var markerCluster;
+var Permetre_canvi_presentacions='N';  
+var Presentacio_inicial="tarja";
+var Plantilla_mapa="";
+var Plantilla_tarja="";
+var Plantilla_taula="";
+var Zoom_automatic="";
+
+//per determinar fer global la variable que guardarà la columna per la que s'ordenaran les matrius en el moment de construir els desplegables 
+var colOrd=0; 
+
+var Columna_id="";
+var capsalera='N';
+var permisEdit='';
+
+
+//relacionats amb el tipus mapa
+var numColAgrupa=0;
+var numColBoto=0;
+var numColBotoURL=0;
+var numColLatitud=0;
+var numColLongitud=0;
+
+//Pantalla d'espera per carregar dades
+$(document).ready(function(){ 
+   $("#btnTancar").click(function(){
+        //$('#imgtemp').remove(); 
+        $('#imgtemp').css("visibility","hidden");           
+    });  
+});
+
+var time = 20;
+window.setInterval(test, 1000);
+function test() {
+	time -=1;
+	if(time == 0) {
+        //$('#imgtemp').remove(); 
+        $('#imgtemp').css("visibility","hidden");           
+	}
+}
+
+
+
+
+function fnBoto(id_registre,columna,url){
+   alert("id: "+id_registre+"\nColumna: "+columna+"\nURL: "+url);
+   //*
+   if (dades[0][columna]=="Fitxa"){
+      //if(dades[id_registre][columna]==""){
+      if(url==""){      
+         google.script.run.withSuccessHandler(onFitxa).crear_fitxa_apadrina(id_registre);     
+         //google.script.run.withSuccessHandler(onSalvarDades).salvarDades(regArray);  
+         alert(2)
+      } else {
+         onFitxa(url);
+      }
+   }
+   return
+   //*/
+}
+
+
+function onFitxa(url){
+  window.open(url);  
+}
+
+
+function inicia(){
+    google.script.run.withSuccessHandler(onVariables).recollidaVariables();       
+}
+
+
+
+//Càrrega de les variables 
+function onVariables(variables) {
+   row_var=variables;
+   for (v=0;v<row_var.length;v++){
+      eval(row_var[v][0]+"='"+row_var[v][1]+"'");
+      //console.log(row_var[v][0]+"="+eval("'"+row_var[v][1]+"'"));          
+   }
+   var plantilla=eval("Plantilla_"+Presentacio_inicial);
+   //recollir les dades despres de les variables per garantir que està el nombre de files a mostrar
+   google.script.run.withSuccessHandler(onPlantilles).recollidaPlantilles(plantilla);    
+   google.script.run.withSuccessHandler(onDades).recollidaDades();      
+}
+
+
+
+
+//Càrrega dels estils de la plantilla
+function onPlantilles(plt) {
+   plantilles=plt;
+   estil="";
+   plantilla_1="";
+   plantilla_2="";   
+   for (p=0; p<plantilles[0].length; p++){
+      if (plantilles[0][p]=="<style>"){
+        estil +=plantilles[1][p];
+      }
+      if (plantilles[0][p]=="Plantilla"){
+        plantilla_1 +=plantilles[1][p];        
+      }
+      if (plantilles[0][p]=="Botons"){
+        plantilla_2 +=plantilles[1][p];        
+      } 
+   }
+   //alert(estil);
+   $('#estil').html(estil);   
+   creaTipus();
+}
+
+
+
+//Comprovació dels permisos 
+function comprovacioPermis(){
+    google.script.run.withSuccessHandler(onPermis).comprovacioPermis();   
+}
+
+
+
+//Càrrega de les variables 
+function onPermis(permis) {
+  //alert(permis);
+  permisEdit=permis;
+  presentaDades();
+}
+
+
+
+function ordenaArray(a, b) {
+    if (a[colOrd] === b[colOrd]) {
+        return 0;
+    }
+    else {
+        return (a[colOrd] < b[colOrd]) ? -1 : 1;
+    }
+}
+  
+
+//Càrrega dels filtres 
+function creacioFiltres(){
+  var f=0;
+  var flt="";  
+  for (c=0;c<dades[0].length; c++){
+    if (dades[1][c].toLowerCase().indexOf("selfiltre")>-1){
+        var cmp=""; //per controlar si l'opció ha estat o no incorporada
+        var nomCamp=dades[0][c];
+        nomCamp=nomCamp.replace(new RegExp(' ', 'g'),'_');               
+        nomCamp=nomCamp.replace(new RegExp('/', 'g'),'_');          
+        //nomCamp=nomCamp.normalize('NFD').replace(/[\u0300-\u036f]/g, "_")        
+        flt +="<select name='"+nomCamp+"' id='sel_"+nomCamp+"' onChange='aplicacioFiltres(this.id)' style='width:170px; height: 35px; font-size: 14px; margin: 5px '>";        
+        flt +="<option value='*'>"+dades[0][c]+"</option>";        
+        for (var j=3; j < dades.length ; j++) {           
+            var str=dades[j][c];            
+            str=str.replace(new RegExp(' ', 'g'),'_');
+            str=str.replace(new RegExp('/', 'g'),'_');            
+            //str=str.normalize('NFD').replace(/[\u0300-\u036f]/g, "_")                    
+            if (str.length>0){            
+                if (cmp.indexOf(str)<0){
+                    flt +="<option class='opcio' value="+str+">"+dades[j][c]+"</option>";
+                    cmp +="#"+str;
+                }
+            }
+        }
+        flt +="</select>";       
+    } else if (dades[1][c].toLowerCase().indexOf("csvfiltre")>-1) {
+        var cmp="";
+        var nomCamp=dades[0][c];
+        nomCamp=nomCamp.replace(new RegExp(' ', 'g'),'_');       
+        nomCamp=nomCamp.replace(new RegExp('/', 'g'),'_');   
+        //nomCamp=nomCamp.normalize('NFD').replace(/[\u0300-\u036f]/g, "_")        
+        flt +="<select name='"+nomCamp+"' id='sel_"+nomCamp+"' onChange='aplicacioFiltres(this.id)' style='width:170px; height: 35px; font-size: 14px; margin: 5px '>";        
+        flt +="<option value='*'>"+dades[0][c]+"</option>";     
+        for (var j = 3; j < dades.length-3 ; j++) {           
+            var str=dades[j][c];     
+            str=str.replace(new RegExp(' ', 'g'),'_');            
+            str=str.replace(new RegExp('/', 'g'),'_');                        
+            //str=str.normalize('NFD').replace(/[\u0300-\u036f]/g, "_")                    
+            if (str.length>0){
+                var xF=str.split(",");
+                for (f=0;f<xF.length;f++){
+                    if (cmp.indexOf(xF[f])<0){
+                        flt +="<option value="+xF[f]+" class='opcio' >"+xF[f]+"</option>";
+                        cmp +="#"+xF[f];
+                    }
+                }
+            }
+        }
+        flt +="</select>";           
+    }
+     if (dades[1][c].indexOf("Agrupa")>-1) {
+            numColAgrupa=c;
+     }
+     if (dades[1][c].indexOf("BotoTitol")>-1) {
+            numColBoto=c;
+     }
+     if (dades[1][c].indexOf("BotoURL")>-1) {
+            numColBotoURL=c;
+     }
+     if (dades[1][c].indexOf("Latitud")>-1) {
+            numColLatitud=c;
+     }
+     if (dades[1][c].indexOf("Longitud")>-1) {
+            numColLongitud=c;
+     }    
+  }
+
+  if (flt!="") {
+     $("#divFiltres").css("visibility","visible"); 
+     $('#divFiltres').html(flt);
+  } else {
+     $("#divFiltres").css("display","none");   
+  }
+  
+  $('#selTipus').val(Presentacio_inicial);
+}
+
+
+
+
+//Aplicacio filtres
+function aplicacioFiltres(id){
+  $("*").css("cursor","wait");
+  if ($("#"+id).val()=="*") {
+    $("#"+id).css("color","initial");
+  } else {
+    $("#"+id).css("color","red");
+  }
+  
+  var finalArray=new Array();
+  finalArray=dades;
+  
+  for (c=0;c<finalArray[0].length; c++){
+    if (finalArray[1][c].toLowerCase().indexOf("selfiltre")>-1 || finalArray[1][c].toLowerCase().indexOf("csvfiltre")>-1){
+       var nomCamp=finalArray[0][c];
+       nomCamp=nomCamp.replace(new RegExp(' ', 'g'),'_')
+       nomCamp=nomCamp.replace(new RegExp('/', 'g'),'_') 
+       //nomCamp=nomCamp.normalize('NFD').replace(/[\u0300-\u036f]/g, "_")
+       if($("#sel_"+nomCamp).val()!="*"){
+         var arr=new Array();
+         arr[0]=finalArray[0]
+         arr[1]=finalArray[1]
+         arr[2]=finalArray[2]         
+         var n=3 
+         for (r=3;r<finalArray.length; r++){         
+             var strName="[name='"+finalArray[r][Columna_id]+"#$"+finalArray[0][c]+"'";
+             var strVal=$(strName).val();             
+             var strCamp=finalArray[r][c];
+             strCamp=strCamp.replace(new RegExp(' ', 'g'),'_')
+             strCamp=strCamp.replace(new RegExp('/', 'g'),'_')             
+             //strCamp=strCamp.normalize('NFD').replace(/[\u0300-\u036f]/g, "_")
+             if(strCamp.indexOf($("#sel_"+nomCamp).val())>-1){             
+                arr[n]=finalArray[r];
+                n +=1;
+             }
+         }
+         finalArray=arr;
+       }
+    }
+  }
+  //return finalArray
+  switch (Presentacio_inicial){
+  case "mapa":
+      creaMarcadors(finalArray);
+  case "taula":
+      //creaTaula(finalArray);  
+      return finalArray;
+  case "tarja":
+      //creaTarges(finalArray);
+      return finalArray;      
+  }
+  $("*").css("cursor","default");     
+}
+
+
+
+
+//Visualitza les primeres fitxes
+function onDades(dad) {
+   //alert(dad)
+   dades=dad;
+   creacioFiltres(dades);
+   switch (Presentacio_inicial){
+   case "mapa":
+      if (Zoom_automatic=='N') {
+          $('#botoCentrar').removeClass("noZoom").addClass("zoom");
+      } 
+      else {
+          $('#botoCentrar').removeClass("zoom").addClass("noZoom");
+      }
+      creaMarcadors(dades);
+      break;
+   case "taula":
+      creaTaula(dades);
+      break;
+   case "tarja":
+      creaTarges(0);
+      break;      
+   }
+
+   if (capsalera=='N'){
+     $("#capsalera").css("display","none");
+   } else {
+     $("#capsalera").css("visibility","visible");          
+     $("#capsalera").css("display","block");   
+   }
+   
+   if (Permetre_canvi_presentacions=='N'){
+     $("#divTipus").css("display","none");      
+   } else {
+     $("#divTipus").css("visibility","visible");   
+   }   
+   $('#imgtemp').css('display','none');   
+}
+
+
+function aplicaTipus(tipus){
+
+  if (tipus=="mapa" && Zoom_automatic=='N') {
+      $('#botoCentrar').removeClass("noZoom").addClass("zoom");
+  } 
+  else {
+      $('#botoCentrar').removeClass("zoom").addClass("noZoom");
+  }
+
+   $('#imgtemp').css('display','block');
+   $("*").css("cursor","wait");   
+   /*
+   $("#divFiltres").css("visibility","visible"); 
+   $("#divFiltres").css("display","block");    
+   //*/
+   
+   var plantilla=eval("Plantilla_"+tipus);
+   Presentacio_inicial=tipus;
+   //recollir les dades despres de les variables per garantir que està el nombre de files a mostrar
+   google.script.run.withSuccessHandler(onPlantilles).recollidaPlantilles(plantilla);    
+}
+
+
+
+//function creaTipus(Presentacio_inicial){
+function creaTipus() {
+   $('#imgtemp').css('display','block');
+   $("*").css("cursor","wait");   
+ 
+    
+   switch (Presentacio_inicial){
+   case "mapa":
+     $("#btnNovaPagina").hide();   
+     $("#comptadorPagines").hide();            
+     $("#divBotons").css("display","none");                     
+     $("#divPresentacio").css("display","none");                               
+     $("#map").css("visibility","visible");               
+     $("#map").css("display","block");                         
+     creaMarcadors(dades);
+     break;
+   case "taula":
+     $("#btnNovaPagina").hide();   
+     $("#comptadorPagines").hide();       
+     $("#map").css("display","none");                     
+     $("#divPresentacio").css("visibility","visible");                     
+     $("#divPresentacio").css("display","block");                          
+     creaTaula(dades);
+     break;
+   case "tarja":
+     $("#divBotons").css("display","none");                
+     $("#map").css("display","none");                          
+     $("#divPresentacio").css("visibility","visible");                     
+     $("#divPresentacio").css("display","block");                               
+     creaTarges(0);
+     break;      
+   }
+   $("*").css("cursor","default"); 
+   $('#imgtemp').css('display','none');
+}
+
+
+
+
+//Visualitza les primeres fitxes
+function creaTaula() {
+  for (c=0;c<dades[0].length; c++) {
+    if (dades[1][c].toLowerCase()=='id'){
+      Columna_id=c;
+      break;
+    }
+  }
+ 
+  for (r=0; r<dades.length; r++){
+    var str="";    
+    if (r>2){
+      for (c=0; c<dades[0].length;c++){
+        if (dades[2][c].length==0){
+          str +=dades[r][c]+"##";
+          //str +="<input disabled name='"+dades[r][Columna_id]+"#$"+dades[0][c]+"' value="+dades[r][c]+" style='width:100%'/>##";                    
+        }      
+        if (dades[2][c].toLowerCase().indexOf(":visu")>-1){
+          str +=dades[r][c]+"##";
+          //str +="<input disabled name='"+dades[r][Columna_id]+"#$"+dades[0][c]+"' value="+dades[r][c]+" style='width:100%'/>##";          
+        }
+        if (dades[2][c].toLowerCase().indexOf("text:edit")>-1 && dades[2][c].toLowerCase().indexOf("areatext:edit")<0){ 
+          var valor=dades[r][c].replace(/[']+/g, '`');
+          str +="<input name='"+dades[r][Columna_id]+"#$"+dades[0][c]+"' value='"+valor+"' style='width:100%'/>##";
+        }      
+        if (dades[2][c].toLowerCase().indexOf("areatext:edit")>-1){
+          var valor=dades[r][c].replace(/[']+/g, '`');        
+          str +="<textarea name='"+dades[r][Columna_id]+"#$"+dades[0][c]+"' style='width:100%'>"+valor+"</textarea>##";
+        } 
+        if (dades[2][c].toLowerCase().indexOf("boto")>-1){
+          var valor=dades[r][c].replace(/[']+/g, '`');        
+          str +="<button value='"+valor+"' onclick=\"fnBoto("+r+","+c+",this.value);\" style='width:100%; height:25px; max-width: 150px;'>btn_"+dades[0][c]+"</button>##";
+        }         
+        
+        if (dades[2][c].toLowerCase().indexOf("radio:")>-1){
+            var opc=dades[2][c].substring(6,100);
+            var opcions=opc.split(",");
+            for (p=0;p<opcions.length;p++){
+               if (dades[r][c]==opcions[p]){
+                  str +="<input type='radio' checked value='"+opcions[p]+"' name='"+dades[r][Columna_id]+"#$"+dades[0][c]+"' style='margin-left:5px'/>"+opcions[p];
+               } else {
+                  str +="<input type='radio' value='"+opcions[p]+"' name='"+dades[r][Columna_id]+"#$"+dades[0][c]+"' style='margin-left:5px'/>"+opcions[p];
+               }
+            }
+            str +="##";
+        }            
+        if (dades[2][c].toLowerCase().indexOf("sel:")>-1){
+            var opc=dades[2][c].substring(4,100)
+            var opcions=opc.split(",");
+            str +="<select name='"+dades[r][Columna_id]+"#$"+dades[0][c]+"'>";          
+            str +="<option value='*'>"+dades[0][c]+"</option>";          
+            for (p=0;p<opcions.length;p++){
+               if (dades[r][c]==opcions[p]){
+                  str +="<option selected value='"+opcions[p]+"'>"+opcions[p]+"</option>";
+               } else {
+                  str +="<option value='"+opcions[p]+"'>"+opcions[p]+"</option>";
+               }
+            }
+            str +="</select>";
+            str +="##";
+        }         
+      }
+      str=str.substring(0,str.length-2);
+      dades[r]=str.split("##");
+    } else {
+      dades[r]=dades[r];             
+    }
+  }
+  //presentaDades();
+  
+  var txtDiv="<form id='frmDades'>";
+      txtDiv +="<table id='tblDades' class='display' width='100%'></table>";
+  txtDiv +="</form>";
+  $("#divPresentacio").html(txtDiv);  
+  comprovacioPermis();
+}
+
+
+
+
+//Actualització de les pàgines 
+function presentaDades(id) {
+  $('#imgtemp').css("visibility","visible");  
+   var row=aplicacioFiltres(id);
+
+   var targes=new Array();
+
+   for (r=3;r<row.length;r++){
+      var str="";
+      for (col=0;col<row[0].length;col++){
+          if (row[2][col].length>0){ 
+             str +=row[r][col]+"##";
+          }
+      }
+      str=str.substring(0,str.length-2);
+      targes[r-3]=str.split("##");      
+   }
+
+
+   if ( $.fn.dataTable.isDataTable( '#tblDades' ) ) {
+      $('#tblDades').unbind();      
+      var dt1 = $.fn.dataTable.tables()[0];
+      $(dt1).DataTable().destroy();
+    }
+   
+
+   var titols=new Array();
+   r=0;
+   for (c=0;c<dades[0].length;c++){
+      if (dades[2][c].length>0){
+        var title= dades[0][c];
+        titols[r]={title};        
+        r +=1;
+      }
+   }
+
+   //alert(targes.length+"\n"+titols.length);
+
+
+   $('#tblDades').DataTable( {
+        dom: 'Bfrtip',
+        select: true,        
+        buttons: ['csv','pdf','print'],
+        data: targes,
+        columns: titols,
+        scrollY:        '50vh',
+        scrollCollapse: true,
+        paging:         false,        
+        "order": []
+        
+    } );
+    
+  var table = $('#tblDades').DataTable();
+
+  if (permisEdit=='S'){
+      $("#btnPermis").show();    
+      $("input").prop('disabled', false);                   
+  } else {
+      $("#btnPermis").hide();    
+      $("input").prop('disabled', true);                     
+  }
+     
+  $("#divBotons").css("visibility","visible");     
+  $("#divTaula").show();  
+  $("#divPresentacio").show();    
+  $("#divBotons").show();   
+  $("*").css("cursor","default");  
+  $('#imgtemp').css("display","none");    
+}
+
+
+
+//preparar parametres i enviar 
+function enviarGenerar(){
+    $("*").css("cursor","wait");
+    var regArray = new Array();
+    regArray=$("#frmDades").serializeArray();   
+    google.script.run.withSuccessHandler(onSalvarDades).salvarDades(regArray);         
+}
+
+
+
+
+//preparar parametres i enviar 
+function onSalvarDades(missatge){
+   $("#modalHeader").html(missatge[0]);
+   var divMissatge="";
+      divMissatge +="<table id='tblResultats'>";   
+      divMissatge +="<tr><th style='width: 10%; border: solid 1px grey'>Registre</th><th style='width: 10%; border: solid 1px grey'>Columna</th><th style='width: 40%;  border: solid 1px grey'>Valor antic</th><th style='width: 40%;  border: solid 1px grey'>Nou valor</th></tr>";   
+      for (c=1; c<missatge.length; c++){
+           divMissatge +=missatge[c];
+      }
+      divMissatge +="</table>";      
+   $("#missatge").html(divMissatge);
+   $('#finestraInfo').modal('show');
+   $("*").css("cursor","default");    
+      
+   $("#tblResultats").css({
+     "border":"1px solid black",
+     "width": "90%",
+     "margin": "0 auto",  
+     "max-height": "250px",
+     "overflow-y": "scroll"});
+}
+
+
+
+
+//preparar parametres i enviar 
+function missatgeError(missatge){
+   $("#modalHeader").html("Avís");
+   var divMissatge=missatge;
+   $("#missatge").html(divMissatge);
+   $('#finestraInfo').modal('show');
+   $("*").css("cursor","default");    
+}
+
+
+
+
+//Actualització de les pàgines 
+function creaTarges(sentit) {
+
+  $('#imgtemp').css("visibility","visible");   
+  numPag +=sentit;  
+  Files_capsalera=parseInt(Files_capsalera);
+
+  divAmplada=$("#divPresentacio").css("width");
+  divAmpladaTar=parseInt(divAmplada)/parseInt(Num_columnes);
+  divAmpladaTar=divAmpladaTar-20; //afegir els marges laterals
+  nTarFila=(parseInt(parseInt(divAmplada)/divAmpladaTar));
+  //alert("amplada contenidor: "+divAmplada+"\nNombre de columnes: "+Num_columnes+"\nAmplada targeta: "+divAmpladaTar+"\nNombre de targes per fila: "+nTarFila);
+  var nReg=nTarFila*Num_files;
+  var targes=aplicacioFiltres();
+
+  if (numPag<1) {
+     numPag=1
+  };
+  var xIni=nTarFila*(numPag-1)*Num_files;
+  var xFin=nTarFila*(numPag)*Num_files;  
+
+  if (xFin>targes.length-Files_capsalera) {
+      numPag -=1;      
+      xIni=nTarFila*(numPag)*Num_files;
+      xFin=targes.length-Files_capsalera;
+  };    
+  var divDades="";
+  var t=0;
+  
+
+  for (var j = xIni; j < targes.length-Files_capsalera; j++) {  
+     var plt=plantilles[1][0];
+     for (c=0;c<targes[0].length; c++){
+        if (plt.indexOf("{{"+targes[0][c]+"}}")>-1){
+            var cadena="{{"+targes[0][c]+"}}";
+            plt=plt.replace(new RegExp(cadena, 'g'), targes[Files_capsalera+j][c]);  
+
+            if(targes[1][c].toLowerCase().indexOf("imatge")>-1) {
+              if(targes[Files_capsalera+j][c]=="") { 
+                plt=plt.replace("logo","nologo");
+              }
+            }            
+            if(targes[1][c].toLowerCase().indexOf("url")>-1) {
+              if(targes[Files_capsalera+j][c]=="") { 
+                plt=plt.replace("url","nourl");
+              }
+            } 
+
+        }
+     }
+     divDades +=plt;
+     t +=1;        
+    if (t>=nReg || t>=targes.length-Files_capsalera) {break};     
+  }
+  
+
+  if(xIni==0 && xFin>=parseInt(targes.length)-Files_capsalera){
+    $("#btnNovaPagina").hide();
+  } else {
+    $("#btnNovaPagina").css('visibility','visible');      
+    $("#btnNovaPagina").show();             
+  }
+
+  if (xIni==0){
+    $("#btnB1").css('background-color', '#CACACA');  
+    $("#btnB1").css('color', '#FFFFFF');      
+    $("#btnB1").prop('disabled', true);      
+  } else {
+    $("#btnB1").css('background-color', 'inherit');
+    $("#btnB1").css('color', 'inherit');      
+    $("#btnB1").prop('disabled', false);          
+  }
+  
+  if (xFin>=parseInt(targes.length)-Files_capsalera){
+    $("#btnB2").css('background-color', '#CACACA');    
+    $("#btnB2").css('color', '#FFFFFF');          
+    $("#btnB2").prop('disabled', true);          
+  } else {
+    $("#btnB2").css('background-color', 'inherit');
+    $("#btnB2").css('color', 'inherit');          
+    $("#btnB2").prop('disabled', false);          
+  }
+
+  var regPagina="Registres: "+(xIni+1)+" a  "+xFin+" de "+parseInt(targes.length-Files_capsalera);
+  $("#comptadorPagines").html(regPagina);  
+  $("#comptadorPagines").show();         
+   
+  $('#divPresentacio').html(divDades);
+  $(".targeta").css("width",divAmpladaTar);  
+    
+  $('#imgtemp').css("display","none");     
+  $("*").css("cursor","default");  
+}
+
+function creaMapa() {
+ map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 8,
+    center: {lat: 41.7292826, lng: 1.8225154} // Manresa, per a zoom manual
+ });  
+ $('#imgtemp').css("display","none");    
+}
+
+function creaMarcadors(finalArray){
+
+// Construeix targes i mostra marcadors en el mapa
+   var infoWindowActual=new google.maps.InfoWindow();
+   var repetit=[];
+   for (var i=0;i<finalArray.length;i++) {
+     repetit[i]=false;
+   }        
+   var numCentres=0;     
+   
+   creaMapa();
+   centres=[];
+   marcadors=[]; 
+      
+   for (var i=3;i<finalArray.length;i++) { 
+     if (!repetit[i]) {
+       var numRepetits=0;
+       var titols=[];
+       var blogs=[];
+       titols[0]=finalArray[i][numColBoto];
+       blogs[0]=finalArray[i][numColBotoURL];
+     
+       for(var j=i+1;j<finalArray.length;j++) {
+         var primer=parseFloat(finalArray[i][numColAgrupa]);
+         var segon=parseFloat(finalArray[j][numColAgrupa]);
+         
+         if(primer==segon) {
+           numRepetits++;
+           repetit[j]=true;
+           titols[numRepetits]=finalArray[j][numColBoto];
+           blogs[numRepetits]=finalArray[j][numColBotoURL];
+         }                                                                  
+       }                                                  
+       centres[numCentres]=[];
+       for(var j=0;j<finalArray[0].length;j++) {
+          centres[numCentres][j]=finalArray[i][j];
+       }
+       centres[numCentres][numColBoto]=titols;                      
+       centres[numCentres][numColBotoURL]=blogs;                      
+   
+       numCentres++;
+     }         
+   }       
+ 
+   var locations=new Array();    
+   for (k=0;k<centres.length;k++) (function(i){
+ 
+      locations[i]={lat: parseFloat(centres[i][numColLatitud]), lng: parseFloat(centres[i][numColLongitud])}; 
+   
+        var capsalera=plantilla_1;      
+        for (c=0;c<finalArray[0].length; c++){
+          if (capsalera.indexOf("{{"+finalArray[0][c]+"}}")>-1){
+            capsalera=capsalera.replace("{{"+finalArray[0][c]+"}}",centres[i][c]);
+            if(finalArray[1][c]=="Imatge") {
+              if(centres[i][c]=="") { 
+                capsalera=capsalera.replace("logo","nologo");
+              }
+            }
+            if(finalArray[1][c]=="URL") {
+              if(centres[i][c]=="") { 
+                capsalera=capsalera.replace("url","nourl");
+              }
+            }
+          }
+        }         
+        
+        var titolsActuals=centres[i][numColBoto]; 
+        var blogsActuals=centres[i][numColBotoURL];  
+        
+        var botons="";            
+        for(var j=0;j<titolsActuals.length;j++) {
+           var boto=plantilla_2;
+              if(blogsActuals[j]=="") { 
+                boto=boto.replace("url","nourl");
+              }
+           boto=boto.replace("{{BotoTitol}}",titolsActuals[j]);
+           boto=boto.replace("{{BotoURL}}",blogsActuals[j]);
+           botons+=boto;
+           botons+="<br>";
+        }
+      
+
+        capsalera=capsalera.replace("{{#Botons#}}",botons);                
+        contentString='<div id="content">';               
+        contentString+=capsalera;
+        contentString+='</div>';
+        
+        marcadors[i]=new google.maps.Marker({
+          position: locations[i],
+          //map: map
+        });  
+        
+       
+        infowindow[i] = new google.maps.InfoWindow({content: contentString});
+                 
+        marcadors[i].addListener('click', function() {   
+              infoWindowActual.close();
+              infowindow[i].open(map,marcadors[i]);
+              infoWindowActual=infowindow[i];
+        });
+
+     })(k);  
+      
+      // Add a marker clusterer to manage the markers.
+      markerCluster = new MarkerClusterer(map, marcadors,
+      {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+      if(Zoom_automatic=='S') {
+        limitsMapa();
+      }
+      
+     //$("#divFiltres").css("visibility","visible"); 
+
+     $('#imgtemp').css("display","none");           
+     $("*").css("cursor","default");  
+      
+}
+
+function limitsMapa(){
+ if (marcadors.length>0) {       
+        var bounds = new google.maps.LatLngBounds();
+        for (var l = 0; l < marcadors.length; l++) {
+           bounds.extend(marcadors[l].getPosition());
+        }      
+        map.fitBounds(bounds);
+      }
+}
+
+</script>
+
+<!--div on es carregaran els estils -->
+<style id="estil">
+</style>
+
+<!--div on es carregaran els scripts -->
+<script id="script">
+</script>
+
+<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyANTZUP7RPqwaCdyiFp2XhWcJLQxRDRX5U&callback=inicia"></script>
+
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
