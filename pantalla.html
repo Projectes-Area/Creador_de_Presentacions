@@ -137,7 +137,8 @@ tr:hover {
 
 </head>
 
-<body >
+
+<body>
     <div id="imgtemp" style="position: absolute; margin-left: 25%; margin-top: 5%; width: 50%; height: 300px; background-color: #A0AAD5; opacity:0.7; z-index: 99">
          <input id="btnTancar" type="button" value="X"/>
          <div style='text-align:center; line-height: 100px'>
@@ -146,8 +147,8 @@ tr:hover {
          </div> 
     </div>
 
-         <div class="panel-heading" id="capsalera" style="visibility: hidden;">
-         <h3 class="panel-title">
+    <div class="panel-heading" id="capsalera" style="visibility: hidden;">
+        <h3 class="panel-title">
             <div class="row">
                <div class="col-md-8">
                   <h1><?= Titol_aplicacio ?></h1>
@@ -156,37 +157,28 @@ tr:hover {
                   <img width="120px" style="float: right;" src="<?= Icona ?>">
                </div>
             </div>
-         </h3>
-         </div>
+        </h3>
+    </div>
          
-         <div>
-         
-               <div class='container-fluid'>
-                 
-                  <!-- <div class='row filtres' id="filtres" style='font-size:14px; float: left'></div> -->
-                  <div class='row filtres' style='margin:10px 0px;visibility: hidden' id="divFiltres">
-                  </div>                  
-                  <div class='row filtres' style=' float:left; margin:10px 0px;visibility: hidden' id="divTipus">
-                  
-                       <select id="selTipus" onchange="aplicaTipus(this.value)" style='width:250px; height: 35px; font-size: 14px; margin: 5px '>
-                           <option value='taula'>Presentació en forma de Taula</option>
-                           <option value='tarja'>Presentació en forma de Targes</option>
-                           <option value='mapa'>Presentació en forma de Mapa</option>
-                        </select>
-                        <input id='botoCentrar' src="https://edumet.cat/edumet/icones/centrar.png" class="noZoom" type="image" onClick="limitsMapa()"> 
-                  </div> 
-                  <div style='font-size:14px; float: right;  margin:10px 0px; visibility: hidden' id="btnNovaPagina">
-                     <input type="button" id="btnB1" value="Anteriors" onclick="creaTarges(-1)"/>
-                     <input type="button" id="btnB2" value="Següents" onclick="creaTarges(1)"/>
-                  </div>
-                  <div style='font-size:14px; float: right; margin-right:10px; margin-top:10px' id='comptadorPagines'></div>
-               </div>
-            <div class="panel-body">
-               <div class='container-fluid'>
-                    <div id="divPresentacio" width="100%"></div>
-               </div>
-            </div>         
-         <div id='divBotons' style='display: none'>
+    <div class='container-fluid'>
+            <div class='row filtres' style='margin:10px 0px;visibility: hidden;clear:both' id="divFiltres">
+            </div>                  
+            <div class='row filtres' style='margin:10px 0px 15px 0px;visibility: hidden; float:left;' id="divTipus">
+                <select id="selTipus" onchange="aplicaTipus(this.value)" style='float:left; width:250px; height: 35px; font-size: 14px;'>
+                    <option value='taula'>Presentació en forma de Taula</option>
+                    <option value='tarja'>Presentació en forma de Targes</option>
+                    <option value='mapa'>Presentació en forma de Mapa</option>
+                </select>
+                <input id='botoCentrar' src="https://edumet.cat/edumet/icones/centrar.png" class="noZoom" type="image" onClick="limitsMapa()" style='float:left; margin-left:10px; margin-top:0px'> 
+            </div> 
+            <div style='font-size:14px; float: right;  margin:5px 0px; visibility: hidden' id="btnNovaPagina">
+                <input type="button" id="btnB1" value="Anteriors" onclick="creaTarges(-1)"/>
+                <input type="button" id="btnB2" value="Següents" onclick="creaTarges(1)"/>
+            </div>
+            <div style='font-size:14px; float: right; margin-right:10px; margin-top:5px' id='comptadorPagines'></div>
+
+        <div id="divPresentacio" style="clear:both; width: 100%; margin-top:5px"></div>
+        <div id='divBotons' style='display: none'>
             <div style="width:50%; float: left">
                <? if(prmEdit=='S') { ?>
                <input type='button' class='btn btn-primary' id='btnPermis' style='width: 25%; display: block; margin: 0 auto' onclick="enviarGenerar()" value='Enviar respostes'/>
@@ -197,31 +189,28 @@ tr:hover {
             <form>
                <div style="width:50%; float: right"><button class='btn btn-primary' style="background-color:grey; width: 25%; display: block; margin: 0 auto"  onclick="self.close()"> Tancar </button></div>
             </form>
-         </div>
-         <div>
-         </div>
-         </div>
-
-    <div id="map" style="clear:both"></div>
-
+        </div>        
+    </div>
+ 
+    <div id="map" style="clear:both; margin: 5px 15px"></div>     
 
 <!-- Modal -->
     <div id="finestraInfo" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" width='90%'>
-     <div class="modal-dialog">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h3 id="modalHeader">Resultats del procés de desar dades</h3>
-        </div>
-        <div class="modal-body" id="missatge">
-            <p>One fine body…</p>
-        </div>
-        <div class="modal-footer">
-            <button class="btn" data-dismiss="modal" aria-hidden="true">Tancar</button>
+        <div class="modal-dialog">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="modalHeader">Resultats del procés de desar dades</h3>
+            </div>
+            <div class="modal-body" id="missatge">
+                <p>One fine body…</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal" aria-hidden="true">Tancar</button>
+            </div>
         </div>
     </div>
-</div>
-
-</body>
+    
+</body>    
 
 
 <!--script incials-->
@@ -232,6 +221,7 @@ var Num_files=0;
 var Num_columnes=0;
 var plantilla_1="";
 var plantilla_2="";
+var dades_org=new Array();
 var dades=new Array();
 var nTarFila=0;
 var row_var=new Array();
@@ -250,6 +240,13 @@ var Plantilla_mapa="";
 var Plantilla_tarja="";
 var Plantilla_taula="";
 var Zoom_automatic="";
+var Zoom_max;
+var Clusters="";
+var bounds;
+var bounds_all;
+var iniciantMapa=true;
+var filtresActius=0;
+
 
 //per determinar fer global la variable que guardarà la columna per la que s'ordenaran les matrius en el moment de construir els desplegables 
 var colOrd=0; 
@@ -286,32 +283,33 @@ function test() {
 
 
 
+function inicia(){
+    google.script.run.withSuccessHandler(onVariables).recollidaVariables();       
+}
+
+
+
+
 
 function fnBoto(id_registre,columna,url){
-   alert("id: "+id_registre+"\nColumna: "+columna+"\nURL: "+url);
-   //*
+   //url=dades[id_registre][columna];
+   //console.log("id: "+id_registre+"\nColumna: "+columna+"\nURL: "+url);
    if (dades[0][columna]=="Fitxa"){
       //if(dades[id_registre][columna]==""){
       if(url==""){      
          google.script.run.withSuccessHandler(onFitxa).crear_fitxa_apadrina(id_registre);     
-         //google.script.run.withSuccessHandler(onSalvarDades).salvarDades(regArray);  
-         alert(2)
       } else {
          onFitxa(url);
       }
+   } else {
+      onFitxa(url);
    }
-   return
-   //*/
 }
 
 
 function onFitxa(url){
+  alert("Full de càlcul creat: "+url+"\n\n\nRefresqueu la pantalla per actualitzar les dades");
   window.open(url);  
-}
-
-
-function inicia(){
-    google.script.run.withSuccessHandler(onVariables).recollidaVariables();       
 }
 
 
@@ -338,6 +336,8 @@ function onPlantilles(plt) {
    estil="";
    plantilla_1="";
    plantilla_2="";   
+   script="";
+   div="";
    for (p=0; p<plantilles[0].length; p++){
       if (plantilles[0][p]=="<style>"){
         estil +=plantilles[1][p];
@@ -348,9 +348,17 @@ function onPlantilles(plt) {
       if (plantilles[0][p]=="Botons"){
         plantilla_2 +=plantilles[1][p];        
       } 
+      if (plantilles[0][p]=="<script>"){
+        script +=plantilles[1][p];        
+      }       
+      if (plantilles[0][p]=="<div>"){
+        div +=plantilles[1][p];        
+      }             
    }
-   //alert(estil);
-   $('#estil').html(estil);   
+   $('#divEstil').html(estil);  
+   script=script.replace(new RegExp('""', 'g'),'"');
+   $('#divScript').html(script);      
+   $('#divDiv').html(div);      
    creaTipus();
 }
 
@@ -393,9 +401,9 @@ function creacioFiltres(){
         nomCamp=nomCamp.replace(new RegExp(' ', 'g'),'_');               
         nomCamp=nomCamp.replace(new RegExp('/', 'g'),'_');          
         //nomCamp=nomCamp.normalize('NFD').replace(/[\u0300-\u036f]/g, "_")        
-        flt +="<select name='"+nomCamp+"' id='sel_"+nomCamp+"' onChange='aplicacioFiltres(this.id)' style='width:170px; height: 35px; font-size: 14px; margin: 5px '>";        
+        flt +="<select name='"+nomCamp+"' id='sel_"+nomCamp+"' onChange='aplicacioFiltres(this.id)' style='width:170px; height: 35px; font-size: 14px; margin-right: 5px '>";        
         flt +="<option value='*'>"+dades[0][c]+"</option>";        
-        for (var j=3; j < dades.length ; j++) {           
+        for (var j=Files_capsalera; j < dades.length ; j++) {           
             var str=dades[j][c];            
             str=str.replace(new RegExp(' ', 'g'),'_');
             str=str.replace(new RegExp('/', 'g'),'_');            
@@ -465,12 +473,19 @@ function creacioFiltres(){
 
 //Aplicacio filtres
 function aplicacioFiltres(id){
+
+
+
   $("*").css("cursor","wait");
   if ($("#"+id).val()=="*") {
     $("#"+id).css("color","initial");
+    filtresActius--;   
   } else {
     $("#"+id).css("color","red");
+    filtresActius++;
   }
+  
+
   
   var finalArray=new Array();
   finalArray=dades;
@@ -486,8 +501,8 @@ function aplicacioFiltres(id){
          arr[0]=finalArray[0]
          arr[1]=finalArray[1]
          arr[2]=finalArray[2]         
-         var n=3 
-         for (r=3;r<finalArray.length; r++){         
+         var n=Files_capsalera; 
+         for (r=Files_capsalera;r<finalArray.length; r++){         
              var strName="[name='"+finalArray[r][Columna_id]+"#$"+finalArray[0][c]+"'";
              var strVal=$(strName).val();             
              var strCamp=finalArray[r][c];
@@ -523,8 +538,9 @@ function aplicacioFiltres(id){
 //Visualitza les primeres fitxes
 function onDades(dad) {
    //alert(dad)
+   dades_org=dad;
    dades=dad;
-   creacioFiltres(dades);
+   creacioFiltres(dades_org);
    switch (Presentacio_inicial){
    case "mapa":
       if (Zoom_automatic=='N') {
@@ -533,10 +549,10 @@ function onDades(dad) {
       else {
           $('#botoCentrar').removeClass("zoom").addClass("noZoom");
       }
-      creaMarcadors(dades);
+      creaMarcadors(dades_org);
       break;
    case "taula":
-      creaTaula(dades);
+      creaTaula(dades_org);
       break;
    case "tarja":
       creaTarges(0);
@@ -624,57 +640,60 @@ function creaTipus() {
 
 //Visualitza les primeres fitxes
 function creaTaula() {
-  for (c=0;c<dades[0].length; c++) {
-    if (dades[1][c].toLowerCase()=='id'){
+  dades=dades_org;
+  //alert(dades_org.length);
+  for (c=0;c<dades_org[0].length; c++) {
+    if (dades_org[1][c].toLowerCase()=='id'){
       Columna_id=c;
       break;
     }
   }
  
-  for (r=0; r<dades.length; r++){
+  for (r=0; r<dades_org.length; r++){
     var str="";    
     if (r>2){
-      for (c=0; c<dades[0].length;c++){
-        if (dades[2][c].length==0){
-          str +=dades[r][c]+"##";
+      for (c=0; c<dades_org[0].length;c++){
+        if (dades_org[2][c].length==0){
+          str +=dades_org[r][c]+"##";
           //str +="<input disabled name='"+dades[r][Columna_id]+"#$"+dades[0][c]+"' value="+dades[r][c]+" style='width:100%'/>##";                    
         }      
-        if (dades[2][c].toLowerCase().indexOf(":visu")>-1){
-          str +=dades[r][c]+"##";
+        if (dades_org[2][c].toLowerCase().indexOf(":visu")>-1){
+          str +=dades_org[r][c]+"##";
           //str +="<input disabled name='"+dades[r][Columna_id]+"#$"+dades[0][c]+"' value="+dades[r][c]+" style='width:100%'/>##";          
         }
-        if (dades[2][c].toLowerCase().indexOf("text:edit")>-1 && dades[2][c].toLowerCase().indexOf("areatext:edit")<0){ 
-          var valor=dades[r][c].replace(/[']+/g, '`');
-          str +="<input name='"+dades[r][Columna_id]+"#$"+dades[0][c]+"' value='"+valor+"' style='width:100%'/>##";
+        if (dades_org[2][c].toLowerCase().indexOf("text:edit")>-1 && dades_org[2][c].toLowerCase().indexOf("areatext:edit")<0){ 
+          var valor=dades_org[r][c].replace(/[']+/g, '`');
+          str +="<input name='"+dades_org[r][Columna_id]+"#$"+dades_org[0][c]+"' value='"+valor+"' style='width:100%'/>##";
         }      
-        if (dades[2][c].toLowerCase().indexOf("areatext:edit")>-1){
-          var valor=dades[r][c].replace(/[']+/g, '`');        
-          str +="<textarea name='"+dades[r][Columna_id]+"#$"+dades[0][c]+"' style='width:100%'>"+valor+"</textarea>##";
+        if (dades_org[2][c].toLowerCase().indexOf("areatext:edit")>-1){
+          var valor=dades_org[r][c].replace(/[']+/g, '`');        
+          str +="<textarea name='"+dades_org[r][Columna_id]+"#$"+dades_org[0][c]+"' style='width:100%'>"+valor+"</textarea>##";
         } 
-        if (dades[2][c].toLowerCase().indexOf("boto")>-1){
-          var valor=dades[r][c].replace(/[']+/g, '`');        
-          str +="<button value='"+valor+"' onclick=\"fnBoto("+r+","+c+",this.value);\" style='width:100%; height:25px; max-width: 150px;'>btn_"+dades[0][c]+"</button>##";
+        if (dades_org[2][c].toLowerCase().indexOf("boto")>-1){
+          var valor=dades_org[r][c].replace(/[']+/g, '`');        
+          //str +="<input type='button' id='btn_"+r+"_"+c+"' onclick=\"fnBoto("+r+","+c+",this.id);\" style='width:100%; height:25px; max-width: 150px;'value='btn_"+dades_org[0][c]+"'</input>##";
+          str +="<input type='button' id='"+valor+"' onclick=\"fnBoto("+r+","+c+",this.id);\" style='width:100%; height:25px; max-width: 150px;'value='btn_"+dades_org[0][c]+"'</input>##";          
         }         
         
-        if (dades[2][c].toLowerCase().indexOf("radio:")>-1){
-            var opc=dades[2][c].substring(6,100);
+        if (dades_org[2][c].toLowerCase().indexOf("radio:")>-1){
+            var opc=dades_org[2][c].substring(6,100);
             var opcions=opc.split(",");
             for (p=0;p<opcions.length;p++){
-               if (dades[r][c]==opcions[p]){
-                  str +="<input type='radio' checked value='"+opcions[p]+"' name='"+dades[r][Columna_id]+"#$"+dades[0][c]+"' style='margin-left:5px'/>"+opcions[p];
+               if (dades_org[r][c]==opcions[p]){
+                  str +="<input type='radio' checked value='"+opcions[p]+"' name='"+dades_org[r][Columna_id]+"#$"+dades_org[0][c]+"' style='margin-left:5px'/>"+opcions[p];
                } else {
-                  str +="<input type='radio' value='"+opcions[p]+"' name='"+dades[r][Columna_id]+"#$"+dades[0][c]+"' style='margin-left:5px'/>"+opcions[p];
+                  str +="<input type='radio' value='"+opcions[p]+"' name='"+dades_org[r][Columna_id]+"#$"+dades_org[0][c]+"' style='margin-left:5px'/>"+opcions[p];
                }
             }
             str +="##";
         }            
-        if (dades[2][c].toLowerCase().indexOf("sel:")>-1){
-            var opc=dades[2][c].substring(4,100)
+        if (dades_org[2][c].toLowerCase().indexOf("sel:")>-1){
+            var opc=dades_org[2][c].substring(4,100)
             var opcions=opc.split(",");
-            str +="<select name='"+dades[r][Columna_id]+"#$"+dades[0][c]+"'>";          
-            str +="<option value='*'>"+dades[0][c]+"</option>";          
+            str +="<select name='"+dades_org[r][Columna_id]+"#$"+dades_org[0][c]+"'>";          
+            str +="<option value='*'>"+dades_org[0][c]+"</option>";          
             for (p=0;p<opcions.length;p++){
-               if (dades[r][c]==opcions[p]){
+               if (dades_org[r][c]==opcions[p]){
                   str +="<option selected value='"+opcions[p]+"'>"+opcions[p]+"</option>";
                } else {
                   str +="<option value='"+opcions[p]+"'>"+opcions[p]+"</option>";
@@ -709,7 +728,7 @@ function presentaDades(id) {
 
    var targes=new Array();
 
-   for (r=3;r<row.length;r++){
+   for (r=Files_capsalera;r<row.length;r++){
       var str="";
       for (col=0;col<row[0].length;col++){
           if (row[2][col].length>0){ 
@@ -918,9 +937,11 @@ function creaTarges(sentit) {
 
 function creaMapa() {
  map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 8,
-    center: {lat: 41.7292826, lng: 1.8225154} // Manresa, per a zoom manual
+    //zoom:8
+    //nter: {lat: 41.7292826, lng: 1.8225154} // Manresa, per a zoom manual
  });  
+ 
+ 
  $('#imgtemp').css("display","none");    
 }
 
@@ -938,39 +959,49 @@ function creaMarcadors(finalArray){
    centres=[];
    marcadors=[]; 
       
-   for (var i=3;i<finalArray.length;i++) { 
-     if (!repetit[i]) {
-       var numRepetits=0;
-       var titols=[];
-       var blogs=[];
-       titols[0]=finalArray[i][numColBoto];
-       blogs[0]=finalArray[i][numColBotoURL];
-     
-       for(var j=i+1;j<finalArray.length;j++) {
-         var primer=parseFloat(finalArray[i][numColAgrupa]);
-         var segon=parseFloat(finalArray[j][numColAgrupa]);
-         
-         if(primer==segon) {
-           numRepetits++;
-           repetit[j]=true;
-           titols[numRepetits]=finalArray[j][numColBoto];
-           blogs[numRepetits]=finalArray[j][numColBotoURL];
-         }                                                                  
-       }                                                  
-       centres[numCentres]=[];
-       for(var j=0;j<finalArray[0].length;j++) {
-          centres[numCentres][j]=finalArray[i][j];
-       }
-       centres[numCentres][numColBoto]=titols;                      
-       centres[numCentres][numColBotoURL]=blogs;                      
+   for (var i=Files_capsalera;i<finalArray.length;i++) {
    
-       numCentres++;
-     }         
-   }       
+     //if (parseFloat(finalArray[i][numColLatitud])>0 && parseFloat(finalArray[i][numColLongitud])>0) {
+     
+       if (!repetit[i]) {
+         var numRepetits=0;
+         var titols=[];
+         var blogs=[];
+         titols[0]=finalArray[i][numColBoto];
+         blogs[0]=finalArray[i][numColBotoURL];
+       
+         for(var j=i+1;j<finalArray.length;j++) {
+         
+           //if (parseFloat(finalArray[j][numColLatitud])>0 && parseFloat(finalArray[j][numColLongitud])>0) {
+           
+             var primer=parseFloat(finalArray[i][numColAgrupa]);
+             var segon=parseFloat(finalArray[j][numColAgrupa]);
+             
+             if(primer==segon) {
+               numRepetits++;
+               repetit[j]=true;
+               titols[numRepetits]=finalArray[j][numColBoto];
+               blogs[numRepetits]=finalArray[j][numColBotoURL];
+             }    
+             
+           //}  
+             
+           }                                                  
+           centres[numCentres]=[];
+           for(var j=0;j<finalArray[0].length;j++) {
+              centres[numCentres][j]=finalArray[i][j];
+           }
+           centres[numCentres][numColBoto]=titols;                      
+           centres[numCentres][numColBotoURL]=blogs;                      
+       
+           numCentres++;
+       }   
+       //}
+   }
  
    var locations=new Array();    
-   for (k=0;k<centres.length;k++) (function(i){
- 
+   for (k=0;k<centres.length;k++) (function(i){   
+
       locations[i]={lat: parseFloat(centres[i][numColLatitud]), lng: parseFloat(centres[i][numColLongitud])}; 
    
         var capsalera=plantilla_1;      
@@ -1011,82 +1042,88 @@ function creaMarcadors(finalArray){
         contentString+=capsalera;
         contentString+='</div>';
         
-        marcadors[i]=new google.maps.Marker({
-          position: locations[i],
-          //map: map
-        });  
-        
+       if (Clusters=='S'){        
+          marcadors[i]=new google.maps.Marker({
+            position: locations[i]
+          });  
+       } else {
+          marcadors[i]=new google.maps.Marker({
+            position: locations[i],
+            map: map
+          });           
+       }       
        
-        infowindow[i] = new google.maps.InfoWindow({content: contentString});
-                 
+        infowindow[i] = new google.maps.InfoWindow({content: contentString});     
+                       
         marcadors[i].addListener('click', function() {   
               infoWindowActual.close();
               infowindow[i].open(map,marcadors[i]);
               infoWindowActual=infowindow[i];
         });
 
-     })(k);  
+     })(k);      
+
+      if (Clusters=='S'){  
+        // Add a marker clusterer to manage the markers.
+        markerCluster = new MarkerClusterer(map, marcadors,
+        {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+      }  
       
-      // Add a marker clusterer to manage the markers.
-      markerCluster = new MarkerClusterer(map, marcadors,
-      {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+      bounds = new google.maps.LatLngBounds();      
+
+      if (marcadors.length>0) {       
+        for (var l = 0; l < marcadors.length; l++) {
+           bounds.extend(marcadors[l].getPosition());
+        } 
+        if (iniciantMapa) {
+          bounds_all=bounds;
+          iniciantMapa=false;
+        }
+      }
+      
       if(Zoom_automatic=='S') {
         limitsMapa();
+      } else {
+        if (bounds_all!=null) {
+          map.fitBounds(bounds_all);     
+        }
       }
       
      //$("#divFiltres").css("visibility","visible"); 
 
      $('#imgtemp').css("display","none");           
-     $("*").css("cursor","default");  
-      
+     $("*").css("cursor","default");        
 }
 
-function limitsMapa(){
- if (marcadors.length>0) {       
-        var bounds = new google.maps.LatLngBounds();
-        for (var l = 0; l < marcadors.length; l++) {
-           bounds.extend(marcadors[l].getPosition());
-        }      
-        map.fitBounds(bounds);
-      }
+function limitsMapa(){    
+    if (marcadors.length>0) {     
+      map.fitBounds(bounds);
+    }
+    zoomChangeBoundsListener = 
+    google.maps.event.addListenerOnce(map, 'bounds_changed', function(event) {
+        if (this.getZoom() > parseFloat(Zoom_max)){   
+            this.setZoom(parseFloat(Zoom_max));  
+        }
+    });
+    setTimeout(function(){google.maps.event.removeListener(zoomChangeBoundsListener)}, 2000);      
 }
 
 </script>
 
 <!--div on es carregaran els estils -->
-<style id="estil">
+<style id="divEstil">
 </style>
 
 <!--div on es carregaran els scripts -->
-<script id="script">
-</script>
+<div id="divScript">
+</div>
+
+<div id="divDiv">
+</div>
 
 <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyANTZUP7RPqwaCdyiFp2XhWcJLQxRDRX5U&callback=inicia"></script>
 
 
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
