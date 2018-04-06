@@ -1,135 +1,412 @@
 <html>
-<head>
-<base target="_top"><!-- jQuery -->
-<link rel="stylesheet"
-href="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/themes/cupertino/jquery-ui.css">
-<script
-src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script
-src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script><!-- Bootstrap -->
-<link rel="stylesheet"
-href="https://maxcdn.bootstra%0Apcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-<!-- Bootstrap -->
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet"
-href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-crossorigin="anonymous">
-<!-- Optional theme -->
-<link rel="stylesheet"
-href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
-integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
-crossorigin="anonymous">
-<!-- Latest compiled and minified JavaScript -->
-<script
-src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-crossorigin="anonymous"></script>
+   <head>
+      <base target="_top">
+      <!-- jQuery -->
+      <link rel="stylesheet"  href="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/themes/cupertino/jquery-ui.css">
+      <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
+      <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+         
+      <!-- Bootstrap -->
+      <!-- Latest compiled and minified CSS -->
+      <link rel="stylesheet"
+         href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+         integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+         crossorigin="anonymous">
+      <!-- Optional theme -->
+      <link rel="stylesheet"
+         href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+         integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+         crossorigin="anonymous">
+      <!-- Latest compiled and minified JavaScript -->
+      <script
+         src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+         integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+         crossorigin="anonymous">
+      </script>
+
+
 <style>
-.centered{
-width: 50%;
-height: 350px;
-position: absolute;
+.carousel-indicators {
+    bottom: -5px;
+}
 
-top:-300px;
-bottom: 0;
-left: 0;
-right: 0;
-margin: auto;
 
+.carousel-caption {
+    padding-bottom: 3px;
+}
+
+.container {
+    padding-left: 100px;
+    padding-right: 100px;
+    width: 100%;  
+}
+
+.carousel-control {
+    width:20%;
+}
+.badge {
+    display: inline;
+    min-width: 20px;
+    margin: 10px;
+    font-size: 16px;
 }
 
 .modal-dialog{
-background-color: white;
-width: 70%;'
-}
-
-.modal-header{
-background-color: rgb(224, 236, 247);
+    width:75%;
 }
 
 .modal-body{
-
-}
-.modal-footer{
-
+   width: 90%;
+   margin: 5px 5%;
 }
 
+.carousel-indicators .active{
+  background-color: #428bca;
+}
+
+p {
+  margin: 5px 0px;
+}
+
+h3 {
+ font-size:1.5em;
+}
 </style>
+
+
 <title>Creació de Presentacions</title>
+
+
 </head>
-<body>
-<div style="top: 0px; height: 460px; left: 0px; width: 75%;background-color:#cacaca"
-class="panel panel-default centered">
-<div class="panel-heading" id="capçalera" style='background-color:grey'>
-<h3 class="panel-title">
-<div class="row" style='background-color:grey'>
-<div class="col-md-12"><strong><h3 style='text-align:center'>Eina de creació de presentacions a partir d'un full de càlcul del Google Drive</h3></strong></div>
-</div>
-</h3>
-</div>
-<div class="panel-body" style="height: 500px">
-<form id="form-course">
-<div>
-<p>Benvolgut/da <strong> </strong>, <br>
-</p>
-<div class="row">
-<div class="col-md-12">
-<p><span style="font-family: Arial;">Aquesta eina crea un mapa, una taula o una presentació de targes a partir d'un full de dades d'un document de </span><span
-style="font-weight: bold; font-style: italic; font-family: Arial;">Google Sheets</span>.
-El document ha de tenir una estructura com la d'aquest <a href="https://docs.google.com/spreadsheets/d/1FjYLjqfnb0iJ1UKHXXbOX-E3krihR1foLwT_KkyLLFk/edit?usp=sharing" target="blank">model de document</a>.<br>
-<span style="font-family: Arial;">Cal tenir present que les 3 primeres fileres tenen una <a href='https://docs.google.com/spreadsheets/d/1FjYLjqfnb0iJ1UKHXXbOX-E3krihR1foLwT_KkyLLFk/edit#gid=2069427191'>funció especifica</a> i per tant són espais reservats on s'indica: 
-el nom de les columnes, els filtres que s'utilitzaran i quins seran les columnes que es visualitzaran a les taules.</span><br style="font-family: Arial;">
-<br><span style="font-family: Arial;">L'eina crea un marcador al mapa, una tarja o una fila per a cada registre del full (fila).</span><br style="font-family: Arial;">
-<span style="font-family: Arial;">Un cop creat el mapa, la tarja o la fila, si es clica el marcador apareix una fitxa informativa, creada a partir de les dades del registre.</span><br
-style="font-family: Arial;">
-<span style="font-family: Arial;">Si hi ha diversos registres en una mateixa ubicació, es genera un marcador únic i la fitxa informativa inclou informació dels registres corresponents.</span></p>
-<ul>
-<li><span style="font-family: Arial;">Escriu a sota la URL del document de Google Sheets que conté les dades, i el nom del full que conté informació de configuració addicional per a la creació del mapa.
-</span></li>
-<li><span style="font-family: Arial;">Un cop s'hagi mostrat el mapa, conserva la URL que es mostra al navegador per utilitzar-la posteriorment (incrustar el mapa en un lloc web, per exemple).</span></li>
-</ul>
-<br>
-<div style="width: 300px; text-align: right; float: left;">URL de Google Sheets amb les dades: <br>
-</div>
-<div style="width: 200px; float: left;"><input name="usuariNom"
-id="fullID" type="text"></div>
-<br>
-<br>
-<div style="width: 300px; text-align: right; float: left;">Nom del full de configuració: </div>
-<div style="width: 200px; float: left;"><input
-name="usuariContrasenya" id="config" value="Configuració" type="text"></div>
-<div> <input class="btn btn-primary"
-style="margin: 0pt auto; width: 25%; display: block;"
-onclick="window.open('https://script.google.com/a/xtec.cat/macros/s/AKfycbzbQifWqMdZaP8E3Iqhp_6pziS0h1I3FcfwhuyUDb4v4ROBtDc/exec?config='+document.getElementById('config').value+'&ID='+document.getElementById('fullID').value,'_blank');"
-value="Crea i mostra el mapa" type="button"> </div>
-</div>
-<hr> </div>
-</div>
-</form>
-</div>
-</div>
-<script
-src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script><!-- Modal -->
-<div id="finestraInfo" class="modal fade" tabindex="-1" role="dialog"
-aria-labelledby="myModalLabel" aria-hidden="true" width="90%">
-<div class="modal-dialog">
-<div class="modal-header"> <button type="button" class="close"
-data-dismiss="modal" aria-hidden="true">×</button>
-<h3 id="modalHeader">Resultats de l'accés a l'aplicació</h3>
-</div>
-<div class="modal-body" id="missatge"> </div>
-<div class="modal-footer"> <button class="btn" data-dismiss="modal"
-aria-hidden="true">Tancar</button> </div>
-</div>
-</div>
+<body onload="presenta_dades()">
+<div class="container">
+<header id="main-header">
+
+    <!-- Carousel
+    ================================================== -->
+
+    <div id="myCarousel" class="carousel slide" data-ride="carousel" style="margin:30px">
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1" ></li>
+        <li data-target="#myCarousel" data-slide-to="2" ></li>
+      </ol>
+      
+            
+    <!-- Wrapper for slides -->      
+      <div class="carousel-inner">
+        <div class="item active">
+          <div class="carousel-caption" >
+            <h3>Presentació en forma de mapa.</h3>
+          </div>
+          <div class="text-center">
+            <img src="https://drive.google.com/uc?id=1lo929CWiLwUWkPZJPWGazwBMX_ISikik" alt="First slide">
+          </div>
+        </div>
+        <div class="item">
+          <div class="text-center">
+            <img src="https://drive.google.com/uc?id=1hSKEGc2JyxdA5nMcF6zlwo5wtC8_Ik3D" alt="Second slide">
+          </div>
+          <div class="carousel-caption">
+            <h3 style="color: #428bca">Presentació en forma de targes.</h3>            
+          </div>
+        </div>
+        <div class="item">
+          <div class="text-center">        
+            <img src="https://drive.google.com/uc?id=1kPm7yMuBEuz0CtmMjuCA23sPwcZAvwYJ" alt="Third slide">
+          </div>  
+          <div class="carousel-caption">
+            <h3 style="color: #000">Presentació en forma de taula.</h3>            
+          </div>
+        </div>
+      </div>
+      
+      <!-- Left and right controls -->
+      <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+      <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+
+    </div>
+
+    <div class="container">    
+      <h4 style='text-align: center;'><a href="https://script.google.com/a/macros/xtec.cat/s/AKfycbyaz-KrhOESpoUOrGHncEnSSWixoxXJ6Zvh4Xm7tgO32Az4TIpd/exec?ID=<?= idFullModel ?>&config=Config_1" target="_blank" >Aplicació</a> que us permetrà crear presentacions de mapes, targes i taules per publicar a partir de fulls de càlcul de Google  (<a href="https://docs.google.com/spreadsheets/d/1NpyfKlvJ3_SSowkg0QFQfZZOA_kbuFufda21NXCfEUY/view#gid=0" target="_blank">MODEL</a>) declarats públics</h4>    
+      <span style="text-align: center;font-family: Arial;">Amb aquesta eina podeu crear un mapa mapa, una taula o una presentació de targes a partir d'un full de dades d'un document de </span> <span style="font-weight: bold; font-style: italic; font-family: Arial;">Google Sheets</span>.
+    </div>
+</header>                         
+    <!-- /.carousel -->
+
+    <div class="container marketing">
+
+      <!-- Three columns of text below the carousel -->
+      <div class="row">
+        <div class="col-lg-3">
+           <h3><span class="badge"> 1 </span>Crear el full de càlcul</h3>
+          <div><a class="btn btn-default" data-toggle="modal" data-target="#FullCalcul"  name='btnFullCalcul' id='btnFullCalcul' role="button">Veure detall &raquo;</a></div>          
+        </div>
+
+        <div class="col-lg-3">
+          <h3><span class="badge" style="background-color: #428bca"> 2 </span>Indicar columnes a visualitzar</h3>          
+          <p><a class="btn btn-default" data-toggle="modal" data-target="#Columnes" name='btnColumnes' id='btnColumnes' role="button">Veure detall &raquo;</a></p>
+        </div>
+
+        <div class="col-lg-3">
+          <h3><span class="badge" style="background-color: #428bca"> 3 </span>Personalitzar presentació</h3>          
+          <p><a class="btn btn-default" data-toggle="modal" data-target="#Parametres" name='btnParametres' id='btnParametres' role="button">Veure detall &raquo;</a></p>
+        </div>
+        
+        <div class="col-lg-3">
+          <h3><span class="badge"> 4 </span>Configurar i compartir</h3>          
+          <p><a class="btn btn-default" data-toggle="modal" data-target="#Compartir" name='btnCompartir' id='btnCompartir' role="button" >Veure detall &raquo;</a></p>
+       </div>
+      </div>
+    </div>
+  
+
+   
+
+  <!-- Finestra configuració del fulls de càlcul-->
+  <div class="modal fade" id="FullCalcul" tabindex="-1" role="dialog" aria-labelledby="myModal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header" style="background-color:#E0ECF7;" >
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h3 class="modal-title" id="myModal" ><span class="badge"> 1 </span>Construïu el vostre full de càlcul amb les dades a representar.</h3> 
+        </div>
+        <div id="divVisuGraf" class="modal-body"> 
+          <div class="col-md-8">
+              <p style="background-color: #DEDCDC">Dades a representar (veure <a href="https://docs.google.com/spreadsheets/d/1NpyfKlvJ3_SSowkg0QFQfZZOA_kbuFufda21NXCfEUY/view#gid=0" target="_blank">MODEL</a>).</p>
+              <div id="data">
+                <table id="dataTABLE" >
+                  <tbody id="dataTBODY">
+                  </tbody>
+                </table>
+              </div>
+          </div>
+          <div class="col-md-4">
+            <p style="background-color: #DEDCDC">Publicar el full de càlcul.</p>
+            <img class="featurette-image img-responsive" src="https://drive.google.com/uc?id=1LjreVv1ZrZ-uWds0tkOYynRk7E86r3in" style="width: 100%; border: solid 1px #cacaca"/>
+          </div>          
+        </div>        
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal"  style="float:rigth; margin:20px;">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="Columnes" tabindex="-1" role="dialog" aria-labelledby="myModal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header" style="background-color:#E0ECF7;" >
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h3 class="modal-title" id="myModal" ><span class="badge"> 2 </span>Indiqueu, sota el nom de cada columna, la forma en la que es visualitzarà el contingut.</h3>
+        </div>
+        <div id="divVisuGraf" class="modal-body"> 
+           <p>Indiqueu quines són les columnes a visualitzar en cada presentació, de quina forma ho faran i si es facilitaran eines per filtra els registres a presentar.</p>
+           <div style="margin-top:5px"><p>Les 3 primeres fileres de la pestanya de dades, tenen una funció especifica i per tant, són espais reservats on s'indica: </p></div>
+           <ul>
+              <li><strong>Primera filera:</strong> el nom de les columnes.</li>
+              <li><strong>Segona filera:</strong> la forma en que serà presentada la informació, els filtres els agrupaments  que s'utilitzaran, si hi haurà o no agrupaments de registres, les imatges....</li>
+              <li><strong>Tercera filera:</strong> les columnes que es visualitzaran en les presentacions en forma de taula.</li>
+           </ul>
+           <p>A la següent taula, podeu trobar informació especifica dels diferents comportaments que poden tenir els valors de cada columna (vuere <a href="https://docs.google.com/spreadsheets/d/1BTFM2CIU7_51pfFdBHA5vJUWuqmirl23Gy9gLu1UdO0/edit#gid=362729893" target="_blank">MODEL</a>):
+           <a href="https://docs.google.com/spreadsheets/d/1BTFM2CIU7_51pfFdBHA5vJUWuqmirl23Gy9gLu1UdO0/edit#gid=362729893" target="_blank"><img src='https://edumet.cat/areatac/presentacions/tipologia_columnes.png' style='margin: 10px 0px; width:100%; height:600px'></a></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>  
+
+
+
+  <!-- Finestra presentació plantilles-->
+  <div class="modal fade" id="Parametres" tabindex="-1" role="dialog" aria-labelledby="myModal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header" style="background-color:#E0ECF7;" >
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h3 class="modal-title" id="myModal" ><span class="badge" style="background-color: #428bca"> 3 </span>Personalitzeu la presentació amb la creació de plantilles</h3>          
+        </div>
+        <div id="divVisuGraf" class="modal-body"> 
+           <p>Les presentacions han d'anar acompanyades d'una pestanya on caldrà construir, en format HTML, l'estructura que voleu que adopti la informació quan es presenti al web.</p>
+           <p>Modifiqueu les plantilles del model o creeu unes de noves seguint per les pautes del llenguatge HTML5.</p>
+           <p>Tot i que poden haver altres columnes (<strong>informacio, &lt;script&gt;,&lt;div&gt;</strong>), la mínima configuració de cada plantilla consta de dues fileres i 3 columnes (<strong>plantilla,botons,&lt;style&gt;</strong>).</p>
+           <p>Al fitxer <a href="https://docs.google.com/spreadsheets/d/1NpyfKlvJ3_SSowkg0QFQfZZOA_kbuFufda21NXCfEUY/edit#gid=1450176318" target="_blank">MODEL</a> podreu trobar diverses plantilles de configuració</p>           
+           <p>Exemple:</p>                      
+           <table style="width: 100%; margin: 5px 0;">
+              <tr>
+                 <td style="border: 1px solid #000; background:#CACACA; width: 35%">Plantilla</td>
+                 <td style="border: 1px solid #000; background:#CACACA; width: 25%">Botons</td>
+                 <td style="border: 1px solid #000; background:#CACACA; width: 25%">&lt;style&gt;</td>
+                 <td style="border: 1px solid #000; width: 15%" rowspan="3">
+                    <img src="https://edumet.cat/areatac/presentacions/tarja.png"/>                 
+                 </td>
+              </tr>
+              <tr>
+                 <td style="border: 1px solid #000">Codi html amb el nom dels camps a substituir pels valors de cada registre entre <strong>{{}}:<br><br>{{<i>nom del camp</i>}}</strong></td>
+                 <td style="border: 1px solid #000">Com a la columna anterior però amb la informació que es vulgui mostrar en forma de botó en la presentació.<br><br>En el cas que s'agrupin diversos registres en una mateixa pantalla, es crearan tants botons com a registres agrupats</td>
+                 <td style="border: 1px solid #000">La definició dels estils dels elements de les Plantilles</td>                 
+              </tr>
+              <tr style="font-size: 0.8em">
+                 <td style="border: 1px solid #000">
+                    &lt;div id='targeta' class='m-4 zindex-dropdown'&gt;
+                       <br>&nbsp;&nbsp;&nbsp;&nbsp;&lt;img src="{{Imatge}}" class="imatge" &gt;
+                       <br>&nbsp;&nbsp;&nbsp;&nbsp;&lt;br&gt;&lt;a href="{{Enllaç}}" target="_blank" class="url" &gt;&lt;b&gt;{{Titol}}&lt;/b&gt;&lt;/a&gt;
+                       <br>&nbsp;&nbsp;&nbsp;&nbsp;&lt;br&gt;&lt;b&gt;Adreça: &lt;/b&gt;{{Adreça}}
+                       <br>&nbsp;&nbsp;&nbsp;&nbsp;&lt;br&gt;&lt;b&gt;Localitat: &lt;/b&gt;{{Localitat}}
+                       <br>&nbsp;&nbsp;&nbsp;&nbsp;&lt;br&gt;&lt;br&gt;
+                      <br>&lt;div style="clear: both;text-align:center"&gt;{{#Botons#}}&lt;/div&gt;
+                    <br>&lt;/div&gt;</td>
+                 <td style="border: 1px solid #000">
+                    <br>&lt;button style="width:100%" class="btn-element" onclick="obreDescripcio({{id}})"&gt;
+                    <br>&nbsp;&nbsp;&nbsp;&nbsp;Més informació
+                    <br>&lt;/button&gt;
+                 </td>
+                 <td style="border: 1px solid #000">
+                    <br>.btn-element{
+                        <br>&nbsp;&nbsp;&nbsp;height: 30px;
+                        <br>&nbsp;&nbsp;&nbsp;margin: 2px 0px;
+                        <br>&nbsp;&nbsp;&nbsp;background-color:#BF0000;
+                        <br>&nbsp;&nbsp;&nbsp;color:#FFFFFF;
+                    <br>}
+                    <br>.m-4 {
+                        <br>&nbsp;&nbsp;&nbsp;margin: 1rem!important; 
+                        <br>&nbsp;&nbsp;&nbsp;width: 250px;
+                        <br>&nbsp;&nbsp;&nbsp;padding:0 5px 0 5px;
+                        <br>&nbsp;&nbsp;&nbsp;cursor:pointer;
+                    <br>}
+                    <br>.imatge{
+                        <br>&nbsp;&nbsp;&nbsp;width:100%; 
+                        <br>&nbsp;&nbsp;&nbsp;height: 175px;
+                    <br>}
+                 </td>                 
+              </tr>              
+           </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+ 
+  <!-- Finestra presentació enllaços-->
+  <div class="modal fade" id="Compartir" tabindex="-1" role="dialog" aria-labelledby="myModal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header" style="background-color:#E0ECF7;" >
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h3 class="modal-title" id="myModal" ><span class="badge" style="background-color: #428bca;"> 4 </span>Codi per compartir la presentació</h3>          
+        </div>
+        <div id="divVisuGraf" class="modal-body"> 
+            <p>Amb els paràmetres de la pestanya <a href="https://docs.google.com/spreadsheets/d/1BTFM2CIU7_51pfFdBHA5vJUWuqmirl23Gy9gLu1UdO0/edit#gid=1541066440" target="blank">Configuracio</a> es pot controlar la forma de presentar les dades de l'aplicació</p>                           
+            <p>Es poden crear diverses pestanyes de configuració diferents (Config_1,Config_2...). Cridant l'aplicació amb el nom d'aquestes, s'executarà seguint els valors dels paràmetres indicats a la pestanya</p>
+            <ul>
+               <li><p>Escriu a sota l'enllaç del document de Google Sheets que conté les dades, i el nom del full que conté informació de configuració addicional per a la creació de ñes presentacions.</p></li>
+               <li><p style="font-family: Arial;">Un cop s'hagi mostrat el mapa, conserva l'enllaç que es mostra al navegador per utilitzar-la posteriorment (incrustar la presentació en un lloc web, per exemple).</p></li>
+            </ul>
+            <br>
+            <div style="margin: 10px 0px; clear:both">
+               <div style="width: 35%; text-align: right; float: left;">Introduïu l'enllaç del full amb les dades a representar: <br></div>
+               <div style="float: left;width: 65%;"><input id="urlUsuari" type="text" style='background-color: #FEFFCF; width:100%' value=""></div>
+               <br><br><div style="width: 35%; text-align: right; float: left;">Nom del full de configuració: </div>
+               <div style="width: 65%; float: left;"><input id="cfgUsuari" type="text" style='background-color: #FEFFCF; width:50%'  value="Config_1" ></div>
+            </div>               
+            <div style="margin: 50px 0px; clear:both">
+               <input class="btn btn-primary"
+                      style="margin: 0px 10%; width: 25%; float: left"
+                      onclick="crear_enllacos()"
+                      value="Crea enllaços" type="button"> 
+               <input class="btn btn-primary"
+                      style="margin: 0px 10%; width: 25%; float:left"
+                      onclick="obrirAplicacio()"
+                      value="Mostrar resultat" type="button">                            
+            </div>
+            <div style="margin: 100px 0px; clear:both">            
+                <p style="background-color: #DEDCDC">Codi de l'enllaç</p>              
+                   <textarea id='codiEnllac' rows='2' style='background-color: #FEFFCF; width:100%'></textarea>            
+                <br>
+                <p style="background-color: #DEDCDC">Codi per inserir en un web</p>                           
+                    <textarea id='codiEmbed' rows='2' style='background-color:  #FEFFCF; width:100%'></textarea>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>    
+  </div>
 </body>
 </html>
 
 
+<script>
+var idFullModel="1NpyfKlvJ3_SSowkg0QFQfZZOA_kbuFufda21NXCfEUY";
+var urlModel="https://docs.google.com/spreadsheets/d/1NpyfKlvJ3_SSowkg0QFQfZZOA_kbuFufda21NXCfEUY/edit?usp=sharing";
+var urlAplicacio="https://script.google.com/a/macros/xtec.cat/s/AKfycbyaz-KrhOESpoUOrGHncEnSSWixoxXJ6Zvh4Xm7tgO32Az4TIpd/exec";
+
+
+function presenta_dades() {
+    $("#urlUsuari").val(urlModel);
+    google.script.run.withSuccessHandler(onObrirModel).obrir_model_index(urlModel);
+}                                          
 
 
 
+function onObrirModel(dades){
+  var str="<table style='width:100%'>";
+  var style="style='background-color:#a4c2f4;font-size:0.8em; border: 1px solid #000000; padding: 2px 2px; '";
+  for (var f=0;f<dades.length;f++){
+     if (f<20 || f==dades.length){ 
+        str +="<tr>";  
+        for (var c=0; c<dades[0].length ;c++){
+           if (c>6) {
+              str +="<td "+style+">...</td><td "+style+">"+dades[f][c]+"</td>";            
+              break;
+           } else {
+              str +="<td "+style+">"+dades[f][c]+"</td>";            
+           }
+        }
+        str +="</tr>";         
+     } else {
+       str +="<tr><td "+style+">...</td></tr>";            
+       f=dades.length;
+     }
+     if (f>1) style="style='background-color:#e6eeff;font-size:0.7em; border: 1px solid #000000; padding: 0px 2px'";          
+  }
+  str +="</table>";
+  
+  $("#data").html(str);
+}
+
+function obrirFull() {
+  window.open(urlModel,"_blank")
+}
+
+function obrirAplicacio() {
+  var apl=urlAplicacio+"?ID="+$("#urlUsuari").val()+"&config="+$("#cfgUsuari").val();  
+  window.open(apl,"_blank")
+}
 
 
+function crear_enllacos(){
+  //determinar la ID del full de calcul a partir de l'entrada si és una URL complerta 
+  var urlUsuari=$("#urlUsuari").val();  
+  var cfgUsuari=$("#cfgUsuari").val();
+  var enll=urlAplicacio+"?ID="+urlUsuari+"&config="+cfgUsuari;
+  var embed="<iframe src='"+urlAplicacio+"?ID="+urlUsuari+"&config="+cfgUsuari+"' style='width: 90%; height: 600px'></icframe>";  
+  $("#codiEnllac").html(enll);
+  $("#codiEmbed").html(embed);  
+}
+
+</script>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> -->
+    <!-- <script src="bootstrap.min.js"></script> -->

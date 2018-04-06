@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <base target="_top">
+      <!-- Bootstrap -->
+      <!-- Latest compiled and minified CSS -->
+      <link rel="stylesheet"
+         href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+         integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+         crossorigin="anonymous">
+      <!-- Optional theme -->
+      <link rel="stylesheet"
+         href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+         integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+         crossorigin="anonymous">
+      <style>
+         .centered{
+            width: 50%;
+            height: 350px;
+            position: absolute;
+            top:-300px;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+         }
+         .modal-dialog{
+            background-color: white;
+            width: 70%;'
+         }
+         .modal-header{
+            background-color: rgb(224, 236, 247);
+         }
+         .modal-body{
+         }
+         .modal-footer{
+         }
+      </style>
+      <title>Creació de Presentacions</title>
+   </head>
+   <body>
+      <div style="top: 0px; height: 70%; left: 0px; width: 75%;background-color:#CACAD9"
+         class="panel panel-default centered">
+         <div class="panel-heading" id="Capçalera" style='background-color:grey'>
+            <h3 class="panel-title">
+               <div class="row" style='background-color:grey'>
+                  <div class="col-md-12">
+                     <strong>
+                        <h3 style='text-align:center; color:white'>Eina de creació de presentacions a partir d'un full de càlcul del Google Drive</h3>
+                     </strong>
+                  </div>
+               </div>
+            </h3>
+         </div>
+         <div class="panel-body" style="height: 500px">
+            <form id="form-course">
+               <div>
+                  <p>Benvolgut/da <strong> </strong>, <br></p>
+                  <div class="row">
+                     <div class="col-md-12">
+                        <p>Heu executat l'aplicació sense alguns dels parametres requerits:</p>
+                        <ul>
+                           <li><strong>Id o enllaç del full de càlcul:</strong> <?= id ?></li>
+                           <li><strong>Pestanya de configuració:</strong> <?= config ?></li>						
+                        </ul>
+                        <hr>
+                        <p>Feu servir l'opció de <a href="<?= urlAplicacio ?>"> configurar i compartir d'aquesta aplicació</a> per confeccionar correctament l'enllaç a executar</p>                        
+                     </div>
+                     <hr>
+                  </div>
+               </div>
+            </form>
+         </div>
+      </div>
+      
+
+   </body>
+</html>

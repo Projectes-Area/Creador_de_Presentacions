@@ -104,7 +104,7 @@ function onSalvarDades(missatge){
 <body>
   <div class="panel panel-default centered">
   <? if (Capçalera=="S"){ ?>
-    <div class="panel-heading" id="capçalera">
+    <div class="panel-heading" id="Capçalera">
         <h3 class="panel-title">
            <div class="row">
               <div class="col-md-8">
@@ -125,18 +125,22 @@ function onSalvarDades(missatge){
              <div class="row">
                 <div class="col-md-12">
                     <? if(Tipus_missatge=="no_usuari") { ?>
-                        <p>No hi ha cap usuari <strong>@xtec</strong> actiu. Entreu al vostre correu <strong>@xtec</strong> i torneu a executar aquesta aplicació.</p>
+                        <p>No heu iniciat sessió en el navegador amb un compte del domini <strong>@xtec.cat</strong></p>
+                        <br>
+                        <p>Inicieu sessió amb un correu <strong>@xtec.cat</strong> autoritzat en l'aplicació i refresqueu aquest enllaç.</p>
+                        <!--
                         <p>O si no esteu donat d'alta a l'aplicació amb un usuari i contrasenya no <strong>@xtec</strong> podeu provar d'entrar les dades al següent formulari</p>
                         <form id='frmDades'>
                             <div style='width:90px; text-align:right; float: left'>Usuari:</div><div style='width:50px; float: left'><input type='text' name='usuariNom' id='usuariNom' value='Josep'/></div>
                             <br><br><div style='width:90px; text-align:right; float: left'>Contrasenya:</div><div style='width:50px; float: left'><input type='text' name='usuariContrasenya' id='usuariContrasenya' value='12345'/></div>
                             <input type='button' class='btn btn-primary' style='width: 25%; display: block; margin: 0 auto;' onclick="enviarGenerar();" value='Enviar respostes'/>
                         </form>
+                        -->
                      <? } else if (Tipus_missatge=="usuari_no_autoritzat") {?>            
                      
-                        L'usuari que està actualment actiu, <strong><i><?= userEmail ?> </i></strong>, no està al llistat dels autoritzats per executar aquesta aplicació.
+                        <p>L'usuari que està actualment actiu, <strong><i><?= userEmail ?> </i></strong>, no està al llistat dels autoritzats per executar aquesta aplicació.</p>
                          <br><br>
-                         Per continuar, tanqueu l'usuari actual, obriu el correu amb un usuari autoritzat i torneu a executar aquesta aplicació.                      
+                         Per continuar, tanqueu l'usuari actual, obriu la sessió amb un usuari autoritzat i torneu a executar aquesta aplicació.
                      <? } ?>
                      <hr>
                      <b><?= Contacte ?></b>

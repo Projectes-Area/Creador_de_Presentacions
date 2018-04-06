@@ -11,23 +11,30 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>     
 
 
+
 <!--Datatables-->
 <!-- jQuery -->
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" >
+
 
 <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.0.3/css/buttons.dataTables.min.css"></script>
 
 <!-- buttons -->
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/select/1.2.5/js/dataTables.select.min.js"></script>
 <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
+
 <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.flash.min.js"></script>
 <script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+
 <script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
 <script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
 <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.html5.min.js"></script>
 <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
 
-
+<!--
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+-->
 
 <!-- Bootstrap -->
 <!-- Latest compiled and minified CSS -->
@@ -39,6 +46,29 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OverlappingMarkerSpiderfier/1.0.3/oms.min.js"></script>
+
+<!--scrips relacionats amb el TimeLineMap -->
+<!--    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAVxmW5MSmBXNniGfdBkiojV16y4_9E5_Q&v=3.exp&sensor=false&language=ca"></script> -->
+	<!---<script src="https://openlayers.org/api/OpenLayers.js"></script>-->
+
+    <script type="text/javascript" src="https://edumet.cat/areatac/cartografia/lib/mxn/mxn.js?(googlev3)"></script>	
+
+	<script type="text/javascript" src="https://edumet.cat/areatac/cartografia/lib/timeline-2.3.0.js"></script>
+    <script type="text/javascript" src="https://edumet.cat/areatac/cartografia/src/timemap.js"></script>
+	<script type="text/javascript" src="https://edumet.cat/areatac/cartografia/src/param.js"></script>	
+	<script type="text/javascript" src="https://edumet.cat/areatac/cartografia/src/manipulation.js"></script>	
+    <script type="text/javascript" src="https://edumet.cat/areatac/cartografia/src/state.js" ></script>
+
+<!---google_spreadsheet	-->
+    <script src="https://edumet.cat/areatac/cartografia/src/loaders/json.js" type="text/javascript"></script>
+    <script src="https://edumet.cat/areatac/cartografia/src/loaders/google_spreadsheet.js" type="text/javascript"></script>	
+<!---google_spreadsheet-->		
+	<script src="https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization', 'version':'1','packages':['timeline']}]}" type="text/javascript" ></script>
+
+<!--script TimeLine-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
 <style>
 .centered{
     width: 85%;
@@ -46,16 +76,6 @@
     position: absolute;
     /*top:-200px;*/
     top: 40px;
-    left: 0;
-    right: 0;
-    margin: auto;
-}
-
-.filtres{
-    height: 30px;*/
-    position: absolute;
-    /*top:-200px;*/
-    top: 50px!important;
     left: 0;
     right: 0;
     margin: auto;
@@ -77,6 +97,11 @@
   margin: 5px;
 }
 
+.selFiltre{
+   height: 35px; 
+   font-size: 14px; 
+   margin: 2px 3px;
+}
 
 #tblDades{
     font-size:12px;
@@ -88,7 +113,7 @@
    height: 100%;
 }
 
-#divPresentacio {
+#divPresTaula, #divPresTarja  {
    height: 100%;
 }
 
@@ -99,6 +124,11 @@ html, body {
    padding: 0;
 }
 
+#divTitols{
+  font-size:1.5em;
+  line-height: 35px;*/
+  vertical-align: middle;  
+}
 
 .tblResultats{
     border: 1px solid black;
@@ -108,11 +138,36 @@ html, body {
     overflow-y:scroll;        
 }
 
+.tblEdit{
+    font-size:15px;
+}
+
 th{
  background-color: #cacaca;
 }
 
 tr:hover {
+  background-color: #d9d9d9;
+}
+
+#tblEditReg{
+ background-color: #ffffff;
+ font-size: 11px;
+}
+
+#tblEditReg td{
+ padding: 5px 0px;
+}
+
+#tblEditReg input, textarea{
+ background-color: #ffe6e6;
+}
+
+#tblEditReg th{
+ background-color: #cacaca;
+}
+
+#tblEditReg tr:hover {
   background-color: #d9d9d9;
 }
 
@@ -134,9 +189,91 @@ tr:hover {
 }
 </style>
 
+<!--Style timeLineMaps-->
+<style>
+    div#timelinecontainer{
+    width: 100%;
+    height: 60%;
+	background: #B7C1CF;	
+    }
+	
+    div#mapcontainer {
+    width: 100%;
+    height: 40%;
+	background: #CFB7B7;	
+    }	
+    
+    div#timeline{
+	left:2%;	
+    width: 98%;
+    height: 100%;
+    font-size: 11px;
+    background: #CCCCCC;
+    }        
+    
+    div#map {
+	left:2%;	
+    width: 98%;
+    height: 100%;
+    background: #EEEEEE;
+    }
+	
+	div#global_menys_alçada{
+	position:absolute;
+	left:1%;
+	top:150px;	
+	z-index:100;
+	}
+    
+	div#global_mes_alçada{
+	position:absolute;
+	left:1%;
+	top:164px;	
+	z-index:100;
+	}
+
+	div#mapa_menys_alçada{
+	position:absolute;
+	left:1%;
+	top:440px;	
+	z-index:100;
+	}
+
+	div#mapa_mes_alçada{
+	position:absolute;
+	left:1%;
+	top:454px;	
+	z-index:100;
+	}
+
+	div#timeline_amplada_text {
+	/*position:absolute;*/
+	left:4%;
+	top:60px;	
+	z-index:200;
+	}
+
+	div#timeline_amplada {
+	/*position:absolute;*/
+	left:4%;
+	top:75px;	
+	z-index:300;
+	}
+    
+    div.infodescription {
+    font-style: normal;
+    width: 300px;
+    }
+
+    p{font-family: Arial;
+    font-size:1em;}
+    .esq{float:left;}
+    .dret{padding-left:10px;margin-left: 130px;}
+    a{text-decoration: none;color:#AD2114;}
+    a:hover{text-decoration: none;color:grey;}
+</style>	
 
 </head>
-
 
 <body>
     <div id="imgtemp" style="position: absolute; margin-left: 25%; margin-top: 5%; width: 50%; height: 300px; background-color: #A0AAD5; opacity:0.7; z-index: 99">
@@ -146,12 +283,11 @@ tr:hover {
              <br><img src="http://cdn.nirmaltv.com/images/generatorphp-thumb.gif" style="width: auto; display: block; margin: 0 auto" />
          </div> 
     </div>
-
-    <div class="panel-heading" id="capsalera" style="visibility: hidden;">
+    <div class="panel-heading" id="Capçalera" style="visibility: hidden;">
         <h3 class="panel-title">
             <div class="row">
                <div class="col-md-8">
-                  <h1><?= Titol_aplicacio ?></h1>
+                  <h3><?= Titol_aplicacio ?></h3>
                </div>
                <div class="col-md-4">
                   <img width="120px" style="float: right;" src="<?= Icona ?>">
@@ -161,38 +297,47 @@ tr:hover {
     </div>
          
     <div class='container-fluid'>
-            <div class='row filtres' style='margin:10px 0px;visibility: hidden;clear:both' id="divFiltres">
+            <div class='row filtres' style='margin:5px 0px;visibility: hidden; clear:both' id="divFiltres">
             </div>                  
-            <div class='row filtres' style='margin:10px 0px 15px 0px;visibility: hidden; float:left;' id="divTipus">
-                <select id="selTipus" onchange="aplicaTipus(this.value)" style='float:left; width:250px; height: 35px; font-size: 14px;'>
-                    <option value='taula'>Presentació en forma de Taula</option>
-                    <option value='tarja'>Presentació en forma de Targes</option>
-                    <option value='mapa'>Presentació en forma de Mapa</option>
-                </select>
-                <input id='botoCentrar' src="https://edumet.cat/edumet/icones/centrar.png" class="noZoom" type="image" onClick="limitsMapa()" style='float:left; margin-left:10px; margin-top:0px'> 
-            </div> 
-            <div style='font-size:14px; float: right;  margin:5px 0px; visibility: hidden' id="btnNovaPagina">
-                <input type="button" id="btnB1" value="Anteriors" onclick="creaTarges(-1)"/>
-                <input type="button" id="btnB2" value="Següents" onclick="creaTarges(1)"/>
+            <div id="bloc_capçalera_2" hidden>
+               <div class='row filtres' style='margin:5px 0px 5px 0px;visibility: hidden; float:left;' id="divTipus">
+                   <div id="divSelTipus" style="float:left;visibility: hidden; float:left;">
+                   </div>
+                   <input id='botoCentrar' src="https://edumet.cat/edumet/icones/centrar.png" class="noZoom" type="image" onClick="centrar()" style='float:left; margin-left:10px; margin-top:0px'> 
+               </div> 
+               <div class='row titols' style='margin:5px 50px; float:left; text-align:center; visibility: hidden' id="divTitols">
+               </div>             
+               <div style='font-size:14px; float: right;  margin:5px 0px; visibility: hidden' id="btnNovaPagina">
+                   <input type="button" id="btnB1" value="Anteriors"/>
+                   <input type="button" id="btnB2" value="Següents"/>
+               </div>
+               <div style='font-size:14px; float: right; margin-right:10px; margin-top:5px' id='comptadorPagines'></div>
             </div>
-            <div style='font-size:14px; float: right; margin-right:10px; margin-top:5px' id='comptadorPagines'></div>
-
-        <div id="divPresentacio" style="clear:both; width: 100%; margin-top:5px"></div>
-        <div id='divBotons' style='display: none'>
+        <div id="divPresTaula" style="clear:both; width: 100%; margin-top:5px">
+             <div id="userEmail"></div>
+             <div id="divFormTaula"></div>
+        </div>
+        <div id="divPresTarja" style="clear:both; width: 100%; margin-top:5px"></div>        
+        <div id="divPresTimeMap" style="clear:both; width: 100%; margin-top:5px"></div>
+        <div id="divPresTimeLine" style="clear:both; width: 100%; margin-top:5px"></div>        
+        <div id='divBotons' hidden >
             <div style="width:50%; float: left">
-               <? if(prmEdit=='S') { ?>
-               <input type='button' class='btn btn-primary' id='btnPermis' style='width: 25%; display: block; margin: 0 auto' onclick="enviarGenerar()" value='Enviar respostes'/>
-               <? } else { ?>
-               <input type='button' class='btn btn-primary' id='btnPermis' style='width: 25%; display: block; margin: 0 auto; color: red' value='Enviar respostes'  onclick="missatgeError('No esteu autoritzat a guardar canvis')" title='No esteu autoritzat a guardar canvis'/>          
-               <? } ?>
+               <? if(Permetre_edicio_taula=='S') { ?>            
+                   <? if(prmEdit=='S') { ?>
+                       <input type='button' class='btn btn-primary' id='btnPermis' style='width: 25%; display: block; margin: 0 auto' onclick="enviarGenerar()" value='Enviar respostes'/>
+                   <? } else { ?>
+                       <input type='button' class='btn btn-primary' id='btnPermis' style='width: 25%; display: block; margin: 0 auto; color: red' value='Enviar respostes'  onclick="missatgeError('No esteu autoritzat a guardar canvis')" title='No esteu autoritzat a guardar canvis'/>          
+                   <? } ?>
+               <? } ?>                   
             </div>
             <form>
-               <div style="width:50%; float: right"><button class='btn btn-primary' style="background-color:grey; width: 25%; display: block; margin: 0 auto"  onclick="self.close()"> Tancar </button></div>
+               <div id='btnTancarApl' style='width:50%; float: right; visibility: hidden'><button class='btn btn-primary' style="background-color:grey; width: 25%; display: block; margin: 0 auto"  onclick="self.close()"> Tancar </button></div>
             </form>
         </div>        
     </div>
  
-    <div id="map" style="clear:both; margin: 5px 15px"></div>     
+    <div id="map" style="clear:both; margin: 5px 15px"></div>      
+
 
 <!-- Modal -->
     <div id="finestraInfo" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" width='90%'>
@@ -213,62 +358,158 @@ tr:hover {
 </body>    
 
 
-<!--script incials-->
+<!--scripts incials-->
 <script>
+var Color_punts_omisio="#000000";
+var userEmail='';
 var numPag=1;
-var Files_capsalera=3;
+var Files_Capçalera=3;
 var Num_files=0;
 var Num_columnes=0;
 var plantilla_1="";
 var plantilla_2="";
-var dades_org=new Array();
-var dades=new Array();
+var bloc_capçalera_2="N";
+var row_org=new Array();
+//var dades=new Array();
 var nTarFila=0;
 var row_var=new Array();
+var row_tip=[];
 var plantilles=new Array();
 var finalArray=new Array();
-var centres=[];
-var map;
-var markers;
-var marcadors=[];
-var infowindow=[];
-var bounds;
-var markerCluster;
+
 var Permetre_canvi_presentacions='N';  
-var Presentacio_inicial="tarja";
+var tipus="";
 var Plantilla_mapa="";
 var Plantilla_tarja="";
 var Plantilla_taula="";
-var Zoom_automatic="";
-var Zoom_max;
-var Clusters="";
-var bounds;
-var bounds_all;
-var iniciantMapa=true;
 var filtresActius=0;
-
 
 //per determinar fer global la variable que guardarà la columna per la que s'ordenaran les matrius en el moment de construir els desplegables 
 var colOrd=0; 
-
 var Columna_id="";
-var capsalera='N';
-var permisEdit='';
+var Capçalera='N';
+var permisEdit='N';
 
 
 //relacionats amb el tipus mapa
-var numColAgrupa=0;
-var numColBoto=0;
-var numColBotoURL=0;
+var numColAgrupa=-1;
+var numColColor=0;
 var numColLatitud=0;
 var numColLongitud=0;
+var numColDataIni=0;
+var numColDataFin=0;
+var numColDescripcio=0;
+var numColTitol=0;
+var numColBloc=0;
+var centres=[];
+var agrupaCentres=[];
+var map;
+var marcadors=[];
+var infowindow=[];
+var markerCluster;
+var Centre_mapa="41.71,1.82";
+var Zoom_automatic="S";
+var Zoom_inicial=0;
+var Zoom_max=21;
+var Clusters="S";
+var Clusters_max_zoom=12;
+var Visualitzar_errors="N";
+var bounds;
+var bounds_all;
+var iniciantMapa=true;
+var Color_punts_omisio="#AC2010";
+
+//Variables relacionades amb timeLineMap
+//var tm="";
+var titol_pagina ="prova";
+var tipus='basic';
+var alcada_select="550";
+var bandaTemps="35";
+var etiqueta="";
+var visColumna = "Visible";
+var descColumna = "Descripcio";
+var latColumna = "latitud";
+var lonColumna = "longitud";
+var locColumna = "localitat";
+var adrColumna = "adreça";
+var enllaçColumna = "enllaç";
+var mediaColumna = "Imatge";
+var idColumna = "id";
+var mapaColor = "red";
+var dataInici = "dataIni";
+var dataFinal = "dataFin";
+var quadreWidth = "1000";
+var quadreHight = "550";
+
+var avui = new Date();
+avui=avui.getFullYear()+ "/" + (avui.getMonth() +1)+"/" +avui.getDate() ;
+
+var banda = [];
+var banda = ["Mil·lisegon","Segon","Minut","Hora","Dia","Setmana","Mes","Any","Decada","Centuria","Mil·leni"];
+var bandIntervals = [];
+var bandIntervals = ["Mil·lisegon","seg","min","hr","day","wk","mon","yr","dec","Centuria","Mil·leni"];
+var finestra_temporal=banda[bandaTemps];
+var bandIntervals=bandIntervals[bandaTemps];
+
+/*Timeline.DateTime.MILLISECOND=0;
+Timeline.DateTime.SECOND=1;
+Timeline.DateTime.MINUTE=2;
+Timeline.DateTime.HOUR=3;
+Timeline.DateTime.DAY=4;
+Timeline.DateTime.WEEK=5;
+Timeline.DateTime.MONTH=6;
+Timeline.DateTime.YEAR=7;
+Timeline.DateTime.DECADE=8;
+Timeline.DateTime.CENTURY=9;
+Timeline.DateTime.MILLENNIUM=10;
+Timeline.DateTime.EPOCH=-1;
+Timeline.DateTime.ERA=-2;
+//*/
+
+colors_objectes= [];
+colors_objectes= ['green', 'orange', 'blue','red','purple','ltblue','pink','green', 'orange', 'blue','red','yelow'];
+inici =[];
+fin = [];
+titol = [];
+titol_curt = [];
+bloc = [];
+bloc_nom = [];
+bloc_color = [];
+bloc_color= ['green', 'orange', 'blue','red','purple','ltblue','pink','green', 'orange', 'blue','red','yelow'];
+//bloc_unic = [[1,1]];
+lat = [];	
+lon = [];	
+media= [];
+text= [];
+poblacio= [];
+adreça= [];
+dades= [];
+enllaç= [];
+tarja= [];
+totalfiles = 0;
+longitud=[];
+latitud=[];
+
+
+data_inici = new Date();
+data_inici =data_inici.getFullYear()+ "/" + (data_inici.getMonth() +1)+"/" +data_inici.getDate() ;
+
+//final codi declaracio de variables de timeLineMap
 
 //Pantalla d'espera per carregar dades
 $(document).ready(function(){ 
    $("#btnTancar").click(function(){
         //$('#imgtemp').remove(); 
         $('#imgtemp').css("visibility","hidden");           
-    });  
+   });  
+   $("#btnB1").click(function(){
+        numPag =numPag-1;  
+        aplicacioFiltres();     
+   });     
+   $("#btnB2").click(function(){
+        numPag =numPag+1;  
+        aplicacioFiltres();             
+   });         
 });
 
 var time = 20;
@@ -281,104 +522,298 @@ function test() {
 	}
 }
 
-
-
 function inicia(){
     google.script.run.withSuccessHandler(onVariables).recollidaVariables();       
 }
 
-
-
-
-
-function fnBoto(id_registre,columna,url){
-   //url=dades[id_registre][columna];
-   //console.log("id: "+id_registre+"\nColumna: "+columna+"\nURL: "+url);
-   if (dades[0][columna]=="Fitxa"){
-      //if(dades[id_registre][columna]==""){
+function fnBoto(id_registre,columna,id,url){
+   //url=row_org[id_registre][columna];
+   //var org=row_org[id_registre][columna];
+   //console.log("id: "+id_registre+"\nColumna: "+columna+"\nID: "+id+"\nURL: "+url);
+   $('#imgtemp').css('display','block');
+   $("*").css("cursor","wait");      
+   if (row_org[0][columna]=="Fitxa"){
       if(url==""){      
          google.script.run.withSuccessHandler(onFitxa).crear_fitxa_apadrina(id_registre);     
       } else {
-         onFitxa(url);
+         obreFitxa(url);
       }
    } else {
-      onFitxa(url);
+      obreFitxa(url);
    }
 }
 
+function onFitxa(retorn){
+   var fil=retorn[0];
+   var col=retorn[1];
+   var url=retorn[2];   
+   var ele=retorn[3]; 
+   var id_registre=retorn[4]; 
 
-function onFitxa(url){
-  alert("Full de càlcul creat: "+url+"\n\n\nRefresqueu la pantalla per actualitzar les dades");
-  window.open(url);  
+   //actualitzar taula amb les dades de la url creada
+   $("#"+"btn_"+fil+"_"+col).attr('name', url);
+
+   //desactivar pantalla d'espera
+   $('#imgtemp').css('display','none');
+   $("*").css("cursor","default");    
+
+   $("#modalHeader").html("Creació de fitxa de: "+ele);
+   var divMissatge="Fitxa creada correctament";
+     divMissatge +="<br><br><a href='"+url+"' target='_blank'>Obrir la fitxa</a>";   
+   $("#missatge").html(divMissatge);
+   $('#finestraInfo').modal('show');
+   $("*").css("cursor","default");    
+      
+   $("#tblResultats").css({
+     "border":"1px solid black",
+     "width": "90%",
+     "margin": "0 auto",  
+     "max-height": "250px",
+     "overflow-y": "scroll"});
 }
 
-
+function obreFitxa(url){
+  $('#imgtemp').css('display','none');
+  $("*").css("cursor","default");     
+  window.open(url);  
+}
 
 //Càrrega de les variables 
 function onVariables(variables) {
    row_var=variables;
    for (v=0;v<row_var.length;v++){
       eval(row_var[v][0]+"='"+row_var[v][1]+"'");
-      //console.log(row_var[v][0]+"="+eval("'"+row_var[v][1]+"'"));          
+      if (row_var[v][0].indexOf("Plantilla_")>-1){
+          str=row_var[v][0]+"_titol";
+          valVar=row_var[v][2].replace(new RegExp("'", 'g'),"`"); 
+          eval(str+"='"+valVar+"'");
+      }
    }
-   var plantilla=eval("Plantilla_"+Presentacio_inicial);
-   //recollir les dades despres de les variables per garantir que està el nombre de files a mostrar
-   google.script.run.withSuccessHandler(onPlantilles).recollidaPlantilles(plantilla);    
-   google.script.run.withSuccessHandler(onDades).recollidaDades();      
-}
+   if (Capçalera=='N'){
+     $("#Capçalera").css("display","none");
+   } else {
+     $("#Capçalera").css("visibility","visible");          
+     $("#Capçalera").css("display","block");   
+   }
+   
+   
+   //Creacció del select de presentacions si hi ha més d'una
+   row_tip=Presentacions_permeses.split(",");   
+   if (row_tip.length>1){
+       var str="<select id='selTipus' onchange='aplicaTipus(this.value)' style='float:left; width:250px; height: 35px; font-size: 14px;'>";
+           for(i=0; i<row_tip.length; i++){
+              str +="<option value='"+row_tip[i]+"'>Presentació en forma de "+row_tip[i].toUpperCase()+"</option>";
+            }
+            str +="</select>";
+      $("#divSelTipus").html(str);
+      $("#divSelTipus").css("visibility","visible");         
+      $("#divTipus").css("visibility","visible");   
+   }
+   
+   if (Visualitzar_boto_tancar=='S'){
+      $("#btnTancarApl").css("visibility","visible");         
+   }
 
+   //var plantilla=plantilles[0][1];   
+   //recollir les dades despres de les variables per garantir que està el nombre de files a mostrar
+   google.script.run.withSuccessHandler(onPlantilles).recollidaPlantilles();       
+}
 
 
 
 //Càrrega dels estils de la plantilla
 function onPlantilles(plt) {
-   plantilles=plt;
-   estil="";
-   plantilla_1="";
-   plantilla_2="";   
-   script="";
-   div="";
-   for (p=0; p<plantilles[0].length; p++){
-      if (plantilles[0][p]=="<style>"){
-        estil +=plantilles[1][p];
+   if (plt.length<row_tip.length){
+      var missatge=[];
+      missatge[0]=[];
+      missatge[0][0]="No s'han trobat les pestanyes de les següents plantilles indicades al full de configuració<br><br>Reviseu aquesta informació";
+      missatge[0][1]="Tipus de presentació autoritzat";      
+      missatge[0][2]="Plantilla indicada";            
+      missatge[0][3]="Situació";                  
+      //*
+      for (t=0;t<row_tip.length;t++){
+        missatge[t+1]=[];      
+        missatge[t+1][0]=row_tip[t];      
+        missatge[t+1][1]="";            
+        missatge[t+1][2]="No trobada";                        
+
+        for (p=0;p<plt.length;p++){
+          if (plt[p][0].toLowerCase()===row_tip[t].toLowerCase()){
+            missatge[t+1][1]=plt[p][1];            
+            missatge[t+1][2]="Trobada";              
+            break;         
+          }
+        }
+
       }
-      if (plantilles[0][p]=="Plantilla"){
-        plantilla_1 +=plantilles[1][p];        
-      }
-      if (plantilles[0][p]=="Botons"){
-        plantilla_2 +=plantilles[1][p];        
-      } 
-      if (plantilles[0][p]=="<script>"){
-        script +=plantilles[1][p];        
-      }       
-      if (plantilles[0][p]=="<div>"){
-        div +=plantilles[1][p];        
+      //*/
+      mostraErrades(missatge);
+   }
+   for (p=0;p<plt.length;p++){ 
+      plantilles[p]=[];
+      plantilles[p][0]=plt[p][0]; //tipus
+      plantilles[p][1]=plt[p][2]; //titol
+      plantilles[p][2]=[];      
+      plantilles[p][2][0]=plantilles[p][2][1]=plantilles[p][2][2]=plantilles[p][2][3]=plantilles[p][2][4]="" ;
+      for (c=0; c<plt[p][3][0][0].length; c++){
+        if (plt[p][3][0][c]!=undefined){
+           switch (plt[p][3][0][c].toLowerCase()){
+           case "plantilla": 
+              plantilles[p][2][0] +=plt[p][3][1][c];
+              break;
+           case "botons":
+              plantilles[p][2][1] +=plt[p][3][1][c];           
+              break;
+           case "<style>":
+              plantilles[p][2][2] +=plt[p][3][1][c];           
+              break;           
+           case "<script>":
+              plantilles[p][2][3] +=plt[p][3][1][c];           
+              break;
+           case "<div>":
+              plantilles[p][2][4] +=plt[p][3][1][c];           
+              break;
+           }
+        }
       }             
    }
-   $('#divEstil').html(estil);  
-   script=script.replace(new RegExp('""', 'g'),'"');
-   $('#divScript').html(script);      
-   $('#divDiv').html(div);      
-   creaTipus();
+   tipus=plantilles[0][0];
+   google.script.run.withSuccessHandler(onDades).recollidaDades();   
 }
 
+function aplicaTipus(){
+  if (plantilles.length==1){
+     tipus=plantilles[0][0];
+  } else {
+     tipus=$("#selTipus").val();     
+  }
+  if (tipus=="mapa" && Zoom_automatic=='N') {
+      $('#botoCentrar').removeClass("noZoom").addClass("zoom");
+  } 
+  else {
+      $('#botoCentrar').removeClass("zoom").addClass("noZoom");
+  }
 
+  $('#imgtemp').css('display','block');
+  $("*").css("cursor","wait");   
+  //determinar la plantilla a aplicar
+  for (p=0;p<plantilles.length;p++){
+    if (plantilles[p][0]==tipus){
+       $("#divTitols").html(plantilles[p][1]);  
+       plantilla_1=plantilles[p][2][0];       
+       plantilla_2=plantilles[p][2][1];              
+       $('#divEstil').html(plantilles[p][2][2]);  
+       script=plantilles[p][2][3].replace(new RegExp('""', 'g'),'"');
+       $('#divScript').html(script);      
+       $('#divDiv').html(plantilles[p][2][4]);  
+       if (plantilles[p][1]!=""){
+          $("#divTitols").html(plantilles[p][1]);
+          $("#divTitols").css("visibility","visible");         
+       }
+       break;
+    }
+  }
+  if (plantilles.length>1 || plantilles[0][1].length>0){
+      $("#bloc_capçalera_2").show();            
+  }
+  creaTipus();  
+}
+
+function creaTipus(){
+   $('#imgtemp').css('display','block');
+   $("*").css("cursor","wait");   
+
+   //alert("creaTipus: "+tipus)
+   switch (tipus){
+   case "mapa":
+     $("#btnNovaPagina").css("visibility","hidden");         
+     $("#comptadorPagines").css("visibility","hidden");                 
+     $("#divBotons").css("display","none");                     
+     $("#divPresTaula").css("display","none");                               
+     $("#divPresTarja").css("display","none");                      
+     $("#divPresTimeMap").css("display","none");               
+     $("#divPresTimeLine").css("display","none");                   
+     $("#map").css("visibility","visible");               
+     $("#map").css("display","block");                         
+     break;
+   case "taula":
+     $("#btnNovaPagina").css("visibility","hidden");           
+     $("#comptadorPagines").css("visibility","hidden");                      
+     $("#divBotons").css("visibility","visible");       
+     $("#divBotons").show();                          
+     $("#map").css("display","none");                     
+     $("#divPresTimeMap").css("display","none");               
+     $("#divPresTimeLine").css("display","none");                   
+     $("#divPresTaula").css("display","block");                          
+     $("#divPresTarja").css("display","none");       
+     break;
+   case "tarja":
+     $("#divBotons").css("visibility","hidden");    
+     $("#comptadorPagines").css("visibility","visible");                 
+     $("#btnNovaPagina").css("visibility","visible");                 
+     $("#map").css("display","none");                          
+     $("#divPresTimeMap").css("display","none");               
+     $("#divPresTimeLine").css("display","none");                  
+     $("#divPresTaula").css("display","none");                          
+     $("#divPresTarja").css("display","block");            
+     break;      
+   case "timemap":
+     $("#btnNovaPagina").css("visibility","hidden");         
+     $("#comptadorPagines").css("visibility","hidden");                 
+     $("#divBotons").css("display","none");                     
+     $("#divPresTaula").css("display","none");                               
+     $("#divPresTarja").css("display","none");            
+     $("#map").css("display","none");       
+     $("#divPresTimeLine").css("display","none");               
+     $("#divPresTimeMap").css("display","none");               
+     $("#divPresTimeMap").css("display","block");                              
+     break;      
+   case "timeline":
+     $("#btnNovaPagina").css("visibility","hidden");         
+     $("#comptadorPagines").css("visibility","hidden");                 
+     $("#divBotons").css("display","none");                     
+     $("#divPresTaula").css("display","none");                               
+     $("#divPresTarja").css("display","none");            
+     $("#map").css("display","none");                          
+     $("#divPresTimeMap").css("display","none");               
+     $("#divPresTimeLine").css("visibility","visible");               
+     $("#divPresTimeLine").css("display","block");                              
+     break;           
+   }
+   aplicacioFiltres();
+   $("*").css("cursor","default"); 
+   $('#imgtemp').css('display','none');
+}
 
 //Comprovació dels permisos 
 function comprovacioPermis(){
     google.script.run.withSuccessHandler(onPermis).comprovacioPermis();   
 }
 
-
-
 //Càrrega de les variables 
 function onPermis(permis) {
-  //alert(permis);
-  permisEdit=permis;
-  presentaDades();
+  userEmail=permis[0];
+  Acces_restringit=permis[1];  
+  permisEdit=permis[2];
+
+  var str='';
+  if (Acces_restringit=='S') {
+      str="<h4>Llistat de registres relacionats amb el compte: <strong><font color='red'>"+userEmail+"</font></strong></h3>";
+  }      
+  $("#userEmail").html(str);
+  
+  if (permisEdit=='S'){
+      $("#btnPermis").show();    
+      $("input").prop('disabled', false);     
+      var paginacio=false;      
+  } else {
+      $("#btnPermis").prop('disabled', true);                     
+      var paginacio=true;            
+  }
+
+  //aplicacioFiltres()
+  //presentaDades();
 }
-
-
 
 function ordenaArray(a, b) {
     if (a[colOrd] === b[colOrd]) {
@@ -388,74 +823,98 @@ function ordenaArray(a, b) {
         return (a[colOrd] < b[colOrd]) ? -1 : 1;
     }
 }
-  
 
 //Càrrega dels filtres 
-function creacioFiltres(){
+function creacioFiltres(dades){
   var f=0;
   var flt="";  
   for (c=0;c<dades[0].length; c++){
+    var pas=false;  
     if (dades[1][c].toLowerCase().indexOf("selfiltre")>-1){
-        var cmp=""; //per controlar si l'opció ha estat o no incorporada
-        var nomCamp=dades[0][c];
-        nomCamp=nomCamp.replace(new RegExp(' ', 'g'),'_');               
-        nomCamp=nomCamp.replace(new RegExp('/', 'g'),'_');          
-        //nomCamp=nomCamp.normalize('NFD').replace(/[\u0300-\u036f]/g, "_")        
-        flt +="<select name='"+nomCamp+"' id='sel_"+nomCamp+"' onChange='aplicacioFiltres(this.id)' style='width:170px; height: 35px; font-size: 14px; margin-right: 5px '>";        
-        flt +="<option value='*'>"+dades[0][c]+"</option>";        
-        for (var j=Files_capsalera; j < dades.length ; j++) {           
-            var str=dades[j][c];            
-            str=str.replace(new RegExp(' ', 'g'),'_');
-            str=str.replace(new RegExp('/', 'g'),'_');            
-            //str=str.normalize('NFD').replace(/[\u0300-\u036f]/g, "_")                    
-            if (str.length>0){            
-                if (cmp.indexOf(str)<0){
-                    flt +="<option class='opcio' value="+str+">"+dades[j][c]+"</option>";
-                    cmp +="#"+str;
-                }
-            }
+      var row=[];
+      var itemsFound = {};      
+      for (r=3;r<dades.length;r++){
+        var str = dades[r][c];
+        if(itemsFound[str]) {
+           continue; 
         }
-        flt +="</select>";       
+        row.push(dades[r][c]);
+        itemsFound[str] = true;
+      }
+      row.sort();      
+      pas=true;
+
     } else if (dades[1][c].toLowerCase().indexOf("csvfiltre")>-1) {
-        var cmp="";
-        var nomCamp=dades[0][c];
-        nomCamp=nomCamp.replace(new RegExp(' ', 'g'),'_');       
-        nomCamp=nomCamp.replace(new RegExp('/', 'g'),'_');   
-        //nomCamp=nomCamp.normalize('NFD').replace(/[\u0300-\u036f]/g, "_")        
-        flt +="<select name='"+nomCamp+"' id='sel_"+nomCamp+"' onChange='aplicacioFiltres(this.id)' style='width:170px; height: 35px; font-size: 14px; margin: 5px '>";        
-        flt +="<option value='*'>"+dades[0][c]+"</option>";     
-        for (var j = 3; j < dades.length-3 ; j++) {           
-            var str=dades[j][c];     
-            str=str.replace(new RegExp(' ', 'g'),'_');            
-            str=str.replace(new RegExp('/', 'g'),'_');                        
-            //str=str.normalize('NFD').replace(/[\u0300-\u036f]/g, "_")                    
-            if (str.length>0){
-                var xF=str.split(",");
-                for (f=0;f<xF.length;f++){
-                    if (cmp.indexOf(xF[f])<0){
-                        flt +="<option value="+xF[f]+" class='opcio' >"+xF[f]+"</option>";
-                        cmp +="#"+xF[f];
-                    }
-                }
-            }
+
+      var row=[];
+      var itemsFound = {};      
+      for (r=3;r<dades.length;r++){
+        var str = dades[r][c];
+        var xF=str.split(",");
+        for (f=0;f<xF.length;f++){
+           if(itemsFound[xF[f]]) {
+             continue; 
+           }        
+           row.push(xF[f]);
+           itemsFound[xF[f]] = true;           
         }
-        flt +="</select>";           
+      }
+      row.sort();      
+      pas=true;
     }
-     if (dades[1][c].indexOf("Agrupa")>-1) {
+    
+    if (pas==true){
+      var nomCamp=dades[0][c];
+      nomCamp=nomCamp.replace(new RegExp(' ', 'g'),'_');               
+      nomCamp=nomCamp.replace(new RegExp('/', 'g'),'_');          
+      flt +="<select class='selFiltre'  name='"+nomCamp+"' id='sel_"+nomCamp+"' onChange='aplicacioFiltres(this.id)'>";        
+      flt +="<option value='*'>"+dades[0][c]+"</option>";              
+      for (r=0;r<row.length;r++){
+        var str=row[r];            
+        str=str.replace(new RegExp(' ', 'g'),'_');
+        str=str.replace(new RegExp('/', 'g'),'_');            
+        if (str.length>0){            
+            flt +="<option class='opcio' value="+str+">"+row[r]+"</option>";
+        }
+      }
+      flt +="</select>";  
+    }
+
+     if (dades[1][c].toLowerCase().indexOf("agrupa")>-1) {
             numColAgrupa=c;
      }
-     if (dades[1][c].indexOf("BotoTitol")>-1) {
-            numColBoto=c;
+     if (dades[1][c].toLowerCase().indexOf("colorpunt")>-1) {
+            numColColor=c;
      }
-     if (dades[1][c].indexOf("BotoURL")>-1) {
-            numColBotoURL=c;
-     }
-     if (dades[1][c].indexOf("Latitud")>-1) {
+     if (dades[1][c].toLowerCase().indexOf("latitud")>-1) {
             numColLatitud=c;
      }
-     if (dades[1][c].indexOf("Longitud")>-1) {
+     if (dades[1][c].toLowerCase().indexOf("longitud")>-1) {
             numColLongitud=c;
      }    
+     if (dades[1][c].toLowerCase().indexOf("id")>-1) {
+            numColBotoProjecte=c;
+     }   
+     if (dades[1][c].toLowerCase().indexOf("dataini")>-1) {
+            numColDataIni=c;
+     }   
+     if (dades[1][c].toLowerCase().indexOf("datafin")>-1) {
+            numColDataFin=c;
+     }        
+     if (dades[1][c].toLowerCase().indexOf("descripcio")>-1) {
+            numColDescripcio=c;
+     }        
+     if (dades[1][c].toLowerCase().indexOf("titol")>-1) {
+            numColTitol=c;
+     }        
+     if (dades[1][c].toLowerCase().indexOf("bloc")>-1) {
+            numColBloc=c;
+     }        
+     
+     if(numColAgrupa<0) {
+       numColAgrupa=numColLatitud;
+     }
+     
   }
 
   if (flt!="") {
@@ -465,31 +924,24 @@ function creacioFiltres(){
      $("#divFiltres").css("display","none");   
   }
   
-  $('#selTipus').val(Presentacio_inicial);
+  $('#selTipus').val(tipus);
 }
-
-
-
 
 //Aplicacio filtres
 function aplicacioFiltres(id){
-
-
-
   $("*").css("cursor","wait");
   if ($("#"+id).val()=="*") {
-    $("#"+id).css("color","initial");
-    filtresActius--;   
+    $("#"+id).css("color","initial"); 
   } else {
     $("#"+id).css("color","red");
-    filtresActius++;
   }
-  
-
-  
+ 
+  $('#botoCentrar').attr( "src", "https://edumet.cat/edumet/icones/centrar.png" );
+ 
   var finalArray=new Array();
-  finalArray=dades;
-  
+  finalArray=row_org;
+
+  filtresActius=0;
   for (c=0;c<finalArray[0].length; c++){
     if (finalArray[1][c].toLowerCase().indexOf("selfiltre")>-1 || finalArray[1][c].toLowerCase().indexOf("csvfiltre")>-1){
        var nomCamp=finalArray[0][c];
@@ -497,12 +949,13 @@ function aplicacioFiltres(id){
        nomCamp=nomCamp.replace(new RegExp('/', 'g'),'_') 
        //nomCamp=nomCamp.normalize('NFD').replace(/[\u0300-\u036f]/g, "_")
        if($("#sel_"+nomCamp).val()!="*"){
+         filtresActius++;
          var arr=new Array();
          arr[0]=finalArray[0]
          arr[1]=finalArray[1]
          arr[2]=finalArray[2]         
-         var n=Files_capsalera; 
-         for (r=Files_capsalera;r<finalArray.length; r++){         
+         var n=Files_Capçalera; 
+         for (r=Files_Capçalera;r<finalArray.length; r++){         
              var strName="[name='"+finalArray[r][Columna_id]+"#$"+finalArray[0][c]+"'";
              var strVal=$(strName).val();             
              var strCamp=finalArray[r][c];
@@ -518,227 +971,163 @@ function aplicacioFiltres(id){
        }
     }
   }
-  //return finalArray
-  switch (Presentacio_inicial){
+  switch (tipus){
   case "mapa":
-      creaMarcadors(finalArray);
+     creaMarcadors(finalArray);
+     break;
   case "taula":
-      //creaTaula(finalArray);  
-      return finalArray;
+     creaTaula(finalArray);  
+     break;
   case "tarja":
-      //creaTarges(finalArray);
-      return finalArray;      
+     creaTarges(finalArray);
+     break;
+  case "timemap":
+     creaTimeMap(finalArray);
+     break;     
+  case "timeline":
+     creaTimeLine(finalArray);
+     break;       
   }
-  $("*").css("cursor","default");     
+  $("*").css("cursor","default");  
 }
-
-
 
 
 //Visualitza les primeres fitxes
 function onDades(dad) {
    //alert(dad)
-   dades_org=dad;
-   dades=dad;
-   creacioFiltres(dades_org);
-   switch (Presentacio_inicial){
-   case "mapa":
-      if (Zoom_automatic=='N') {
-          $('#botoCentrar').removeClass("noZoom").addClass("zoom");
-      } 
-      else {
-          $('#botoCentrar').removeClass("zoom").addClass("noZoom");
-      }
-      creaMarcadors(dades_org);
-      break;
-   case "taula":
-      creaTaula(dades_org);
-      break;
-   case "tarja":
-      creaTarges(0);
-      break;      
-   }
-
-   if (capsalera=='N'){
-     $("#capsalera").css("display","none");
-   } else {
-     $("#capsalera").css("visibility","visible");          
-     $("#capsalera").css("display","block");   
-   }
-   
-   if (Permetre_canvi_presentacions=='N'){
-     $("#divTipus").css("display","none");      
-   } else {
-     $("#divTipus").css("visibility","visible");   
-   }   
-   $('#imgtemp').css('display','none');   
-}
-
-
-function aplicaTipus(tipus){
-
-  if (tipus=="mapa" && Zoom_automatic=='N') {
-      $('#botoCentrar').removeClass("noZoom").addClass("zoom");
-  } 
-  else {
-      $('#botoCentrar').removeClass("zoom").addClass("noZoom");
-  }
-
-   $('#imgtemp').css('display','block');
-   $("*").css("cursor","wait");   
-   /*
-   $("#divFiltres").css("visibility","visible"); 
-   $("#divFiltres").css("display","block");    
-   //*/
-   
-   var plantilla=eval("Plantilla_"+tipus);
-   Presentacio_inicial=tipus;
-   //recollir les dades despres de les variables per garantir que està el nombre de files a mostrar
-   google.script.run.withSuccessHandler(onPlantilles).recollidaPlantilles(plantilla);    
-}
-
-
-
-//function creaTipus(Presentacio_inicial){
-function creaTipus() {
-   $('#imgtemp').css('display','block');
-   $("*").css("cursor","wait");   
+   row_org=dad;
+   creacioFiltres(row_org);
  
-    
-   switch (Presentacio_inicial){
-   case "mapa":
-     $("#btnNovaPagina").hide();   
-     $("#comptadorPagines").hide();            
-     $("#divBotons").css("display","none");                     
-     $("#divPresentacio").css("display","none");                               
-     $("#map").css("visibility","visible");               
-     $("#map").css("display","block");                         
-     creaMarcadors(dades);
-     break;
-   case "taula":
-     $("#btnNovaPagina").hide();   
-     $("#comptadorPagines").hide();       
-     $("#map").css("display","none");                     
-     $("#divPresentacio").css("visibility","visible");                     
-     $("#divPresentacio").css("display","block");                          
-     creaTaula(dades);
-     break;
-   case "tarja":
-     $("#divBotons").css("display","none");                
-     $("#map").css("display","none");                          
-     $("#divPresentacio").css("visibility","visible");                     
-     $("#divPresentacio").css("display","block");                               
-     creaTarges(0);
-     break;      
-   }
-   $("*").css("cursor","default"); 
-   $('#imgtemp').css('display','none');
+   $('#imgtemp').css('display','none');   
+   aplicaTipus(tipus);   
 }
-
-
 
 
 //Visualitza les primeres fitxes
-function creaTaula() {
-  dades=dades_org;
-  //alert(dades_org.length);
-  for (c=0;c<dades_org[0].length; c++) {
-    if (dades_org[1][c].toLowerCase()=='id'){
+function creaTaula(row) {
+  var dades=new Array();
+  for (c=0;c<row[0].length; c++) {
+    if (row[1][c].toLowerCase()=='id'){
       Columna_id=c;
       break;
     }
   }
- 
-  for (r=0; r<dades_org.length; r++){
-    var str="";    
+  for (r=0; r<row.length; r++){
+    var str="";   
     if (r>2){
-      for (c=0; c<dades_org[0].length;c++){
-        if (dades_org[2][c].length==0){
-          str +=dades_org[r][c]+"##";
+      for (c=0; c<row[0].length;c++){
+        if (row[2][c].length==0){
+          str +="<div id='"+row[r][Columna_id]+"_"+row[0][c]+"'>"+row[r][c]+"</div>##";  
           //str +="<input disabled name='"+dades[r][Columna_id]+"#$"+dades[0][c]+"' value="+dades[r][c]+" style='width:100%'/>##";                    
         }      
-        if (dades_org[2][c].toLowerCase().indexOf(":visu")>-1){
-          str +=dades_org[r][c]+"##";
+        if (row[2][c].toLowerCase().indexOf("taula:visu")>-1){
+          str +="<div id='"+row[r][Columna_id]+"_"+row[0][c]+"'>"+row[r][c]+"</div>##";  
           //str +="<input disabled name='"+dades[r][Columna_id]+"#$"+dades[0][c]+"' value="+dades[r][c]+" style='width:100%'/>##";          
         }
-        if (dades_org[2][c].toLowerCase().indexOf("text:edit")>-1 && dades_org[2][c].toLowerCase().indexOf("areatext:edit")<0){ 
-          var valor=dades_org[r][c].replace(/[']+/g, '`');
-          str +="<input name='"+dades_org[r][Columna_id]+"#$"+dades_org[0][c]+"' value='"+valor+"' style='width:100%'/>##";
+        if (row[2][c].toLowerCase().indexOf("taula:edit")>-1 && row[2][c].toLowerCase().indexOf("taula:areatext:edit")<0){ 
+          if (row[r][c].length>0){ 
+              var valor=row[r][c].replace(/[']+/g, '`');
+          }
+          if (Permetre_edicio_taula=="S"){
+              str +="<input id='"+row[r][Columna_id]+"_"+row[0][c]+"' name='"+row[r][Columna_id]+"#$"+row[0][c]+"' value='"+valor+"' style='width:100%'/>##";
+          } else {
+              str +="<div id='"+row[r][Columna_id]+"_"+row[0][c]+"'>"+row[r][c]+"</div>##";          
+          }
         }      
-        if (dades_org[2][c].toLowerCase().indexOf("areatext:edit")>-1){
-          var valor=dades_org[r][c].replace(/[']+/g, '`');        
-          str +="<textarea name='"+dades_org[r][Columna_id]+"#$"+dades_org[0][c]+"' style='width:100%'>"+valor+"</textarea>##";
+        if (row[2][c].toLowerCase().indexOf("taula:areatext:edit")>-1){
+          if (row[r][c].length>0){         
+              var valor=row[r][c].replace(/[']+/g, '`');        
+          }
+          if (Permetre_edicio_taula=="S"){
+              str +="<textarea id='"+row[r][Columna_id]+"_"+row[0][c]+"' name='"+row[r][Columna_id]+"#$"+row[0][c]+"' style='width:100%'>"+valor+"</textarea>##";
+          } else {
+              str +="<div id='"+row[r][Columna_id]+"_"+row[0][c]+"'>"+row[r][c]+"</div>##";                 
+          }          
         } 
-        if (dades_org[2][c].toLowerCase().indexOf("boto")>-1){
-          var valor=dades_org[r][c].replace(/[']+/g, '`');        
-          //str +="<input type='button' id='btn_"+r+"_"+c+"' onclick=\"fnBoto("+r+","+c+",this.id);\" style='width:100%; height:25px; max-width: 150px;'value='btn_"+dades_org[0][c]+"'</input>##";
-          str +="<input type='button' id='"+valor+"' onclick=\"fnBoto("+r+","+c+",this.id);\" style='width:100%; height:25px; max-width: 150px;'value='btn_"+dades_org[0][c]+"'</input>##";          
-        }         
+        //if (row[2][c].toLowerCase().indexOf("boto")>-1 && row[2][c].toLowerCase()!="botoVisu"){
+        if (row[2][c].toLowerCase().indexOf("taula:boto")>-1){        
+          if (row[r][c].length>0 || row[0][c].toLowerCase()=="fitxa"){ 
+             var name=row[r][c].replace(/[']+/g, '`');        
+             str +="<input type='button' id='btn_"+row[r][Columna_id]+"_"+c+"' name='"+name+"' onclick=\"fnBoto("+row[r][Columna_id]+","+c+",this.id, this.name);\" style='width:100%; height:25px; max-width: 150px;'value='"+row[0][c]+"'</input>##";
+          } else {
+             var name="";
+             str +="<input type='button' id='btn_"+row[r][Columna_id]+"_"+c+"' style='background-color:grey; color:#FFFFFF;width: 100%; height: 25px; max-width: 150px; cursor: default;' disabled name='"+name+"' onclick=\"fnBoto("+row[r][Columna_id]+","+c+",this.id, this.name);\" style='width:100%; height:25px; max-width: 150px;'value='"+row[0][c]+"'</input>##";
+          }
+        }    
+        if (row[2][c].toLowerCase().indexOf("taula:lupa")>-1){
+           str +="<img src='https://edumet.cat/edumet/images/view.gif' id='btn_"+row[r][Columna_id]+"_"+c+"' onclick='obreDescripcio("+row[r][Columna_id]+");' style='width:25px' />##";
+        }           
+        if (row[2][c].toLowerCase().indexOf("taula:llapis")>-1){
+           str +="<img src='https://edumet.cat/edumet/images/edit.gif' id='btn_"+row[r][Columna_id]+"_"+c+"' onclick='editaRegistre("+row[r][Columna_id]+");' style='width:25px' />##";
+        }                   
         
-        if (dades_org[2][c].toLowerCase().indexOf("radio:")>-1){
-            var opc=dades_org[2][c].substring(6,100);
-            var opcions=opc.split(",");
-            for (p=0;p<opcions.length;p++){
-               if (dades_org[r][c]==opcions[p]){
-                  str +="<input type='radio' checked value='"+opcions[p]+"' name='"+dades_org[r][Columna_id]+"#$"+dades_org[0][c]+"' style='margin-left:5px'/>"+opcions[p];
-               } else {
-                  str +="<input type='radio' value='"+opcions[p]+"' name='"+dades_org[r][Columna_id]+"#$"+dades_org[0][c]+"' style='margin-left:5px'/>"+opcions[p];
+        if (row[2][c].toLowerCase().indexOf("taula:radio:")>-1){
+            if (Permetre_edicio_taula=="N"){
+               var opc=row[2][c].substring(6,100);
+               var opcions=opc.split(",");
+               for (p=0;p<opcions.length;p++){
+                  if (row[r][c]==opcions[p]){
+                     str +="<input type='radio' id='"+row[r][Columna_id]+"_"+row[0][c]+"' checked value='"+opcions[p]+"' name='"+row[r][Columna_id]+"#$"+row[0][c]+"' id='"+row[r][Columna_id]+"#$"+row[0][c]+"' style='margin-left:5px'/>"+opcions[p];
+                  } else {
+                     str +="<input type='radio' id='"+row[r][Columna_id]+"_"+row[0][c]+"' value='"+opcions[p]+"' name='"+row[r][Columna_id]+"#$"+row[0][c]+"' style='margin-left:5px'/>"+opcions[p];
+                  }
                }
+               str +="##";               
+             } else {
+              str +="<div id='"+row[r][Columna_id]+"_"+row[0][c]+"'>"+row[r][c]+"</div>##";
             }
-            str +="##";
         }            
-        if (dades_org[2][c].toLowerCase().indexOf("sel:")>-1){
-            var opc=dades_org[2][c].substring(4,100)
+        if (row[2][c].toLowerCase().indexOf("taula:sel:")>-1){
+            var opc=row[2][c].substring(4,100)
             var opcions=opc.split(",");
-            str +="<select name='"+dades_org[r][Columna_id]+"#$"+dades_org[0][c]+"'>";          
-            str +="<option value='*'>"+dades_org[0][c]+"</option>";          
-            for (p=0;p<opcions.length;p++){
-               if (dades_org[r][c]==opcions[p]){
-                  str +="<option selected value='"+opcions[p]+"'>"+opcions[p]+"</option>";
-               } else {
-                  str +="<option value='"+opcions[p]+"'>"+opcions[p]+"</option>";
+            var dsbl="";
+            if (Permetre_edicio_taula=="S"){
+               str +="<select id='"+row[r][Columna_id]+"_"+row[0][c]+"' name='"+row[r][Columna_id]+"#$"+row[0][c]+"' id='"+row[r][Columna_id]+"#$"+row[0][c]+"'>";          
+               str +="<option value='*'>"+row[0][c]+"</option>";          
+               for (p=0;p<opcions.length;p++){
+                  if (row[r][c]==opcions[p]){
+                     str +="<option selected value='"+opcions[p]+"'>"+opcions[p]+"</option>";
+                  } else {
+                     str +="<option value='"+opcions[p]+"'>"+opcions[p]+"</option>";
+                  }
                }
+               str +="</select>";
+               str +="##";               
+            } else {
+              str +="<div id='"+row[r][Columna_id]+"_"+row[0][c]+"'>"+row[r][c]+"</div>##";                 
             }
-            str +="</select>";
-            str +="##";
         }         
       }
       str=str.substring(0,str.length-2);
       dades[r]=str.split("##");
     } else {
-      dades[r]=dades[r];             
+      dades[r]=row[r];             
     }
   }
-  //presentaDades();
-  
-  var txtDiv="<form id='frmDades'>";
+  var txtDiv ="<form id='frmDades'>";  
       txtDiv +="<table id='tblDades' class='display' width='100%'></table>";
-  txtDiv +="</form>";
-  $("#divPresentacio").html(txtDiv);  
+   txtDiv +="</form>";
+   
+  $("#divFormTaula").html(txtDiv);  
   comprovacioPermis();
+  presentaDades(dades);  
 }
 
 
-
-
 //Actualització de les pàgines 
-function presentaDades(id) {
+function presentaDades(dades) {
   $('#imgtemp').css("visibility","visible");  
-   var row=aplicacioFiltres(id);
-
    var targes=new Array();
-
-   for (r=Files_capsalera;r<row.length;r++){
+   for (r=Files_Capçalera;r<dades.length;r++){
       var str="";
-      for (col=0;col<row[0].length;col++){
-          if (row[2][col].length>0){ 
-             str +=row[r][col]+"##";
+      for (col=0;col<dades[0].length;col++){
+          if (dades[2][col].length>0){ 
+             str +=dades[r][col]+"##";
           }
       }
       str=str.substring(0,str.length-2);
       targes[r-3]=str.split("##");      
    }
-
 
    if ( $.fn.dataTable.isDataTable( '#tblDades' ) ) {
       $('#tblDades').unbind();      
@@ -746,52 +1135,153 @@ function presentaDades(id) {
       $(dt1).DataTable().destroy();
     }
    
-
    var titols=new Array();
    r=0;
    for (c=0;c<dades[0].length;c++){
-      if (dades[2][c].length>0){
+      if (dades[2][c].length>0 && dades[2][c].toLowerCase().indexOf("taula")>-1){
         var title= dades[0][c];
         titols[r]={title};        
         r +=1;
       }
    }
 
-   //alert(targes.length+"\n"+titols.length);
-
+  if (permisEdit=='S'){
+      $("#btnPermis").show();    
+      $("input").prop('disabled', false);     
+      var paginacio=false;      
+  } else {
+      //$("#btnPermis").hide();    
+      $("#btnPermis").prop('disabled', true);                     
+      //var paginacio=true;      
+      var paginacio=true;            
+  }
 
    $('#tblDades').DataTable( {
         dom: 'Bfrtip',
         select: true,        
-        buttons: ['csv','pdf','print'],
+        buttons: ['excel','csv','pdf','print'],
         data: targes,
         columns: titols,
         scrollY:        '50vh',
         scrollCollapse: true,
-        paging:         false,        
+        paging: paginacio,        
         "order": []
         
     } );
     
   var table = $('#tblDades').DataTable();
-
-  if (permisEdit=='S'){
-      $("#btnPermis").show();    
-      $("input").prop('disabled', false);                   
-  } else {
-      $("#btnPermis").hide();    
-      $("input").prop('disabled', true);                     
-  }
      
-  $("#divBotons").css("visibility","visible");     
+  //$("#divBotons").css("visibility","visible");     
   $("#divTaula").show();  
-  $("#divPresentacio").show();    
-  $("#divBotons").show();   
+  //$("#divBotons").show();   
   $("*").css("cursor","default");  
   $('#imgtemp').css("display","none");    
 }
 
+//Visualitza les primeres fitxes
+function editaRegistre(reg) {
+  for (c=0;c<row_org[0].length; c++) {
+    if (row_org[1][c].toLowerCase()=='id'){
+      Columna_id=c;
+      break;
+    }
+  }
 
+  var msgTitol="Edició de les dades del registre: "+reg;
+
+  var str="<form id='frmDadesReg'>";
+      str +="<table id='tblEditReg' width='100%'>";
+      str +="<tr><th style='width:10%'><label>Camp</label></th><th style='width:85%'><label>Valor</label></th>";
+      
+  for (r=0; r<row_org.length; r++){
+    if (reg==row_org[r][Columna_id]) { 
+       break;
+    }
+  }
+  
+  for (c=0; c<row_org[0].length;c++){
+    if (row_org[2][c].length!=0){  
+      str +="<tr><td><label>"+row_org[0][c]+": </label></td>";
+      str +="<td>"
+      if (row_org[2][c].toLowerCase().indexOf("text:visu")>-1 || row_org[2][c].toLowerCase().indexOf("areatext:visu")>-1){
+        str +=row_org[r][c];
+      }
+      if (row_org[2][c].toLowerCase().indexOf("text:edit")>-1 && row_org[2][c].toLowerCase().indexOf("areatext:edit")<0){ 
+        var valor=row_org[r][c];
+        if (row_org[r][c].length>0){ 
+           valor=row_org[r][c].replace(/[']+/g, '`');
+        }
+        str +="<input name='"+row_org[r][Columna_id]+"#$"+row_org[0][c]+"' value='"+valor+"' style='width:100%'/>";
+      }      
+      if (row_org[2][c].toLowerCase().indexOf("areatext:edit")>-1){
+        var valor=row_org[r][c]
+        if (row_org[r][c].length>0){         
+          valor=row_org[r][c].replace(/[']+/g, '`');        
+        }
+        str +="<textarea name='"+row_org[r][Columna_id]+"#$"+row_org[0][c]+"' style='width:100%'>"+valor+"</textarea>";
+      } 
+      if (row_org[2][c].toLowerCase().indexOf("boto")>-1){        
+        if (row_org[r][c].length>0 || row_org[0][c].toLowerCase()=="fitxa"){ 
+          var name=row_org[r][c].replace(/[']+/g, '`');        
+          str +="<input type='button' id='btn_"+row_org[r][Columna_id]+"_"+c+"' name='"+name+"' onclick=\"fnBoto("+row_org[r][Columna_id]+","+c+",this.id, this.name);\" style='width:100%; height:25px; max-width: 150px;'value='"+row_org[0][c]+"'</input>";
+        } else {
+          var name="";
+          str +="<input type='button' id='btn_"+row_org[r][Columna_id]+"_"+c+"' style='background-color:grey; color:#FFFFFF;width: 100%; height: 25px; max-width: 150px; cursor: default;' disabled name='"+name+"' onclick=\"fnBoto("+row_org[r][Columna_id]+","+c+",this.id, this.name);\" style='width:100%; height:25px; max-width: 150px;'value='"+row_org[0][c]+"'</input>";
+        }
+      }    
+      if (row_org[2][c].toLowerCase().indexOf("lupa")>-1){
+        str +="<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwKGoUWN2ogT4KK7TvsB1krS76LLCkEkwUYG6p1znsATc__MhgYA' id='btn_"+row_org[r][Columna_id]+"_"+c+"' onclick='obreDescripcio("+row_org[r][Columna_id]+");' style='width:25px'/>";
+      }           
+      if (row_org[2][c].toLowerCase().indexOf("llapis")>-1){
+        str +="<img src='https://www.shareicon.net/download/2016/07/03/636119_edit.ico' id='btn_"+row_org[r][Columna_id]+"_"+c+"' onclick='editaRegistre("+row_org[r][Columna_id]+");' style='width:25px'/>";
+      }                   
+          
+      if (row_org[2][c].toLowerCase().indexOf("radio:")>-1){
+        var opc=row_org[2][c].substring(6,100);
+        var opcions=opc.split(",");
+        for (p=0;p<opcions.length;p++){
+          if (row_org[r][c]==opcions[p]){
+            str +="<input type='radio' checked value='"+opcions[p]+"' name='"+row_org[r][Columna_id]+"#$"+row_org[0][c]+"' style='margin-left:5px'/>"+opcions[p];
+          } else {
+            str +="<input type='radio' value='"+opcions[p]+"' name='"+row_org[r][Columna_id]+"#$"+row_org[0][c]+"' style='margin-left:5px'/>"+opcions[p];
+          }
+        }
+      }            
+      if (row_org[2][c].toLowerCase().indexOf("sel:")>-1){
+        var opc=row_org[2][c].substring(4,100)
+        var opcions=opc.split(",");
+        str +="<select name='"+row_org[r][Columna_id]+"#$"+row_org[0][c]+"'>";
+        str +="<option value='*'>"+row_org[0][c]+"</option>";
+        for (p=0;p<opcions.length;p++){
+          if (row_org[r][c]==opcions[p]){
+            str +="<option selected value='"+opcions[p]+"'>"+opcions[p]+"</option>";
+          } else {
+            str +="<option value='"+opcions[p]+"'>"+opcions[p]+"</option>";
+          }
+        }
+        str +="</select>";
+      }         
+      str +="</td></tr>";
+    }
+  }
+  str +="</table>";
+  str +="</form>";
+
+  var msgPeu="<div style='width:50%; float: left'>";
+      if (permisEdit=="S"){
+         msgPeu +="<input type='button' class='btn' aria-hidden='true' id='btnPermisEditReg' style='margin: 5px' onclick=\"enviarGenerarRegistre("+reg+")\" value='Enviar respostes'/>";
+      } else {
+         msgPeu +="<input type='button' class='btn' aria-hidden='true' id='btnPermisEditReg' style='margin: 5px' value='Enviar respostes'  onclick=\"missatgeError('No esteu autoritzat a guardar canvis')\" title='No esteu autoritzat a guardar canvis'/>"
+      }
+      msgPeu +='<button class="btn" data-dismiss="modal" aria-hidden="true" style="margin: 5px" >Tancar</button>';              
+      msgPeu +="</div>";
+
+  $('#modalHeaderTarja').html(msgTitol);
+  $('#missatgeTarja').html(str);
+  $('#missatgePeu').html(msgPeu);  
+  $('*').css('cursor','default');    
+  $('#finestraTarja').modal('show');  
+}
 
 //preparar parametres i enviar 
 function enviarGenerar(){
@@ -802,16 +1292,34 @@ function enviarGenerar(){
 }
 
 
+function enviarGenerarRegistre(){
+    $("*").css("cursor","wait");
+    var regArray = new Array();
+    regArray=$("#frmDadesReg").serializeArray();   
+    google.script.run.withSuccessHandler(onSalvarDades).salvarDades(regArray);         
+}
 
 
 //preparar parametres i enviar 
 function onSalvarDades(missatge){
+   $('#finestraTarja').modal('hide');  
    $("#modalHeader").html(missatge[0]);
    var divMissatge="";
       divMissatge +="<table id='tblResultats'>";   
-      divMissatge +="<tr><th style='width: 10%; border: solid 1px grey'>Registre</th><th style='width: 10%; border: solid 1px grey'>Columna</th><th style='width: 40%;  border: solid 1px grey'>Valor antic</th><th style='width: 40%;  border: solid 1px grey'>Nou valor</th></tr>";   
+      divMissatge +="<tr><th style='width: 10%; border: solid 1px grey'>Registre</th><th style='width: 10%; border: solid 1px grey'>Columna</th><th style='width: 30%;  border: solid 1px grey'>Valor antic</th><th style='width: 30%;  border: solid 1px grey'>Nou valor</th></tr>";   
       for (c=1; c<missatge.length; c++){
-           divMissatge +=missatge[c];
+           //divMissatge +=missatge[c];
+           divMissatge +="<tr><td style='border: 1px solid #cacaca !important; padding: 3px !important;'>"+missatge[c][0]+"</td><td style='border: 1px solid #cacaca !important; padding: 3px !important;'>"+missatge[c][3]+"</td><td style='border: 1px solid #cacaca !important; padding: 3px !important;'>"+missatge[c][4]+"</td><td style='border: 1px solid #cacaca !important; padding: 3px !important;'>"+missatge[c][5]+"</td></tr>";           
+           var div="#"+missatge[c][0]+"_"+missatge[c][3];
+           $(div).html(missatge[c][5]);
+           $(div).val(missatge[c][5]);           
+           var columna_id=missatge[c][1];
+           for (r=0;r<row_org.length;r++){
+               if (row_org[r][columna_id]==missatge[c][0]){
+                   row_org[r][missatge[c][2]]=missatge[c][5];
+                   break;
+               }
+           }
       }
       divMissatge +="</table>";      
    $("#missatge").html(divMissatge);
@@ -826,8 +1334,27 @@ function onSalvarDades(missatge){
      "overflow-y": "scroll"});
 }
 
-
-
+function mostraErrades(missatge){
+   $('#finestraTarja').modal('hide');  
+   $("#modalHeader").html(missatge[0][0]);
+   var divMissatge="";
+      divMissatge +="<table id='tblResultats'>";   
+      divMissatge +="<tr><th style='width: 10%; border: solid 1px grey'>"+missatge[0][1]+"</th><th style='width: 10%; border: solid 1px grey'>"+missatge[0][2]+"</th><th style='width: 10%;  border: solid 1px grey'>"+missatge[0][3]+"</th></tr>";   
+      for (c=1; c<missatge.length; c++){
+         divMissatge +="<tr><td style='border: 1px solid #cacaca !important; padding: 3px !important;'>"+missatge[c][0]+"</td><td style='border: 1px solid #cacaca !important; padding: 3px !important;'>"+missatge[c][1]+"</td><td style='border: 1px solid #cacaca !important; padding: 3px !important;'>"+missatge[c][2]+"</td></tr>";           
+      }
+      divMissatge +="</table>";      
+   $("#missatge").html(divMissatge);
+   $('#finestraInfo').modal('show');
+   $("*").css("cursor","default");    
+      
+   $("#tblResultats").css({
+     "border":"1px solid black",
+     "width": "80%",
+     "margin": "0 auto",  
+     "max-height": "250px",
+     "overflow-y": "scroll"});
+}
 
 //preparar parametres i enviar 
 function missatgeError(missatge){
@@ -839,22 +1366,19 @@ function missatgeError(missatge){
 }
 
 
-
-
 //Actualització de les pàgines 
-function creaTarges(sentit) {
+function creaTarges(targes) {
 
   $('#imgtemp').css("visibility","visible");   
-  numPag +=sentit;  
-  Files_capsalera=parseInt(Files_capsalera);
 
-  divAmplada=$("#divPresentacio").css("width");
+  Files_Capçalera=parseInt(Files_Capçalera);
+
+  divAmplada=$("#divPresTarja").css("width");
   divAmpladaTar=parseInt(divAmplada)/parseInt(Num_columnes);
   divAmpladaTar=divAmpladaTar-20; //afegir els marges laterals
   nTarFila=(parseInt(parseInt(divAmplada)/divAmpladaTar));
   //alert("amplada contenidor: "+divAmplada+"\nNombre de columnes: "+Num_columnes+"\nAmplada targeta: "+divAmpladaTar+"\nNombre de targes per fila: "+nTarFila);
   var nReg=nTarFila*Num_files;
-  var targes=aplicacioFiltres();
 
   if (numPag<1) {
      numPag=1
@@ -862,45 +1386,34 @@ function creaTarges(sentit) {
   var xIni=nTarFila*(numPag-1)*Num_files;
   var xFin=nTarFila*(numPag)*Num_files;  
 
-  if (xFin>targes.length-Files_capsalera) {
+  if (xFin>targes.length-Files_Capçalera) {
       numPag -=1;      
       xIni=nTarFila*(numPag)*Num_files;
-      xFin=targes.length-Files_capsalera;
+      xFin=targes.length-Files_Capçalera;
   };    
   var divDades="";
   var t=0;
   
-
-  for (var j = xIni; j < targes.length-Files_capsalera; j++) {  
-     var plt=plantilles[1][0];
-     for (c=0;c<targes[0].length; c++){
-        if (plt.indexOf("{{"+targes[0][c]+"}}")>-1){
-            var cadena="{{"+targes[0][c]+"}}";
-            plt=plt.replace(new RegExp(cadena, 'g'), targes[Files_capsalera+j][c]);  
-
-            if(targes[1][c].toLowerCase().indexOf("imatge")>-1) {
-              if(targes[Files_capsalera+j][c]=="") { 
-                plt=plt.replace("logo","nologo");
-              }
-            }            
-            if(targes[1][c].toLowerCase().indexOf("url")>-1) {
-              if(targes[Files_capsalera+j][c]=="") { 
-                plt=plt.replace("url","nourl");
-              }
-            } 
-
-        }
+  for (p=0;p<plantilles.length;p++){
+     if (plantilles[p][0]=="tarja"){
+       var plant=plantilles[p][2][0];
+       break;
      }
+  }
+
+  for (var j = xIni; j < targes.length-Files_Capçalera; j++) {  
+     var row_dad=targes[Files_Capçalera+j];
+     var plt=aplica_plantilla(plant,row_dad);
      divDades +=plt;
      t +=1;        
-    if (t>=nReg || t>=targes.length-Files_capsalera) {break};     
+    if (t>=nReg || t>=targes.length-Files_Capçalera) {break};     
   }
-  
 
-  if(xIni==0 && xFin>=parseInt(targes.length)-Files_capsalera){
+
+  if(xIni==0 && xFin>=parseInt(targes.length)-Files_Capçalera){
     $("#btnNovaPagina").hide();
   } else {
-    $("#btnNovaPagina").css('visibility','visible');      
+    //$("#btnNovaPagina").css('visibility','visible');      
     $("#btnNovaPagina").show();             
   }
 
@@ -914,7 +1427,7 @@ function creaTarges(sentit) {
     $("#btnB1").prop('disabled', false);          
   }
   
-  if (xFin>=parseInt(targes.length)-Files_capsalera){
+  if (xFin>=parseInt(targes.length)-Files_Capçalera){
     $("#btnB2").css('background-color', '#CACACA');    
     $("#btnB2").css('color', '#FFFFFF');          
     $("#btnB2").prop('disabled', true);          
@@ -924,178 +1437,259 @@ function creaTarges(sentit) {
     $("#btnB2").prop('disabled', false);          
   }
 
-  var regPagina="Registres: "+(xIni+1)+" a  "+xFin+" de "+parseInt(targes.length-Files_capsalera);
+  var regPagina="Registres: "+(xIni+1)+" a  "+xFin+" de "+parseInt(targes.length-Files_Capçalera);
   $("#comptadorPagines").html(regPagina);  
-  $("#comptadorPagines").show();         
+  //$("#comptadorPagines").show();         
    
-  $('#divPresentacio').html(divDades);
+  $('#divPresTarja').html(divDades);
   $(".targeta").css("width",divAmpladaTar);  
     
   $('#imgtemp').css("display","none");     
   $("*").css("cursor","default");  
 }
 
-function creaMapa() {
- map = new google.maps.Map(document.getElementById('map'), {
-    //zoom:8
-    //nter: {lat: 41.7292826, lng: 1.8225154} // Manresa, per a zoom manual
- });  
- 
- 
- $('#imgtemp').css("display","none");    
-}
 
-function creaMarcadors(finalArray){
-
-// Construeix targes i mostra marcadors en el mapa
+function creaMarcadors(finalArray){ // Construeix targes i mostra marcadors en el mapa
    var infoWindowActual=new google.maps.InfoWindow();
    var repetit=[];
    for (var i=0;i<finalArray.length;i++) {
      repetit[i]=false;
    }        
-   var numCentres=0;     
-   
-   creaMapa();
-   centres=[];
-   marcadors=[]; 
-      
-   for (var i=Files_capsalera;i<finalArray.length;i++) {
-   
-     //if (parseFloat(finalArray[i][numColLatitud])>0 && parseFloat(finalArray[i][numColLongitud])>0) {
-     
-       if (!repetit[i]) {
-         var numRepetits=0;
-         var titols=[];
-         var blogs=[];
-         titols[0]=finalArray[i][numColBoto];
-         blogs[0]=finalArray[i][numColBotoURL];
-       
-         for(var j=i+1;j<finalArray.length;j++) {
-         
-           //if (parseFloat(finalArray[j][numColLatitud])>0 && parseFloat(finalArray[j][numColLongitud])>0) {
-           
-             var primer=parseFloat(finalArray[i][numColAgrupa]);
-             var segon=parseFloat(finalArray[j][numColAgrupa]);
-             
-             if(primer==segon) {
-               numRepetits++;
-               repetit[j]=true;
-               titols[numRepetits]=finalArray[j][numColBoto];
-               blogs[numRepetits]=finalArray[j][numColBotoURL];
-             }    
-             
-           //}  
-             
-           }                                                  
-           centres[numCentres]=[];
-           for(var j=0;j<finalArray[0].length;j++) {
-              centres[numCentres][j]=finalArray[i][j];
-           }
-           centres[numCentres][numColBoto]=titols;                      
-           centres[numCentres][numColBotoURL]=blogs;                      
-       
-           numCentres++;
-       }   
-       //}
+   var numCentres=0; 
+   map = new google.maps.Map(document.getElementById('map'), {});
+   $('#imgtemp').css("display","none"); 
+   if(Zoom_automatic=='N') {
+     bounds=bounds_all;
+     limitsMapa();
    }
- 
-   var locations=new Array();    
-   for (k=0;k<centres.length;k++) (function(i){   
-
-      locations[i]={lat: parseFloat(centres[i][numColLatitud]), lng: parseFloat(centres[i][numColLongitud])}; 
+   centres=[];   
+   agrupaCentres=[];
+   marcadors=[]; 
+   row_rep=[];
    
-        var capsalera=plantilla_1;      
-        for (c=0;c<finalArray[0].length; c++){
-          if (capsalera.indexOf("{{"+finalArray[0][c]+"}}")>-1){
-            capsalera=capsalera.replace("{{"+finalArray[0][c]+"}}",centres[i][c]);
-            if(finalArray[1][c]=="Imatge") {
-              if(centres[i][c]=="") { 
-                capsalera=capsalera.replace("logo","nologo");
-              }
-            }
-            if(finalArray[1][c]=="URL") {
-              if(centres[i][c]=="") { 
-                capsalera=capsalera.replace("url","nourl");
-              }
-            }
-          }
-        }         
-        
-        var titolsActuals=centres[i][numColBoto]; 
-        var blogsActuals=centres[i][numColBotoURL];  
-        
-        var botons="";            
-        for(var j=0;j<titolsActuals.length;j++) {
-           var boto=plantilla_2;
-              if(blogsActuals[j]=="") { 
-                boto=boto.replace("url","nourl");
-              }
-           boto=boto.replace("{{BotoTitol}}",titolsActuals[j]);
-           boto=boto.replace("{{BotoURL}}",blogsActuals[j]);
-           botons+=boto;
-           botons+="<br>";
-        }
-      
+// Separador de marcadors quan estan molt propers
+   
+   var oms = new OverlappingMarkerSpiderfier(map, { 
+     markersWontMove: true,   // we promise not to move any markers, allowing optimizations
+     markersWontHide: true,   // we promise not to change visibility of any markers, allowing optimizations
+     basicFormatEvents: true,  // allow the library to skip calculating advanced formatting information
+     nearbyDistance: 20
+   });  
+          
+// Agrupament de registres segons el criteri d'agrupament     
+     
+   for (var i=Files_Capçalera;i<finalArray.length;i++) {
+       if (!repetit[i]) {
+         var repes=i+",";
+         for(var j=i+1;j<finalArray.length;j++) {
+            if (finalArray[j][numColLatitud].length>0 && finalArray[j][numColLongitud].length>0) {    
+               var primer=finalArray[i][numColAgrupa];
+               var segon=finalArray[j][numColAgrupa];
+               if(primer==segon) {
+                 repetit[j]=true;
+                 repes +=j+",";
+               }    
+             }                
+         }                                                  
+         centres[numCentres]=[];
+         for(var j=0;j<finalArray[0].length;j++) {
+           centres[numCentres][j]=finalArray[i][j];
+         }
+         row_rep[numCentres]=repes;
+         agrupaCentres[numCentres]=finalArray[i][numColAgrupa];      
+         numCentres++;
+       }  
+   }
+   
+  if(numCentres==0) {
+      missatgeError("No hi ha cap marcador en el mapa com a resultat dels filtres aplicats.");
+   }
+  
+   var numSenseLloc=0;
+   var stringSenseLloc="Relació de registres, segons el criteri d'agrupament, que no disposen de coordenades de localització vàlides <br> S'han situat a les coordenades 0,0 (equador/meridià 0)";
+   var senseLloc=[];
+   senseLloc[0]=[stringSenseLloc,finalArray[0][numColAgrupa],finalArray[0][numColLatitud],finalArray[0][numColLongitud]]
+ 
+   var locations=new Array();  
+   var iColors=new Array();     
+   var white = { r: 255, g: 255, b: 255 };
+   
+// Agrupament de registres en marcadors i creació de les targetes dels marcadors   
+   
+   for (k=0;k<centres.length;k++) (function(i){   
+   
+      var laLatitud=parseFloat(centres[i][numColLatitud]);
+      var laLongitud=parseFloat(centres[i][numColLongitud]);
 
-        capsalera=capsalera.replace("{{#Botons#}}",botons);                
-        contentString='<div id="content">';               
-        contentString+=capsalera;
-        contentString+='</div>';
-        
-       if (Clusters=='S'){        
-          marcadors[i]=new google.maps.Marker({
-            position: locations[i]
-          });  
-       } else {
-          marcadors[i]=new google.maps.Marker({
+      var clr=Color_punts_omisio;      
+      if (numColColor!=""){
+         if (centres[i][numColColor]!=""){
+             var clr=centres[i][numColColor] //color del punt al mapa
+         }
+      }
+      //console.log(centres[i][numColAgrupa]+"---"+laLatitud+"---"+laLongitud);
+      if (laLatitud==0 || laLongitud==0 || isNaN(laLatitud) || isNaN(laLongitud) ) {
+        laLatitud=0; //es posen a 0 per si el problema és que son NaN
+        laLongitud=0;
+        stringSenseLloc+=agrupaCentres[i]+"\n";
+        numSenseLloc++;
+        senseLloc[numSenseLloc]=[agrupaCentres[i].replace("@", "\@"),centres[i][numColLatitud],centres[i][numColLongitud]];
+      } 
+         
+      locations[i]={lat: laLatitud, lng: laLongitud}; 
+      iColors[i]=clr;
+      var row_dad=centres[i];
+      var Capçalera=aplica_plantilla(plantilla_1,row_dad);
+      
+      //creació dels botons de cada registre agrupat
+      var botons="";            
+      var str=row_rep[i].substr(0,row_rep[i].length-1);
+      var llistaReg=str.split(",");        
+      for(var j=0;j<llistaReg.length;j++) { 
+         var nId=llistaReg[j];
+         var row_dad=finalArray[nId];
+         var boto=aplica_plantilla(plantilla_2,row_dad);
+         botons+=boto;
+         botons+="<br>";
+      }        
+   
+      Capçalera=Capçalera.replace("{{#Botons#}}",botons);                
+      contentString='<div id="content">';               
+      contentString+=Capçalera;
+      contentString+='</div>';
+
+// Definició de la icona dels marcadors (a partir d'un fitxer SVG). La propietat anchor correspon a les coordenades de la punta del marcador 
+
+      var path ="m49.969 5c-19.249 0-29.26 15-29.09 30 .236 21.833 21.818 30 29.09 60 7.279-30 29.13-38.642 29.13-60 0-15-11.296-30-29.12-30m.031  ";
+          path +="20.625c4.694 0 8.5 3.806 8.5 8.5 0 4.694-3.806 8.5-8.5 8.5-4.694 0-8.5-3.806-8.5-8.5 0-4.694 3.806-8.5 8.5-8.5"; //50,94
+
+      var icon = {
+         path: path,
+         fillColor: iColors[i],
+         fillOpacity: 1,
+         anchor: new google.maps.Point(50,94),
+         strokeColor: "black",
+         strokeWeight: 1,
+         scale: 0.4
+      };
+      
+           
+      if (Clusters=='S'){        
+         marcadors[i]=new google.maps.Marker({
             position: locations[i],
+            icon: icon,
+         });  
+         
+      } else {
+         marcadors[i]=new google.maps.Marker({
+            position: locations[i],
+            icon: icon,
             map: map
           });           
-       }       
+      }       
        
-        infowindow[i] = new google.maps.InfoWindow({content: contentString});     
-                       
-        marcadors[i].addListener('click', function() {   
-              infoWindowActual.close();
-              infowindow[i].open(map,marcadors[i]);
-              infoWindowActual=infowindow[i];
-        });
-
-     })(k);      
-
-      if (Clusters=='S'){  
-        // Add a marker clusterer to manage the markers.
-        markerCluster = new MarkerClusterer(map, marcadors,
-        {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
-      }  
+      infowindow[i] = new google.maps.InfoWindow({content: contentString});  
       
-      bounds = new google.maps.LatLngBounds();      
+// Listener per a clics sobre l'aranya (marcadors molt propers)
+             
+      google.maps.event.addListener(marcadors[i], 'spider_click', function(e) {  // 'spider_click', not plain 'click'
+         infoWindowActual.close();
+         infowindow[i].open(map,marcadors[i]);
+         infoWindowActual=infowindow[i];
+      });       
+      oms.addMarker(marcadors[i]);  // adds the marker to the spiderfier _and_ the map    
+   })(k);   
 
-      if (marcadors.length>0) {       
-        for (var l = 0; l < marcadors.length; l++) {
-           bounds.extend(marcadors[l].getPosition());
-        } 
-        if (iniciantMapa) {
-          bounds_all=bounds;
-          iniciantMapa=false;
-        }
-      }
-      
-      if(Zoom_automatic=='S') {
-        limitsMapa();
-      } else {
-        if (bounds_all!=null) {
-          map.fitBounds(bounds_all);     
-        }
-      }
-      
-     //$("#divFiltres").css("visibility","visible"); 
+// Visualització d'errades o omissió de dades de latitud i longitud
 
-     $('#imgtemp').css("display","none");           
-     $("*").css("cursor","default");        
+   if(numSenseLloc>0){
+       if (Visualitzar_errors=="S") {
+         mostraErrades(senseLloc);
+       }
+   }
+      
+// Determinació dels límits del mapa
+
+   bounds = new google.maps.LatLngBounds(); 
+   
+   google.maps.event.addListener(map, 'bounds_changed', function() {
+     if (iniciantMapa) {        
+         bounds_all=map.getBounds(); // límits del mapa, considerant tots els registres
+         iniciantMapa=false;
+     }
+   });
+
+   if (marcadors.length>0) {       
+      for (var l = 0; l < marcadors.length; l++) {
+        bounds.extend(marcadors[l].getPosition());
+      } 
+      
+// Determinació dels límits del mapa inicial      
+
+  if (iniciantMapa) {      
+    bounds_all=bounds;
+    var $mapDiv = $('#map');
+    var mapDim = { height: $mapDiv.height(), width: $mapDiv.width() };
+    var zoomMapa=getBoundsZoomLevel(bounds, mapDim); // zoom determinat per la ubicació de tots els marcadors i les dimensions de la finestra on hi ha el mapa
+    var centreMapa=bounds.getCenter(); // centre del mapa determinat per tots els marcadors
+
+// Recull de variables relacionades amb el mapa inicial
+
+    if (Centre_mapa!='A') {
+      var cadenaCentre=Centre_mapa.split(',');
+      var latInicial=parseFloat(cadenaCentre[0]);
+      var lonInicial=parseFloat(cadenaCentre[1]);
+    }
+    var zoomInicial=parseFloat(Zoom_inicial);
+    
+// Tipus de mapa inicial
+    
+    if (zoomInicial==0 && Centre_mapa=='A') { // tot automàtic
+      iniciantMapa=false;
+    }
+    if (zoomInicial>0 && Centre_mapa=='A') { // centre automàtic
+      map.setZoom(zoomInicial);
+      map.setCenter(centreMapa);
+    }
+    if (zoomInicial==0 && Centre_mapa!='A') { // zoom automàtic
+      map.setZoom(zoomMapa);
+      map.setCenter({lat: latInicial, lng: lonInicial});
+    }
+    if (zoomInicial>0 && Centre_mapa!='A') { // tot manual
+      map.setZoom(zoomInicial);
+      map.setCenter({lat: latInicial, lng: lonInicial});
+    }
+  } 
+   }      
+
+// Si no hi ha filtres actius, mostra el mapa inicial
+
+   if (filtresActius>0) {
+     if (Zoom_automatic=='S') {
+         limitsMapa();
+     }         
+   } else {
+   if (!iniciantMapa) {
+     bounds=bounds_all;
+     limitsMapa();
+     }
+   }
+   
+// Add a marker clusterer to manage the markers.
+   
+   if (Clusters=='S'){  
+        markerCluster = new MarkerClusterer(map, marcadors,{imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+        markerCluster.setMaxZoom(Clusters_max_zoom);
+   }  
+   
+// Tancament de la finestra d'espera   
+      
+   $('#imgtemp').css("display","none");           
+   $("*").css("cursor","default");    
 }
 
-function limitsMapa(){    
+
+function limitsMapa(){  // Actualitza el mapa segons els límits establerts
     if (marcadors.length>0) {     
       map.fitBounds(bounds);
     }
@@ -1105,8 +1699,475 @@ function limitsMapa(){
             this.setZoom(parseFloat(Zoom_max));  
         }
     });
-    setTimeout(function(){google.maps.event.removeListener(zoomChangeBoundsListener)}, 2000);      
+    setTimeout(function(){google.maps.event.removeListener(zoomChangeBoundsListener)}, 2000);         
 }
+
+function getBoundsZoomLevel(bounds, mapDim) {  // Calcula el nivell de zoom en funció de la ubicació de tots els marcadors i les dimensions de la finestra on hi ha el mapa
+    var WORLD_DIM = { height: 256, width: 256 };
+    var ZOOM_MAX = 21;
+    function latRad(lat) {
+        var sin = Math.sin(lat * Math.PI / 180);
+        var radX2 = Math.log((1 + sin) / (1 - sin)) / 2;
+        return Math.max(Math.min(radX2, Math.PI), -Math.PI) / 2;
+    }
+    function zoom(mapPx, worldPx, fraction) {
+        return Math.floor(Math.log(mapPx / worldPx / fraction) / Math.LN2);
+    }
+    var ne = bounds.getNorthEast();
+    var sw = bounds.getSouthWest();
+    var latFraction = (latRad(ne.lat()) - latRad(sw.lat())) / Math.PI;
+    var lngDiff = ne.lng() - sw.lng();
+    var lngFraction = ((lngDiff < 0) ? (lngDiff + 360) : lngDiff) / 360;
+    var latZoom = zoom(mapDim.height, WORLD_DIM.height, latFraction);
+    var lngZoom = zoom(mapDim.width, WORLD_DIM.width, lngFraction);
+    return Math.min(latZoom, lngZoom, ZOOM_MAX);
+}
+
+function centrar(){  // Actualitza el mapa segons els filtres actius en mode zoom manual 
+  if (filtresActius>0) {
+    $('#botoCentrar').attr( "src", "https://edumet.cat/edumet/icones/centrar-red.png" );
+  }
+  limitsMapa();
+}
+
+function aplica_plantilla(plantilla,row_dad){
+  if (row_dad==undefined){
+    alert("No hi ha dades al registre");
+    return;
+  }
+  for (c=0;c<row_org[0].length; c++){
+    if (plantilla.indexOf("{{"+row_org[0][c]+"}}")>-1){
+      var cadena="{{"+row_org[0][c]+"}}";
+      if (row_org[1][c].toLowerCase().indexOf("carousel")>-1){          
+         var valSubs=carousel(row_org[0][c]+"_"+row_dad[c],row_dad[c]);
+      } else if (row_org[1][c].toLowerCase().indexOf("iframe")>-1) {
+         var valSubs="<iframe class='iframe' src='"+row_dad[c]+"'></iframe>";
+      } else {
+         var valSubs=row_dad[c];            
+      }
+
+      plantilla=plantilla.replace(new RegExp(cadena, 'g'), valSubs);  
+     
+      if(row_org[1][c].toLowerCase()=="imatge") {
+        if(row_dad[c]=="") { 
+          plantilla=plantilla.replace("logo","nologo");
+        }
+      }
+      if(row_org[1][c].toLowerCase()=="url") {
+        if(row_dad[c]=="") { 
+          plantilla=plantilla.replace("url","nourl");
+        }
+      }
+    }
+  }     
+  return plantilla;
+}
+
+
+function carousel(nomCar,imgCar){
+  var row_car=imgCar.split(",");
+  //<!-- Indicators -->
+  var strCar="<div id='"+nomCar+"' class='carousel slide' data-ride='carousel'>";
+    strCar +="<ol class='carousel-indicators'>";
+    for (c=0;c<row_car.length;c++){
+      if (c==0){      
+        strCar +="<li data-target='#"+nomCar+"' data-slide-to='"+c+"' class='active'></li>";
+      } else {
+        strCar +="<li data-target='#"+nomCar+"' data-slide-to='"+c+"'></li>";
+      }
+    }
+    strCar +="</ol>";
+
+    //<!-- Wrapper for slides -->
+    strCar +="<div class='carousel-inner'>";
+        for (c=0;c<row_car.length;c++){      
+          if (c==0){
+            strCar +="<div class='item active'>";
+               strCar +="<img src='"+row_car[c]+"'/>";
+            strCar +="</div>";           
+          } else {
+            strCar +="<div class='item'>";           
+               strCar +="<img src='"+row_car[c]+"'/>";
+            strCar +="</div>";           
+          }
+
+        }
+    strCar +="</div>";
+
+    //<!-- Left and right controls -->
+    strCar +="<a class='left carousel-control' href='#"+nomCar+"' data-slide='prev'>";
+      strCar +="<span class='glyphicon glyphicon-chevron-left'></span>";
+      strCar +="<span class='sr-only'>Previous</span>";
+    strCar +="</a>";
+    strCar +="<a class='right carousel-control' href='#"+nomCar+"' data-slide='next'>";
+      strCar +="<span class='glyphicon glyphicon-chevron-right'></span>";
+      strCar +="<span class='sr-only'>Next</span>";
+    strCar +="</a>";
+  strCar +="</div>";
+
+   return strCar;
+}
+
+
+function hexToRgb(hex) {
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16)
+    } : null;
+}
+
+
+function addslashes(str) {
+  str=str.replace("'","´");
+  //str=str.replace("'","\'");
+  str=str.replace(/\\/g,'\\\\');
+  str=str.replace(/\'/g,'\\\'');
+  str=str.replace(/\"/g,'\\"');
+  str=str.replace(/\0/g,'\\0');
+  str=str.replace("\n","\\n");
+  return str;
+}
+	
+
+function getGeoLocation(direccio,i){
+		//alert (direccio);
+		geocoder = new google.maps.Geocoder();
+		geocoder.geocode( { 'address': direccio}, function(results, status) {
+			lat[i] = results[0].geometry.location.lat();
+			lon[i] = results[0].geometry.location.lng();
+			alert("Coordenades de l'adreça: "+direccio+"\n\nlatitud: "+lat[i]+"\nlongitud: "+lon[i]+"\n\n\nIntroduiu les coordenades al full de càlcul per poder representar les dades\n\n");			
+			return lat[i];
+		});
+}
+
+
+function centrar_avui () { 
+	x="document.location.href='#date="+avui+"';";		
+	document.location.reload();
+	//alert(2);
+}
+
+	
+function banda_amplada(valor) {
+	if (!valor) { 
+		z=ban_select.selectedIndex-1;
+		bandaTemps=z;
+	} else {
+		bandaTemps =bandaTemps+valor;
+		z= bandaTemps % 11; 
+	}
+	switch(z){
+	case 0:
+		tm.changeTimeIntervals([Timeline.DateTime.MILLISECOND,Timeline.DateTime.SECOND]);
+		break;	
+	case 1:
+		tm.changeTimeIntervals([Timeline.DateTime.SECOND,Timeline.DateTime.MINUTE]);
+		break;				
+	case 2:
+		tm.changeTimeIntervals([Timeline.DateTime.MINUTE,Timeline.DateTime.HOUR]);
+		break;	
+	case 3:
+		tm.changeTimeIntervals([Timeline.DateTime.HOUR,Timeline.DateTime.DAY]);
+		break;		
+	case 4:
+		tm.changeTimeIntervals([Timeline.DateTime.DAY,Timeline.DateTime.WEEK]);
+		break;			
+	case 5:
+		tm.changeTimeIntervals([Timeline.DateTime.WEEK,Timeline.DateTime.MONTH]);
+		break;
+	case 6:
+		tm.changeTimeIntervals([Timeline.DateTime.MONTH,Timeline.DateTime.YEAR]);
+		break;
+	case 7:
+		tm.changeTimeIntervals([Timeline.DateTime.YEAR,Timeline.DateTime.DECADE]);
+		break;
+	case 8:
+		tm.changeTimeIntervals([Timeline.DateTime.DECADE,Timeline.DateTime.CENTURY]);
+		break;		
+	case 9:
+		tm.changeTimeIntervals([Timeline.DateTime.CENTURY,Timeline.DateTime.MILLENNIUM]);
+		break;
+	default:
+		if (valor > 0) {
+			alert("Ha arribat al límit superior: "+banda[z] );
+		} else {
+			alert("Ha arribat al límit inferior: "+banda[z+1] );
+		}
+		bandaTemps -=valor;
+	}
+}
+
+
+//modificar l'alçada de la línia del temps
+function  global_alçada (valor) {
+	var divHeight;
+	var obj = document.getElementById('timelinecontainer');
+	if (obj.offsetHeight) {timelinecontainer_alçada=obj.offsetHeight;} else if(obj.style.pixelHeight){timelinecontainer_alçada=obj.style.pixelHeight;}
+	timelinecontainer_alçada +=valor;
+    timelinecontainer.style.height =timelinecontainer_alçada+"px";		
+	
+	var divHeight;
+	var obj = document.getElementById('timeline');
+	if (obj.offsetHeight) {timeline_alçada=obj.offsetHeight;} else if(obj.style.pixelHeight){timeline_alçada=obj.style.pixelHeight;}	
+	timeline_alçada +=valor;
+	timeline.style.height =timeline_alçada+"px";
+	
+	
+	var divTop;
+	var obj = document.getElementById('mapa_mes_alçada');
+	if (obj.offsetTop) {obj_top=obj.offsetTop;} else if(obj.style.pixelTop){obj_top=obj.style.pixelTop;}	
+	obj_top +=valor;
+	mapa_mes_alçada.style.top =obj_top+"px";
+
+	
+	var divTop;
+	var obj = document.getElementById('mapa_menys_alçada');
+	if (obj.offsetTop) {obj_top=obj.offsetTop;} else if(obj.style.pixelTop){obj_top=obj.style.pixelTop;}	
+	obj_top +=valor;
+	mapa_menys_alçada.style.top =obj_top+"px";
+
+	banda_amplada(0);
+}
+
+
+//modificar l'alçada del mapa
+function  mapa_alçada (valor) {
+	var divHeight;
+	var obj = document.getElementById('map');
+	if (obj.offsetHeight) {map_alçada=obj.offsetHeight;} else if(obj.style.pixelHeight){map_alçada=obj.style.pixelHeight;}
+	map_alçada +=valor;
+    map.style.height =map_alçada+"px";		
+	
+	var divHeight;
+	var obj = document.getElementById('mapcontainer');
+	if (obj.offsetHeight) {mapcontainer_alçada=obj.offsetHeight;} else if(obj.style.pixelHeight){mapcontainer_alçada=obj.style.pixelHeight;}	
+	mapcontainer_alçada +=valor;
+	mapcontainer.style.height =mapcontainer_alçada+"px";
+	
+}
+
+
+function creaTimeMap(finalArray){
+    inici=[]; fin=[]; titol=[]; titol_curs=[]; text=[]; bloc=[]; lat=[]; lon=[]; tarja=[];
+	for(i=3; i<finalArray.length; i++) {
+		inici[i-3] = finalArray[i][numColDataIni];
+		fin[i-3] = finalArray[i][numColDataFin];
+		titol[i-3] = finalArray[i][numColTitol];
+		titol_curt[i-3] = finalArray[i][numColTitol];								
+		text[i-3]= finalArray[i][numColDescripcio];
+		bloc[i-3]= finalArray[i][numColBloc];
+		lat[i-3] = finalArray[i][numColLatitud];
+		lon[i-3] = finalArray[i][numColLongitud];
+		
+		tarja[i-3]="<div class=finestra>";
+        /*
+		if (media[i]) {
+			tarja[i] +="<div class=esq><img src="+media[i]+" height=125 width=125></div>";
+		}
+		tarja[i] +="<div class=dret><p style=font-weight:bold;font-size:0.9em>"+titol[i]+"</p>";
+		if (inici[i]==fin[i]) {
+			tarja[i] +="<p style=font-size:0.85em>Data: "+inici[i]+"</p>";
+		} else {
+			tarja[i] +="<p style=font-size:0.85em>Del "+inici[i]+" al "+fin[i]+"</p>";
+		}
+		tarja[i] +="<p style=font-size:0.85em>adreça: "+adreça[i]+" ("+poblacio[i]+")</p>";
+		if (enllaç[i]) {
+			tarja[i] +="<p style=font-size:0.85em><a href="+enllaç[i]+" target=_blank>Informació addicional</a></p></div>";
+		}
+		tarja[i-3] +="</div>";
+        //*/
+        
+		poblacio[i] ="Barcelona";
+		adreça[i]= "";				
+
+		media[i]= "Media";
+		enllaç[i]= "";				
+        
+        tarja[i-3] ="Prova";     
+        console.log(i+"---"+lat[i-3])
+	}
+
+
+  var str="";
+    str +="Finestra de temps: "
+    str +="<select id='ban_select' onchange='banda_amplada();'>";
+      for (i=0; i< banda.length; i++) {   
+        if (banda[i] == finestra_temporal) {
+          str +="<option value='"+i+"' selected >"+banda[i]+"</option>";
+        } else {
+          str +="<option value='"+i+"'>"+banda[i]+"</option>";
+        }
+      }
+    str +="</select>";
+
+
+  var pantalla ="<div id='global_menys_alçada'><input type='image' src='https://edumet.cat/areatac/cartografia/images/menys.png' width='15' height='15' onclick='global_alçada(-5);'></div>";
+    pantalla +="<div id='global_mes_alçada'><input type='image' src='https://edumet.cat/areatac/cartografia/images/mes.png' width='15' height='15' onclick='global_alçada(+5);'></div>";
+    pantalla +="<div id='mapa_menys_alçada'><input type='image' src='https://edumet.cat/areatac/cartografia/images/menys.png' width='15' height='15' onclick='mapa_alçada(-5);'></div>";   
+    pantalla +="<div id='mapa_mes_alçada'><input type='image' src='https://edumet.cat/areatac/cartografia/images/mes.png' width='15' height='15' onclick='mapa_alçada(+5);'></div>";       
+    pantalla +="<div id='timemap' style= 'height:550px' >";         
+    pantalla +="<div id='timelinecontainer'>";
+    pantalla +="<div id=''>"+str+"</div>";        
+    //pantalla +="<div id='timeline_amplada_text' style='font-size: 10px'>Finestra de temps</div>";
+    //pantalla +="<div id='timeline_amplada'><input Type='image' src='https://edumet.cat/areatac/cartografia/images/menys.png' width='15' height='15' onclick='banda_amplada(-1);'>";    
+    //pantalla +="<input  Type='image' src='https://edumet.cat/areatac/cartografia/images/mes.png' width='15' height='15' onclick='banda_amplada(+1);'></div>";  
+    pantalla +="<div id='timeline'>";
+    pantalla +="</div></div>";
+    pantalla +="<div id='mapcontainer'><div id='map_2'></div></div></div></div>"; 
+  $("#divPresTimeMap").html(pantalla);
+  
+
+  $(function() {
+    var cadena="[";
+      pas = false;
+      options=" theme: 'orange'";
+      str = "";
+      c=0;
+      j=0;
+      //for(i=0; i<lat.length; i++) { 
+      for(i=0; i<5; i++) {       
+        if (lat[i]) {
+          //per determinar si és o no l'inici de la cadena
+          if (pas == true) {
+            cadena +=',';
+          }
+          pas=true;
+          //determinar el color de cada bloc
+          if (bloc[i]) {
+            for (k=0; k< bloc_nom.length ; k++) {       
+              if (bloc[i] == bloc_nom[k]) {
+                color_objecte=bloc_color[k];
+              }
+            }
+          }
+          color_objecte=bloc_color[1];
+          // per determinar si ha de representar una línia o un punt
+          if(inici[i] == fin[i]) {
+            //punt
+            //dates=new Date(inici[i])+'",'
+            dates=formatDate(inici[i])+'",'                        
+          } else {
+            //linia
+            //dates=new Date(inici[i]).format('YYYY-MM-DD')+'", "end" : "'+new Date(fin[i]).format('YYYY-MM-DD')+'",'            
+            dates=formatDate(inici[i])+'", "end" : "'+formatDate(fin[i])+'",'                        
+            formatDate(inici[i])
+            /*
+            dataIni=new Date(inici[i])
+            dataIni=dataIni.format('YYYY-MM-DD')
+            dataFin=new Date(fin[i])
+            dataFin=dataFin.format('YYYY-MM-DD')                                                
+            dates=dataIni+'", "end" : "'+dataFin+'",'
+            //*/
+            
+          }
+      
+          cadena += '{ "start" : "'+dates+
+            '"point" : {"lat" : '+lat[i]+',"lon" : '+lon[i]+'},'+
+            '"title" : "'+addslashes(titol_curt[i])+'",'+
+            '"options" : { "infoHtml": "'+addslashes(tarja[i])+'", "theme": "'+color_objecte+'", "description": "tags1: ['+bloc[i]+']", "tags": ["'+bloc[i]+'"] } }'
+   
+        } else {
+          //S'ha d'obtenir de google geocoder
+          //direccio=adreça[i]+" "+poblacio[i]+": latitud="+lat[i]+" ,longitud="+lon[i];
+          //alert(direccio+"\n\nIntroduiu al full de càlcul les dades que surtiran més endavant relacionades amb aquesta adreça");    
+        }
+      }
+    cadena +=']';
+
+    console.log(cadena);
+    alert(cadena)
+    
+    var tm = TimeMap.init({
+      mapId: 'map_2',
+      timelineId: 'timeline',
+      //*
+      options: {
+        eventIconPath: 'https://edumet.cat/areatac/cartografia/libimages/'
+      },
+      datasets: [{
+        id: 'artists',
+        title: titol_pagina,
+        theme: mapaColor,       
+        type: tipus,
+        options: {
+          items: JSON.parse(cadena) 
+          //items: cadena           
+        }
+      }],
+      //bandIntervals: bandIntervals
+      bandIntervals: [Timeline.DateTime.DECADE,Timeline.DateTime.CENTURY]
+    });
+    
+    alert(2)
+    /*
+    var gmap = tm.getNativeMap();
+    gmap.mapTypes.set("white", styledMapType);
+    gmap.setMapTypeId("white");
+    */  
+  
+//*
+    // filter function for tags
+    var hasSelectedTag = function(item) {
+      //alert("pas1: "+item);
+      // if no tag was selected, everything passes
+      return !window.selectedTag || (
+        // item has tags?
+        item.opts.tags && 
+        // tag found? (note - will work in IE; Timemap extends the Array prototype if necessary)
+        item.opts.tags.indexOf(window.selectedTag) >= 0
+      );
+    };
+  
+    // add our new function to the map and timeline filters
+    tm.addFilter("map_2", hasSelectedTag); // hide map markers on fail
+    tm.addFilter("timeline", hasSelectedTag); // hide timeline events on fail
+  
+    
+    // onChange gestor del menu de filtres de bloc
+    $('#tag_select').change(function() {
+      window.selectedTag = $(this).val();
+      tm.filter('map_2');
+      tm.filter('timeline');
+    });
+//*/
+  });
+}
+
+
+function creaTimeLine(finalArray){
+  google.charts.load('current', {'packages':['timeline']});
+  google.charts.setOnLoadCallback(drawChart);
+  function drawChart() {
+     var container = document.getElementById('divPresTimeLine');
+     var chart = new google.visualization.Timeline(container);
+     var dataTable = new google.visualization.DataTable();
+
+     dataTable.addColumn({ type: 'string', id: 'President' });
+     dataTable.addColumn({ type: 'date', id: 'Start' });
+     dataTable.addColumn({ type: 'date', id: 'End' });
+     for (i=3;i<finalArray.length;i++){
+       dataIni=formatDate(finalArray[i][numColDataIni]);              
+       dataFin=formatDate(finalArray[i][numColDataFin]);              
+       console.log(finalArray[i][numColTitol]+"--"+dataIni+"--"+dataFin)
+       dataTable.addRow([finalArray[i][numColTitol],dataIni, dataFin])
+     }
+     chart.draw(dataTable);
+  }
+  $('#divPresTimeLine').css("height","600px");  
+}
+
+
+function formatDate(date) {
+    year=date.substr(date.length -4);
+    month=date.substr(3,2);    
+    day=date.substr(0,2);        
+    //var data=new Date(year, month, day);    
+    //data.format('YYYY-MM-DD');
+    return new Date(year, month, day);
+}
+
 
 </script>
 
@@ -1120,7 +2181,7 @@ function limitsMapa(){
 
 <div id="divDiv">
 </div>
-
+<script async defer src="bin/oms.min.js?spiderfier_callback=mapLibReadyHandler"></script>
 <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyANTZUP7RPqwaCdyiFp2XhWcJLQxRDRX5U&callback=inicia"></script>
 
