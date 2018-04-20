@@ -15,12 +15,11 @@
 <!--Datatables-->
 <!-- jQuery -->
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" >
+<link href="https://cdn.datatables.net/buttons/1.0.3/css/buttons.dataTables.min.css" rel="stylesheet" type="text/css" > 
 
-
-<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.0.3/css/buttons.dataTables.min.css"></script>
 
 <!-- buttons -->
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/select/1.2.5/js/dataTables.select.min.js"></script>
 <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
 
@@ -69,6 +68,23 @@
 <!--script TimeLine-->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
+<!--
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<i class="material-icons">local_parking</i>
+<i class="material-icons" style="font-size:36px">local_parking</i>
+<i class="material-icons" style="font-size:48px;color:red">local_parking</i>
+-->
+
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"  rel="stylesheet">
+<!--
+<i class="material-design-icons//1x_web/"  style="font-family: 'Material Icons'">accessibility</i>
+<i class="material-design-icons//2x_web/"  style="font-family: 'Material Icons'">face</i>
+<i class="md-icon dp48" style="font-family: 'Material Icons'">accessibility</i>
+-->
+
+
 <style>
 .centered{
     width: 85%;
@@ -113,7 +129,7 @@
    height: 100%;
 }
 
-#divPresTaula, #divPresTarja  {
+#divPresTaula, #divPresTargetes  {
    height: 100%;
 }
 
@@ -160,7 +176,8 @@ tr:hover {
 }
 
 #tblEditReg input, textarea{
- background-color: #ffe6e6;
+ background-color: #f9efef;
+ /*background-color: #ac1a0e1a;*/
 }
 
 #tblEditReg th{
@@ -187,10 +204,27 @@ tr:hover {
 .modal-footer{
 
 }
-</style>
+
+<!--Mapa-->
+  #llegendaMapa {
+     font-family: Arial, sans-serif;
+     background: #fff;
+     padding: 10px;
+     margin: 10px;
+     border: 1px solid #000;
+  }
+
+  #llegendaMapa h3 {
+     font-size: 1.5em;
+     margin-top: 0;
+  }
+
+  #llegendaMapa img {
+     vertical-align: middle;
+  }
 
 <!--Style timeLineMaps-->
-<style>
+
     div#timelinecontainer{
     width: 100%;
     height: 60%;
@@ -276,11 +310,12 @@ tr:hover {
 </head>
 
 <body>
+
     <div id="imgtemp" style="position: absolute; margin-left: 25%; margin-top: 5%; width: 50%; height: 300px; background-color: #A0AAD5; opacity:0.7; z-index: 99">
          <input id="btnTancar" type="button" value="X"/>
          <div style='text-align:center; line-height: 100px'>
              Carregant dades
-             <br><img src="http://cdn.nirmaltv.com/images/generatorphp-thumb.gif" style="width: auto; display: block; margin: 0 auto" />
+             <br><img src="https://drive.google.com/uc?id=1_O7dANSqSFwgMIC0m7QxTzOD0q-V_nac" style="width: auto; display: block; margin: 0 auto" /> 
          </div> 
     </div>
     <div class="panel-heading" id="Capçalera" style="visibility: hidden;">
@@ -303,7 +338,7 @@ tr:hover {
                <div class='row filtres' style='margin:5px 0px 5px 0px;visibility: hidden; float:left;' id="divTipus">
                    <div id="divSelTipus" style="float:left;visibility: hidden; float:left;">
                    </div>
-                   <input id='botoCentrar' src="https://edumet.cat/edumet/icones/centrar.png" class="noZoom" type="image" onClick="centrar()" style='float:left; margin-left:10px; margin-top:0px'> 
+                   <input id='botoCentrar' src="https://drive.google.com/uc?id=1jVkYeRZiImemNB9QVHJjkbR2xaYgz4mz" class="noZoom" type="image" onClick="centrar()" style='float:left; margin-left:10px; margin-top:0px'> 
                </div> 
                <div class='row titols' style='margin:5px 50px; float:left; text-align:center; visibility: hidden' id="divTitols">
                </div>             
@@ -317,7 +352,7 @@ tr:hover {
              <div id="userEmail"></div>
              <div id="divFormTaula"></div>
         </div>
-        <div id="divPresTarja" style="clear:both; width: 100%; margin-top:5px"></div>        
+        <div id="divPresTargetes" style="clear:both; width: 100%; margin-top:5px"></div>        
         <div id="divPresTimeMap" style="clear:both; width: 100%; margin-top:5px"></div>
         <div id="divPresTimeLine" style="clear:both; width: 100%; margin-top:5px"></div>        
         <div id='divBotons' hidden >
@@ -336,7 +371,8 @@ tr:hover {
         </div>        
     </div>
  
-    <div id="map" style="clear:both; margin: 5px 15px"></div>      
+    <div id="map" style="clear:both; margin: 5px 0px"></div>      
+    <div id="llegendaMapa" hidden><h3>Llegenda</h3></div>    
 
 
 <!-- Modal -->
@@ -360,29 +396,27 @@ tr:hover {
 
 <!--scripts incials-->
 <script>
-var Color_punts_omisio="#000000";
 var userEmail='';
 var numPag=1;
 var Files_Capçalera=3;
-var Num_files=0;
-var Num_columnes=0;
 var plantilla_1="";
 var plantilla_2="";
 var bloc_capçalera_2="N";
 var row_org=new Array();
-//var dades=new Array();
 var nTarFila=0;
 var row_var=new Array();
 var row_tip=[];
 var plantilles=new Array();
 var finalArray=new Array();
-
 var Permetre_canvi_presentacions='N';  
 var tipus="";
-var Plantilla_mapa="";
-var Plantilla_tarja="";
-var Plantilla_taula="";
 var filtresActius=0;
+
+
+//variables relacionades amb la presentació de tragetes
+var Num_files=0;
+var Num_columnes=0;
+
 
 //per determinar fer global la variable que guardarà la columna per la que s'ordenaran les matrius en el moment de construir els desplegables 
 var colOrd=0; 
@@ -393,13 +427,14 @@ var permisEdit='N';
 
 //relacionats amb el tipus mapa
 var numColAgrupa=-1;
-var numColColor=0;
 var numColLatitud=0;
 var numColLongitud=0;
 var numColDataIni=0;
 var numColDataFin=0;
 var numColDescripcio=0;
-var numColTitol=0;
+var numColTitol="";
+var numColColorMark="";
+var numColNomLlegendaMapa="";
 var numColBloc=0;
 var centres=[];
 var agrupaCentres=[];
@@ -418,6 +453,10 @@ var bounds;
 var bounds_all;
 var iniciantMapa=true;
 var Color_punts_omisio="#AC2010";
+var Posicio_llegenda="SENSE_LLEGENDA";
+//var numColIconaMark=0;
+var llegendes="";
+var divLlegenda="";
 
 //Variables relacionades amb timeLineMap
 //var tm="";
@@ -485,7 +524,7 @@ poblacio= [];
 adreça= [];
 dades= [];
 enllaç= [];
-tarja= [];
+targetes= [];
 totalfiles = 0;
 longitud=[];
 latitud=[];
@@ -559,6 +598,9 @@ function onFitxa(retorn){
 
    $("#modalHeader").html("Creació de fitxa de: "+ele);
    var divMissatge="Fitxa creada correctament";
+     divMissatge +="<br>S'han afegit, amb permís d'edició del document, els usuaris crp i els gestors de l'aplicació, entre ells sose@xtec.cat";   
+     divMissatge +="<br><br>Traspasseu la propietat del document al usuari <strong>sose@xtec.cat</strong>";   
+     divMissatge +="<br><br>Afegiu els usuaris que considereu han de poder afegir/modificar informació en el document";        
      divMissatge +="<br><br><a href='"+url+"' target='_blank'>Obrir la fitxa</a>";   
    $("#missatge").html(divMissatge);
    $('#finestraInfo').modal('show');
@@ -600,7 +642,7 @@ function onVariables(variables) {
    //Creacció del select de presentacions si hi ha més d'una
    row_tip=Presentacions_permeses.split(",");   
    if (row_tip.length>1){
-       var str="<select id='selTipus' onchange='aplicaTipus(this.value)' style='float:left; width:250px; height: 35px; font-size: 14px;'>";
+       var str="<select id='selTipus' onchange='aplicaTipus(this.value)' style='float:left; width:275px; height: 35px; font-size: 14px;'>";
            for(i=0; i<row_tip.length; i++){
               str +="<option value='"+row_tip[i]+"'>Presentació en forma de "+row_tip[i].toUpperCase()+"</option>";
             }
@@ -671,7 +713,10 @@ function onPlantilles(plt) {
               plantilles[p][2][3] +=plt[p][3][1][c];           
               break;
            case "<div>":
-              plantilles[p][2][4] +=plt[p][3][1][c];           
+              plantilles[p][2][4] +=plt[p][3][1][c];   
+              break;
+           case "llegenda":
+              llegendes=plt[p][3][1][c];  
               break;
            }
         }
@@ -730,11 +775,11 @@ function creaTipus(){
      $("#comptadorPagines").css("visibility","hidden");                 
      $("#divBotons").css("display","none");                     
      $("#divPresTaula").css("display","none");                               
-     $("#divPresTarja").css("display","none");                      
+     $("#divPresTargetes").css("display","none");                      
      $("#divPresTimeMap").css("display","none");               
      $("#divPresTimeLine").css("display","none");                   
      $("#map").css("visibility","visible");               
-     $("#map").css("display","block");                         
+     $("#map").css("display","block");   
      break;
    case "taula":
      $("#btnNovaPagina").css("visibility","hidden");           
@@ -742,28 +787,31 @@ function creaTipus(){
      $("#divBotons").css("visibility","visible");       
      $("#divBotons").show();                          
      $("#map").css("display","none");                     
+     $("#llegendaMapa").css("display","none");                         
      $("#divPresTimeMap").css("display","none");               
      $("#divPresTimeLine").css("display","none");                   
      $("#divPresTaula").css("display","block");                          
-     $("#divPresTarja").css("display","none");       
+     $("#divPresTargetes").css("display","none");       
      break;
-   case "tarja":
+   case "targetes":
      $("#divBotons").css("visibility","hidden");    
      $("#comptadorPagines").css("visibility","visible");                 
      $("#btnNovaPagina").css("visibility","visible");                 
      $("#map").css("display","none");                          
+     $("#llegendaMapa").css("display","none");                              
      $("#divPresTimeMap").css("display","none");               
      $("#divPresTimeLine").css("display","none");                  
      $("#divPresTaula").css("display","none");                          
-     $("#divPresTarja").css("display","block");            
+     $("#divPresTargetes").css("display","block");            
      break;      
    case "timemap":
      $("#btnNovaPagina").css("visibility","hidden");         
      $("#comptadorPagines").css("visibility","hidden");                 
      $("#divBotons").css("display","none");                     
      $("#divPresTaula").css("display","none");                               
-     $("#divPresTarja").css("display","none");            
+     $("#divPresTargetes").css("display","none");            
      $("#map").css("display","none");       
+     $("#llegendaMapa").css("display","none");                              
      $("#divPresTimeLine").css("display","none");               
      $("#divPresTimeMap").css("display","none");               
      $("#divPresTimeMap").css("display","block");                              
@@ -773,8 +821,9 @@ function creaTipus(){
      $("#comptadorPagines").css("visibility","hidden");                 
      $("#divBotons").css("display","none");                     
      $("#divPresTaula").css("display","none");                               
-     $("#divPresTarja").css("display","none");            
-     $("#map").css("display","none");                          
+     $("#divPresTargetes").css("display","none");            
+     $("#map").css("display","none");
+     $("#llegendaMapa").css("display","none");                              
      $("#divPresTimeMap").css("display","none");               
      $("#divPresTimeLine").css("visibility","visible");               
      $("#divPresTimeLine").css("display","block");                              
@@ -884,8 +933,14 @@ function creacioFiltres(dades){
             numColAgrupa=c;
      }
      if (dades[1][c].toLowerCase().indexOf("colorpunt")>-1) {
-            numColColor=c;
+            numColColorMark=c;
      }
+     /*if (dades[1][c].toLowerCase().indexOf("iconamapa")>-1) {
+            numColIconaMark=c;
+     }   */  
+     if (dades[1][c].toLowerCase().indexOf("nomllegendamapa")>-1) {
+            numColNomLlegendaMapa=c;
+     }     
      if (dades[1][c].toLowerCase().indexOf("latitud")>-1) {
             numColLatitud=c;
      }
@@ -936,7 +991,7 @@ function aplicacioFiltres(id){
     $("#"+id).css("color","red");
   }
  
-  $('#botoCentrar').attr( "src", "https://edumet.cat/edumet/icones/centrar.png" );
+  $('#botoCentrar').attr( "src", "https://drive.google.com/uc?id=1jVkYeRZiImemNB9QVHJjkbR2xaYgz4mz" );
  
   var finalArray=new Array();
   finalArray=row_org;
@@ -978,7 +1033,7 @@ function aplicacioFiltres(id){
   case "taula":
      creaTaula(finalArray);  
      break;
-  case "tarja":
+  case "targetes":
      creaTarges(finalArray);
      break;
   case "timemap":
@@ -1047,7 +1102,10 @@ function creaTaula(row) {
         //if (row[2][c].toLowerCase().indexOf("boto")>-1 && row[2][c].toLowerCase()!="botoVisu"){
         if (row[2][c].toLowerCase().indexOf("taula:boto")>-1){        
           if (row[r][c].length>0 || row[0][c].toLowerCase()=="fitxa"){ 
-             var name=row[r][c].replace(/[']+/g, '`');        
+             var name=row[r][c];        
+             if (name.indexOf("'")>-1){             
+                name=name.replace(/[']+/g, '`');        
+             }
              str +="<input type='button' id='btn_"+row[r][Columna_id]+"_"+c+"' name='"+name+"' onclick=\"fnBoto("+row[r][Columna_id]+","+c+",this.id, this.name);\" style='width:100%; height:25px; max-width: 150px;'value='"+row[0][c]+"'</input>##";
           } else {
              var name="";
@@ -1055,10 +1113,10 @@ function creaTaula(row) {
           }
         }    
         if (row[2][c].toLowerCase().indexOf("taula:lupa")>-1){
-           str +="<img src='https://edumet.cat/edumet/images/view.gif' id='btn_"+row[r][Columna_id]+"_"+c+"' onclick='obreDescripcio("+row[r][Columna_id]+");' style='width:25px' />##";
+           str +="<img src='https://drive.google.com/uc?id=1erUETb9i5H77tmsmbXQB-HgOqg2ZCwzq' id='btn_"+row[r][Columna_id]+"_"+c+"' onclick='obreDescripcio("+row[r][Columna_id]+");' style='width:25px' />##";
         }           
         if (row[2][c].toLowerCase().indexOf("taula:llapis")>-1){
-           str +="<img src='https://edumet.cat/edumet/images/edit.gif' id='btn_"+row[r][Columna_id]+"_"+c+"' onclick='editaRegistre("+row[r][Columna_id]+");' style='width:25px' />##";
+           str +="<img src='https://drive.google.com/uc?id=1FvHayIHBYJDFNDVnBU0yWIXESzFLEil2' id='btn_"+row[r][Columna_id]+"_"+c+"' onclick='editaRegistre("+row[r][Columna_id]+");' style='width:25px' />##";
         }                   
         
         if (row[2][c].toLowerCase().indexOf("taula:radio:")>-1){
@@ -1178,6 +1236,8 @@ function presentaDades(dades) {
   $('#imgtemp').css("display","none");    
 }
 
+
+
 //Visualitza les primeres fitxes
 function editaRegistre(reg) {
   for (c=0;c<row_org[0].length; c++) {
@@ -1198,7 +1258,7 @@ function editaRegistre(reg) {
        break;
     }
   }
-  
+
   for (c=0; c<row_org[0].length;c++){
     if (row_org[2][c].length!=0){  
       str +="<tr><td><label>"+row_org[0][c]+": </label></td>";
@@ -1276,11 +1336,11 @@ function editaRegistre(reg) {
       msgPeu +='<button class="btn" data-dismiss="modal" aria-hidden="true" style="margin: 5px" >Tancar</button>';              
       msgPeu +="</div>";
 
-  $('#modalHeaderTarja').html(msgTitol);
-  $('#missatgeTarja').html(str);
+  $('#modalHeaderTargetes').html(msgTitol);
+  $('#missatgeTargetes').html(str);
   $('#missatgePeu').html(msgPeu);  
   $('*').css('cursor','default');    
-  $('#finestraTarja').modal('show');  
+  $('#finestraTargetes').modal('show');  
 }
 
 //preparar parametres i enviar 
@@ -1302,7 +1362,8 @@ function enviarGenerarRegistre(){
 
 //preparar parametres i enviar 
 function onSalvarDades(missatge){
-   $('#finestraTarja').modal('hide');  
+   console.log(missatge);
+   $('#finestraTargetes').modal('hide');  
    $("#modalHeader").html(missatge[0]);
    var divMissatge="";
       divMissatge +="<table id='tblResultats'>";   
@@ -1335,7 +1396,7 @@ function onSalvarDades(missatge){
 }
 
 function mostraErrades(missatge){
-   $('#finestraTarja').modal('hide');  
+   $('#finestraTargetes').modal('hide');  
    $("#modalHeader").html(missatge[0][0]);
    var divMissatge="";
       divMissatge +="<table id='tblResultats'>";   
@@ -1373,7 +1434,7 @@ function creaTarges(targes) {
 
   Files_Capçalera=parseInt(Files_Capçalera);
 
-  divAmplada=$("#divPresTarja").css("width");
+  divAmplada=$("#divPresTargetes").css("width");
   divAmpladaTar=parseInt(divAmplada)/parseInt(Num_columnes);
   divAmpladaTar=divAmpladaTar-20; //afegir els marges laterals
   nTarFila=(parseInt(parseInt(divAmplada)/divAmpladaTar));
@@ -1395,7 +1456,7 @@ function creaTarges(targes) {
   var t=0;
   
   for (p=0;p<plantilles.length;p++){
-     if (plantilles[p][0]=="tarja"){
+     if (plantilles[p][0]=="targetes"){
        var plant=plantilles[p][2][0];
        break;
      }
@@ -1441,8 +1502,8 @@ function creaTarges(targes) {
   $("#comptadorPagines").html(regPagina);  
   //$("#comptadorPagines").show();         
    
-  $('#divPresTarja').html(divDades);
-  $(".targeta").css("width",divAmpladaTar);  
+  $('#divPresTargetes').html(divDades);
+  $(".targetes").css("width",divAmpladaTar);  
     
   $('#imgtemp').css("display","none");     
   $("*").css("cursor","default");  
@@ -1460,7 +1521,7 @@ function creaMarcadors(finalArray){ // Construeix targes i mostra marcadors en e
    $('#imgtemp').css("display","none"); 
    if(Zoom_automatic=='N') {
      bounds=bounds_all;
-     limitsMapa();
+     limitsMapa();     
    }
    centres=[];   
    agrupaCentres=[];
@@ -1511,10 +1572,14 @@ function creaMarcadors(finalArray){ // Construeix targes i mostra marcadors en e
    senseLloc[0]=[stringSenseLloc,finalArray[0][numColAgrupa],finalArray[0][numColLatitud],finalArray[0][numColLongitud]]
  
    var locations=new Array();  
-   var iColors=new Array();     
+   var iColors=new Array(); 
+   var titols=[];
+   var llegenda = document.getElementById('llegendaMapa');
+   var llgd =""; //cadena on s'afegiran les icones de la llegenda per no repetir-les
+   
    var white = { r: 255, g: 255, b: 255 };
    
-// Agrupament de registres en marcadors i creació de les targetes dels marcadors   
+// Agrupament de registres en marcadors i creació de les targeta dels marcadors   
    
    for (k=0;k<centres.length;k++) (function(i){   
    
@@ -1522,9 +1587,9 @@ function creaMarcadors(finalArray){ // Construeix targes i mostra marcadors en e
       var laLongitud=parseFloat(centres[i][numColLongitud]);
 
       var clr=Color_punts_omisio;      
-      if (numColColor!=""){
-         if (centres[i][numColColor]!=""){
-             var clr=centres[i][numColColor] //color del punt al mapa
+      if (numColColorMark!=""){
+         if (centres[i][numColColorMark]!=""){
+             var clr=centres[i][numColColorMark] //color del punt al mapa
          }
       }
       //console.log(centres[i][numColAgrupa]+"---"+laLatitud+"---"+laLongitud);
@@ -1538,6 +1603,10 @@ function creaMarcadors(finalArray){ // Construeix targes i mostra marcadors en e
          
       locations[i]={lat: laLatitud, lng: laLongitud}; 
       iColors[i]=clr;
+      titols[i]="";      
+      if (numColTitol!=""){
+          titols[i]=centres[i][numColTitol];
+      }
       var row_dad=centres[i];
       var Capçalera=aplica_plantilla(plantilla_1,row_dad);
       
@@ -1558,37 +1627,85 @@ function creaMarcadors(finalArray){ // Construeix targes i mostra marcadors en e
       contentString+=Capçalera;
       contentString+='</div>';
 
-// Definició de la icona dels marcadors (a partir d'un fitxer SVG). La propietat anchor correspon a les coordenades de la punta del marcador 
-
-      var path ="m49.969 5c-19.249 0-29.26 15-29.09 30 .236 21.833 21.818 30 29.09 60 7.279-30 29.13-38.642 29.13-60 0-15-11.296-30-29.12-30m.031  ";
-          path +="20.625c4.694 0 8.5 3.806 8.5 8.5 0 4.694-3.806 8.5-8.5 8.5-4.694 0-8.5-3.806-8.5-8.5 0-4.694 3.806-8.5 8.5-8.5"; //50,94
-
-      var icon = {
-         path: path,
-         fillColor: iColors[i],
-         fillOpacity: 1,
-         anchor: new google.maps.Point(50,94),
-         strokeColor: "black",
-         strokeWeight: 1,
-         scale: 0.4
-      };
-      
+// Icones dels marcadors
+  
+        if(centres[i][numColNomLlegendaMapa]!="") {   // Inline SVG for HTML de https://materialdesignicons.com         
+               
+           var iniciSVG=llegendes.search("<"+centres[i][numColNomLlegendaMapa]+">")+centres[i][numColNomLlegendaMapa].length;
+           var finalSVG=llegendes.search("</"+centres[i][numColNomLlegendaMapa]+">");
+           var cadenaSVG=llegendes.substring(iniciSVG,finalSVG);
            
+           var pos1=cadenaSVG.search("d=")+3;   
+           var pos2=cadenaSVG.search(" />")-1;
+           var path =cadenaSVG.substring(pos1,pos2);                    
+               
+           var icon = {
+                  path: path,
+                  fillColor: iColors[i],
+                  fillOpacity: 1,
+                  anchor: new google.maps.Point(12,12),
+                  strokeColor: "black",
+                  strokeWeight: 0,
+                  scale: 2
+           }; 
+           var iconaLlegenda ="<svg style='height:40px; width:40px'><path fill='"+iColors[i]+"' d='"+path+"' stroke='black' stroke-width='0' transform='scale(1.5,1.5)'/></svg>"; 
+         /*else {
+           var icon = {
+             url:"https://maps.google.com/mapfiles/kml/shapes/"+centres[i][numColIconaMark]+".png",  // Nom del fitxer .png de http://kml4earth.appspot.com/icons.html
+             scaledSize: new google.maps.Size(36, 36)
+           };  
+           var iconaLlegenda="<p class='material-icons' style='font-size:24px;color:"+iColors[i]+"'>"+path+"</p>"
+         }*/
+         
+         }
+       else {  // Definició de la icona per defecte dels marcadors. La propietat anchor correspon a les coordenades de la punta del marcador       
+         var path ="m49.969 5c-19.249 0-29.26 15-29.09 30 .236 21.833 21.818 30 29.09 60 7.279-30 29.13-38.642 29.13-60 0-15-11.296-30-29.12-30m.031  ";
+             path +="20.625c4.694 0 8.5 3.806 8.5 8.5 0 4.694-3.806 8.5-8.5 8.5-4.694 0-8.5-3.806-8.5-8.5 0-4.694 3.806-8.5 8.5-8.5"; //50,94
+         var icon = {
+             path: path,
+             fillColor: iColors[i],
+             fillOpacity: 1,
+             anchor: new google.maps.Point(50,94),
+             strokeColor: "black",
+             strokeWeight: 1,
+             scale: 0.4
+         };                 
+      }
+              
       if (Clusters=='S'){        
          marcadors[i]=new google.maps.Marker({
             position: locations[i],
             icon: icon,
+            //label: icon, 
+            title: titols[i]
          });  
          
       } else {
          marcadors[i]=new google.maps.Marker({
             position: locations[i],
             icon: icon,
-            map: map
+            //label: icon,             
+            map: map,
+            title: titols[i]
           });           
       }       
        
       infowindow[i] = new google.maps.InfoWindow({content: contentString});  
+      
+       //Llegenda 
+      if (Posicio_llegenda.toLowerCase()!="sense_llegenda"){
+        if (numColNomLlegendaMapa!=""){
+           if (llgd.indexOf(centres[i][numColNomLlegendaMapa])==-1){
+              divLlegenda= document.createElement('div');
+              divLlegenda.innerHTML = "<center><div style='width:50px;  margin: 5px;'>"+iconaLlegenda+centres[i][numColNomLlegendaMapa]+"</center></div>";
+              try {
+                llegenda.appendChild(divLlegenda);
+              } catch(e) {}
+              llgd +="#$#"+centres[i][numColNomLlegendaMapa];
+           }
+        }
+      } 
+        
       
 // Listener per a clics sobre l'aranya (marcadors molt propers)
              
@@ -1618,52 +1735,52 @@ function creaMarcadors(finalArray){ // Construeix targes i mostra marcadors en e
          iniciantMapa=false;
      }
    });
+   
 
-   if (marcadors.length>0) {       
-      for (var l = 0; l < marcadors.length; l++) {
+   if (marcadors.length>0) {
+     for (var l = 0; l < marcadors.length; l++) {
         bounds.extend(marcadors[l].getPosition());
-      } 
+     } 
       
-// Determinació dels límits del mapa inicial      
+     // Determinació dels límits del mapa inicial      
 
-  if (iniciantMapa) {      
-    bounds_all=bounds;
-    var $mapDiv = $('#map');
-    var mapDim = { height: $mapDiv.height(), width: $mapDiv.width() };
-    var zoomMapa=getBoundsZoomLevel(bounds, mapDim); // zoom determinat per la ubicació de tots els marcadors i les dimensions de la finestra on hi ha el mapa
-    var centreMapa=bounds.getCenter(); // centre del mapa determinat per tots els marcadors
+     if (iniciantMapa) {      
+        bounds_all=bounds;
+        var $mapDiv = $('#map');
+        var mapDim = { height: $mapDiv.height(), width: $mapDiv.width() };
+        var zoomMapa=getBoundsZoomLevel(bounds, mapDim); // zoom determinat per la ubicació de tots els marcadors i les dimensions de la finestra on hi ha el mapa
+        var centreMapa=bounds.getCenter(); // centre del mapa determinat per tots els marcadors
 
-// Recull de variables relacionades amb el mapa inicial
+        // Recull de variables relacionades amb el mapa inicial
 
-    if (Centre_mapa!='A') {
-      var cadenaCentre=Centre_mapa.split(',');
-      var latInicial=parseFloat(cadenaCentre[0]);
-      var lonInicial=parseFloat(cadenaCentre[1]);
-    }
-    var zoomInicial=parseFloat(Zoom_inicial);
+        if (Centre_mapa!='A') {
+           var cadenaCentre=Centre_mapa.split(',');
+           var latInicial=parseFloat(cadenaCentre[0]);
+           var lonInicial=parseFloat(cadenaCentre[1]);
+        }
+        var zoomInicial=parseFloat(Zoom_inicial);
     
-// Tipus de mapa inicial
+        // Tipus de mapa inicial
     
-    if (zoomInicial==0 && Centre_mapa=='A') { // tot automàtic
-      iniciantMapa=false;
-    }
-    if (zoomInicial>0 && Centre_mapa=='A') { // centre automàtic
-      map.setZoom(zoomInicial);
-      map.setCenter(centreMapa);
-    }
-    if (zoomInicial==0 && Centre_mapa!='A') { // zoom automàtic
-      map.setZoom(zoomMapa);
-      map.setCenter({lat: latInicial, lng: lonInicial});
-    }
-    if (zoomInicial>0 && Centre_mapa!='A') { // tot manual
-      map.setZoom(zoomInicial);
-      map.setCenter({lat: latInicial, lng: lonInicial});
-    }
-  } 
-   }      
+        if (zoomInicial==0 && Centre_mapa=='A') { // tot automàtic
+           iniciantMapa=false;
+        }
+        if (zoomInicial>0 && Centre_mapa=='A') { // centre automàtic
+           map.setZoom(zoomInicial);
+           map.setCenter(centreMapa);
+        }
+        if (zoomInicial==0 && Centre_mapa!='A') { // zoom automàtic
+           map.setZoom(zoomMapa);
+           map.setCenter({lat: latInicial, lng: lonInicial});
+        }
+        if (zoomInicial>0 && Centre_mapa!='A') { // tot manual
+           map.setZoom(zoomInicial);
+           map.setCenter({lat: latInicial, lng: lonInicial});
+        }
+     } 
+   }    
 
-// Si no hi ha filtres actius, mostra el mapa inicial
-
+   // Si no hi ha filtres actius, mostra el mapa inicial
    if (filtresActius>0) {
      if (Zoom_automatic=='S') {
          limitsMapa();
@@ -1675,17 +1792,28 @@ function creaMarcadors(finalArray){ // Construeix targes i mostra marcadors en e
      }
    }
    
-// Add a marker clusterer to manage the markers.
-   
+   // Add a marker clusterer to manage the markers.
    if (Clusters=='S'){  
         markerCluster = new MarkerClusterer(map, marcadors,{imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
         markerCluster.setMaxZoom(Clusters_max_zoom);
    }  
    
-// Tancament de la finestra d'espera   
-      
+   //situar la llegenda al mapa
+   if (Posicio_llegenda.toLowerCase()!="sense_llegenda"){
+      pos_lle=[["dalt_esquerra","top_left"],["dalt_centre","top_center"],["dalt_dreta","top_right"],["esquerra_dalt","left_top"],["esquerra_centre","left_center"],["esquerra_baix","left_bottom"],["dreta_dalt","right_top"],["dreta_centre","right_center"],["dreta_baix","right_bottom"],["baix_esquerra","bottom_left"],["baix_centre","bottom_center"],["baix_dreta","bottom_right"]];
+      for (g=0;g<pos_lle.length;g++){
+         if(pos_lle[g][0]==Posicio_llegenda){
+            posicio=pos_lle[g][1].toUpperCase();         
+            eval("map.controls[google.maps.ControlPosition."+posicio+"].push(document.getElementById('llegendaMapa'))");
+         }
+      }
+      $("#llegendaMapa").css("visibility","visible");                    
+      $("#llegendaMapa").css("display","block");     
+   }
+   // Tancament de la finestra d'espera   
    $('#imgtemp').css("display","none");           
-   $("*").css("cursor","default");    
+   $("*").css("cursor","default");   
+   
 }
 
 
@@ -1725,10 +1853,13 @@ function getBoundsZoomLevel(bounds, mapDim) {  // Calcula el nivell de zoom en f
 
 function centrar(){  // Actualitza el mapa segons els filtres actius en mode zoom manual 
   if (filtresActius>0) {
-    $('#botoCentrar').attr( "src", "https://edumet.cat/edumet/icones/centrar-red.png" );
+    $('#botoCentrar').attr( "src", "https://drive.google.com/uc?id=1bJRPWpX5MjnYXB8EW65TBHXLXbSMdYYZ" );  
   }
   limitsMapa();
 }
+
+
+
 
 function aplica_plantilla(plantilla,row_dad){
   if (row_dad==undefined){
@@ -1950,7 +2081,7 @@ function  mapa_alçada (valor) {
 
 
 function creaTimeMap(finalArray){
-    inici=[]; fin=[]; titol=[]; titol_curs=[]; text=[]; bloc=[]; lat=[]; lon=[]; tarja=[];
+    inici=[]; fin=[]; titol=[]; titol_curs=[]; text=[]; bloc=[]; lat=[]; lon=[]; targetes=[];
 	for(i=3; i<finalArray.length; i++) {
 		inici[i-3] = finalArray[i][numColDataIni];
 		fin[i-3] = finalArray[i][numColDataFin];
@@ -1961,22 +2092,22 @@ function creaTimeMap(finalArray){
 		lat[i-3] = finalArray[i][numColLatitud];
 		lon[i-3] = finalArray[i][numColLongitud];
 		
-		tarja[i-3]="<div class=finestra>";
+		targetes[i-3]="<div class=finestra>";
         /*
 		if (media[i]) {
-			tarja[i] +="<div class=esq><img src="+media[i]+" height=125 width=125></div>";
+			targetes[i] +="<div class=esq><img src="+media[i]+" height=125 width=125></div>";
 		}
-		tarja[i] +="<div class=dret><p style=font-weight:bold;font-size:0.9em>"+titol[i]+"</p>";
+		targetes[i] +="<div class=dret><p style=font-weight:bold;font-size:0.9em>"+titol[i]+"</p>";
 		if (inici[i]==fin[i]) {
-			tarja[i] +="<p style=font-size:0.85em>Data: "+inici[i]+"</p>";
+			targetes[i] +="<p style=font-size:0.85em>Data: "+inici[i]+"</p>";
 		} else {
-			tarja[i] +="<p style=font-size:0.85em>Del "+inici[i]+" al "+fin[i]+"</p>";
+			targetes[i] +="<p style=font-size:0.85em>Del "+inici[i]+" al "+fin[i]+"</p>";
 		}
-		tarja[i] +="<p style=font-size:0.85em>adreça: "+adreça[i]+" ("+poblacio[i]+")</p>";
+		targetes[i] +="<p style=font-size:0.85em>adreça: "+adreça[i]+" ("+poblacio[i]+")</p>";
 		if (enllaç[i]) {
-			tarja[i] +="<p style=font-size:0.85em><a href="+enllaç[i]+" target=_blank>Informació addicional</a></p></div>";
+			targetes[i] +="<p style=font-size:0.85em><a href="+enllaç[i]+" target=_blank>Informació addicional</a></p></div>";
 		}
-		tarja[i-3] +="</div>";
+		targetes[i-3] +="</div>";
         //*/
         
 		poblacio[i] ="Barcelona";
@@ -1985,7 +2116,7 @@ function creaTimeMap(finalArray){
 		media[i]= "Media";
 		enllaç[i]= "";				
         
-        tarja[i-3] ="Prova";     
+        targetes[i-3] ="Prova";     
         console.log(i+"---"+lat[i-3])
 	}
 
@@ -2003,10 +2134,10 @@ function creaTimeMap(finalArray){
     str +="</select>";
 
 
-  var pantalla ="<div id='global_menys_alçada'><input type='image' src='https://edumet.cat/areatac/cartografia/images/menys.png' width='15' height='15' onclick='global_alçada(-5);'></div>";
-    pantalla +="<div id='global_mes_alçada'><input type='image' src='https://edumet.cat/areatac/cartografia/images/mes.png' width='15' height='15' onclick='global_alçada(+5);'></div>";
-    pantalla +="<div id='mapa_menys_alçada'><input type='image' src='https://edumet.cat/areatac/cartografia/images/menys.png' width='15' height='15' onclick='mapa_alçada(-5);'></div>";   
-    pantalla +="<div id='mapa_mes_alçada'><input type='image' src='https://edumet.cat/areatac/cartografia/images/mes.png' width='15' height='15' onclick='mapa_alçada(+5);'></div>";       
+  var pantalla ="<div id='global_menys_alçada'><input type='image' src='https://drive.google.com/uc?id=1l7EGqYTHx4qJW9QXzAUQbcPFcRCqwgHB' width='15' height='15' onclick='global_alçada(-5);'></div>";
+    pantalla +="<div id='global_mes_alçada'><input type='image' src='https://drive.google.com/uc?id=1Vef6fsY_XlO-O1m5pyRoBiLR2Cch6mbs' width='15' height='15' onclick='global_alçada(+5);'></div>";
+    pantalla +="<div id='mapa_menys_alçada'><input type='image' src='https://drive.google.com/uc?id=1l7EGqYTHx4qJW9QXzAUQbcPFcRCqwgHB' width='15' height='15' onclick='mapa_alçada(-5);'></div>";   
+    pantalla +="<div id='mapa_mes_alçada'><input type='image' src='https://drive.google.com/uc?id=1Vef6fsY_XlO-O1m5pyRoBiLR2Cch6mbs.png' width='15' height='15' onclick='mapa_alçada(+5);'></div>";       
     pantalla +="<div id='timemap' style= 'height:550px' >";         
     pantalla +="<div id='timelinecontainer'>";
     pantalla +="<div id=''>"+str+"</div>";        
@@ -2066,7 +2197,7 @@ function creaTimeMap(finalArray){
           cadena += '{ "start" : "'+dates+
             '"point" : {"lat" : '+lat[i]+',"lon" : '+lon[i]+'},'+
             '"title" : "'+addslashes(titol_curt[i])+'",'+
-            '"options" : { "infoHtml": "'+addslashes(tarja[i])+'", "theme": "'+color_objecte+'", "description": "tags1: ['+bloc[i]+']", "tags": ["'+bloc[i]+'"] } }'
+            '"options" : { "infoHtml": "'+addslashes(targetes[i])+'", "theme": "'+color_objecte+'", "description": "tags1: ['+bloc[i]+']", "tags": ["'+bloc[i]+'"] } }'
    
         } else {
           //S'ha d'obtenir de google geocoder
@@ -2100,7 +2231,7 @@ function creaTimeMap(finalArray){
       bandIntervals: [Timeline.DateTime.DECADE,Timeline.DateTime.CENTURY]
     });
     
-    alert(2)
+    //alert(2)
     /*
     var gmap = tm.getNativeMap();
     gmap.mapTypes.set("white", styledMapType);
@@ -2167,6 +2298,8 @@ function formatDate(date) {
     //data.format('YYYY-MM-DD');
     return new Date(year, month, day);
 }
+
+
 
 
 </script>

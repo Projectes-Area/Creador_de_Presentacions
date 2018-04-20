@@ -120,7 +120,7 @@ function onSalvarDades(missatge){
   <div class="panel-body" style="height:500px">
      <form id="form-course">
         <div>
-          <p>Benvolgut <strong><?= userEmail ?> </strong>,          
+          <p>Benvolgut/da <strong><?= userEmail ?> </strong>,          
           <br>
              <div class="row">
                 <div class="col-md-12">
@@ -136,12 +136,26 @@ function onSalvarDades(missatge){
                             <input type='button' class='btn btn-primary' style='width: 25%; display: block; margin: 0 auto;' onclick="enviarGenerar();" value='Enviar respostes'/>
                         </form>
                         -->
-                     <? } else if (Tipus_missatge=="usuari_no_autoritzat") {?>            
-                     
+                     <? } ?>                  
+                                                             
+                    <? if (Tipus_missatge=="usuari_no_autoritzat") {?>                               
                         <p>L'usuari que està actualment actiu, <strong><i><?= userEmail ?> </i></strong>, no està al llistat dels autoritzats per executar aquesta aplicació.</p>
                          <br><br>
                          Per continuar, tanqueu l'usuari actual, obriu la sessió amb un usuari autoritzat i torneu a executar aquesta aplicació.
                      <? } ?>
+                     
+                     <? if (Tipus_missatge=="id_full_incorrecta") {?>                              
+                        <p>La URL que heu indicat per al full de càlcul no és correcta, o bé no es pot accedir a les dades.</p>    
+                        <br>
+                        <p>Si us plau, reviseu que la URL s'hagi escrit correctament i que s'han establert els permisos d'accés al full.</p>
+                     <? } ?>
+                     
+                     <? if (Tipus_missatge=="config_incorrecta") {?>                              
+                        <p>No existeix el full de configuració amb el nom indicat.</p>    
+                        <br>
+                        <p>Si us plau, reviseu que el nom del full de configuració s'hagi escrit correctament.</p>
+                     <? } ?>
+                     
                      <hr>
                      <b><?= Contacte ?></b>
                 </div>
@@ -156,9 +170,6 @@ function onSalvarDades(missatge){
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 
 </html>
-
-
-
 
 <!-- Modal -->
 <div id="finestraInfo" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" width='90%'>
