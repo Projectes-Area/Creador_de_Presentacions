@@ -11,7 +11,7 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>     
 
 
-
+              
 <!--Datatables-->
 <!-- jQuery -->
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" >
@@ -45,7 +45,7 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/OverlappingMarkerSpiderfier/1.0.3/oms.min.js"></script>
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/OverlappingMarkerSpiderfier/1.0.3/oms.min.js"></script>-->
 
 <!--scrips relacionats amb el TimeLineMap -->
 <!--    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAVxmW5MSmBXNniGfdBkiojV16y4_9E5_Q&v=3.exp&sensor=false&language=ca"></script> -->
@@ -75,10 +75,10 @@
 <i class="material-icons">local_parking</i>
 <i class="material-icons" style="font-size:36px">local_parking</i>
 <i class="material-icons" style="font-size:48px;color:red">local_parking</i>
--->
+
 
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"  rel="stylesheet">
-<!--
+
 <i class="material-design-icons//1x_web/"  style="font-family: 'Material Icons'">accessibility</i>
 <i class="material-design-icons//2x_web/"  style="font-family: 'Material Icons'">face</i>
 <i class="md-icon dp48" style="font-family: 'Material Icons'">accessibility</i>
@@ -332,22 +332,22 @@ tr:hover {
     </div>
          
     <div class='container-fluid'>
-            <div class='row filtres' style='margin:5px 0px;visibility: hidden; clear:both' id="divFiltres">
-            </div>                  
-            <div id="bloc_capçalera_2" hidden>
-               <div class='row filtres' style='margin:5px 0px 5px 0px;visibility: hidden; float:left;' id="divTipus">
-                   <div id="divSelTipus" style="float:left;visibility: hidden; float:left;">
-                   </div>
-                   <input id='botoCentrar' src="https://drive.google.com/uc?id=1jVkYeRZiImemNB9QVHJjkbR2xaYgz4mz" class="noZoom" type="image" onClick="centrar()" style='float:left; margin-left:10px; margin-top:0px'> 
-               </div> 
-               <div class='row titols' style='margin:5px 50px; float:left; text-align:center; visibility: hidden' id="divTitols">
-               </div>             
-               <div style='font-size:14px; float: right;  margin:5px 0px; visibility: hidden' id="btnNovaPagina">
-                   <input type="button" id="btnB1" value="Anteriors"/>
-                   <input type="button" id="btnB2" value="Següents"/>
-               </div>
-               <div style='font-size:14px; float: right; margin-right:10px; margin-top:5px' id='comptadorPagines'></div>
+        <div class='row filtres' style='margin:5px 0px;visibility: hidden; float:left; width:95%' id="divFiltres"></div>                  
+        <img src='https://drive.google.com/uc?id=1X1tZEQ8PYYhpQ2nUijq0cwJB5mbqxYpw' id="imgInfo" style="width:38px; margin:5px 5px; float:right; visibility: hidden" onclick="activaInfo()"/>
+        <div id="bloc_capçalera_2" hidden>
+            <div class='row filtres' style='margin:5px 0px 5px 0px;visibility: hidden; float:left;' id="divTipus">
+                <div id="divSelTipus" style="float:left;visibility: hidden; float:left;">
+                </div>
+                <input id='botoCentrar' src="https://drive.google.com/uc?id=1jVkYeRZiImemNB9QVHJjkbR2xaYgz4mz" class="noZoom" type="image" onClick="centrar()" style='float:left; margin-left:10px; margin-top:0px'> 
+            </div> 
+            <div class='row titols' style='margin:5px 50px; float:left; text-align:center; visibility: hidden' id="divTitols">
+            </div>             
+            <div style='font-size:14px; float: right;  margin:5px 0px; visibility: hidden' id="btnNovaPagina">
+                <input type="button" id="btnB1" value="Anteriors"/>
+                <input type="button" id="btnB2" value="Següents"/>
             </div>
+            <div style='font-size:14px; float: right; margin-right:10px; margin-top:5px' id='comptadorPagines'></div>
+        </div>
         <div id="divPresTaula" style="clear:both; width: 100%; margin-top:5px">
              <div id="userEmail"></div>
              <div id="divFormTaula"></div>
@@ -372,7 +372,7 @@ tr:hover {
     </div>
  
     <div id="map" style="clear:both; margin: 5px 0px"></div>      
-    <div id="llegendaMapa" hidden><h3>Llegenda</h3></div>    
+    <!--<div id="llegendaMapa" hidden><h3>Llegenda</h3></div>  -->  
 
 
 <!-- Modal -->
@@ -411,6 +411,8 @@ var finalArray=new Array();
 var Permetre_canvi_presentacions='N';  
 var tipus="";
 var filtresActius=0;
+var informacio="1";
+
 
 
 //variables relacionades amb la presentació de tragetes
@@ -434,7 +436,7 @@ var numColDataFin=0;
 var numColDescripcio=0;
 var numColTitol="";
 var numColColorMark="";
-var numColNomLlegendaMapa="";
+var numColNomLlegendaMapa=-1;
 var numColBloc=0;
 var centres=[];
 var agrupaCentres=[];
@@ -452,11 +454,11 @@ var Visualitzar_errors="N";
 var bounds;
 var bounds_all;
 var iniciantMapa=true;
-var Color_punts_omisio="#AC2010";
+var Marcador_defecte_color="#AC2010";
+var Marcador_defecte_forma="";
 var Posicio_llegenda="SENSE_LLEGENDA";
-//var numColIconaMark=0;
+
 var llegendes="";
-var divLlegenda="";
 
 //Variables relacionades amb timeLineMap
 //var tm="";
@@ -553,6 +555,7 @@ $(document).ready(function(){
 
 var time = 20;
 window.setInterval(test, 1000);
+
 function test() {
 	time -=1;
 	if(time == 0) {
@@ -562,8 +565,8 @@ function test() {
 }
 
 function inicia(){
-    google.script.run.withSuccessHandler(onVariables).recollidaVariables();       
-}
+    google.script.run.withSuccessHandler(onVariables).recollidaVariables();    
+    }
 
 function fnBoto(id_registre,columna,id,url){
    //url=row_org[id_registre][columna];
@@ -638,7 +641,11 @@ function onVariables(variables) {
      $("#Capçalera").css("display","block");   
    }
    
-   
+   //determinar la columna de la latitud i la logintud si n'hi ha
+   numColLatitud=parseInt(Columna_latitud.charCodeAt(0)-65);
+   numColLongitud=parseInt(Columna_longitud.charCodeAt(0)-65);   
+
+
    //Creacció del select de presentacions si hi ha més d'una
    row_tip=Presentacions_permeses.split(",");   
    if (row_tip.length>1){
@@ -658,6 +665,7 @@ function onVariables(variables) {
 
    //var plantilla=plantilles[0][1];   
    //recollir les dades despres de les variables per garantir que està el nombre de files a mostrar
+ 
    google.script.run.withSuccessHandler(onPlantilles).recollidaPlantilles();       
 }
 
@@ -715,6 +723,9 @@ function onPlantilles(plt) {
            case "<div>":
               plantilles[p][2][4] +=plt[p][3][1][c];   
               break;
+           case "info":
+              plantilles[p][2][5] +=plt[p][3][1][c];   
+              break;              
            case "llegenda":
               llegendes=plt[p][3][1][c];  
               break;
@@ -725,6 +736,8 @@ function onPlantilles(plt) {
    tipus=plantilles[0][0];
    google.script.run.withSuccessHandler(onDades).recollidaDades();   
 }
+
+
 
 function aplicaTipus(){
   if (plantilles.length==1){
@@ -754,6 +767,15 @@ function aplicaTipus(){
        if (plantilles[p][1]!=""){
           $("#divTitols").html(plantilles[p][1]);
           $("#divTitols").css("visibility","visible");         
+       }
+       //informacio=plantilles[p][2][5];                        
+       if (plantilles[p][1][2][5]!=""){       
+          //info=plantilles[p][2][5].replace(new RegExp('""', 'g'),'"');       
+          informacio=plantilles[p][2][5];                 
+          $("#imgInfo").css("visibility","visible");                     
+       } else {
+          informacio="";                        
+          $("#imgInfo").css("visibility","hidden");                                   
        }
        break;
     }
@@ -875,6 +897,7 @@ function ordenaArray(a, b) {
 
 //Càrrega dels filtres 
 function creacioFiltres(dades){
+
   var f=0;
   var flt="";  
   for (c=0;c<dades[0].length; c++){
@@ -940,13 +963,16 @@ function creacioFiltres(dades){
      }   */  
      if (dades[1][c].toLowerCase().indexOf("nomllegendamapa")>-1) {
             numColNomLlegendaMapa=c;
-     }     
+     }
+     /* eliminat perquè aquestà informació s'agafa ara de la configuració i per tant en la funció variables
      if (dades[1][c].toLowerCase().indexOf("latitud")>-1) {
             numColLatitud=c;
      }
      if (dades[1][c].toLowerCase().indexOf("longitud")>-1) {
             numColLongitud=c;
-     }    
+     } 
+     //*/
+     
      if (dades[1][c].toLowerCase().indexOf("id")>-1) {
             numColBotoProjecte=c;
      }   
@@ -1056,6 +1082,7 @@ function onDades(dad) {
    $('#imgtemp').css('display','none');   
    aplicaTipus(tipus);   
 }
+
 
 
 //Visualitza les primeres fitxes
@@ -1172,6 +1199,7 @@ function creaTaula(row) {
 }
 
 
+
 //Actualització de les pàgines 
 function presentaDades(dades) {
   $('#imgtemp').css("visibility","visible");  
@@ -1235,6 +1263,18 @@ function presentaDades(dades) {
   $("*").css("cursor","default");  
   $('#imgtemp').css("display","none");    
 }
+
+
+
+//preparar parametres i enviar 
+function activaInfo(){
+   $("#modalHeader").html("Informació");
+   var divMissatge=informacio;
+   $("#missatge").html(divMissatge);
+   $('#finestraInfo').modal('show');
+   $("*").css("cursor","default");   
+}
+
 
 
 
@@ -1342,6 +1382,7 @@ function editaRegistre(reg) {
   $('*').css('cursor','default');    
   $('#finestraTargetes').modal('show');  
 }
+
 
 //preparar parametres i enviar 
 function enviarGenerar(){
@@ -1537,7 +1578,7 @@ function creaMarcadors(finalArray){ // Construeix targes i mostra marcadors en e
      nearbyDistance: 20
    });  
           
-// Agrupament de registres segons el criteri d'agrupament     
+// Agrupament de registres segons el criteri d\'agrupament     
      
    for (var i=Files_Capçalera;i<finalArray.length;i++) {
        if (!repetit[i]) {
@@ -1574,19 +1615,20 @@ function creaMarcadors(finalArray){ // Construeix targes i mostra marcadors en e
    var locations=new Array();  
    var iColors=new Array(); 
    var titols=[];
-   var llegenda = document.getElementById('llegendaMapa');
    var llgd =""; //cadena on s'afegiran les icones de la llegenda per no repetir-les
    
    var white = { r: 255, g: 255, b: 255 };
    
 // Agrupament de registres en marcadors i creació de les targeta dels marcadors   
+
+   var contingutLlegenda="<h3>Llegenda</h3>";
    
    for (k=0;k<centres.length;k++) (function(i){   
    
       var laLatitud=parseFloat(centres[i][numColLatitud]);
       var laLongitud=parseFloat(centres[i][numColLongitud]);
 
-      var clr=Color_punts_omisio;      
+      var clr=Marcador_defecte_color;      
       if (numColColorMark!=""){
          if (centres[i][numColColorMark]!=""){
              var clr=centres[i][numColColorMark] //color del punt al mapa
@@ -1628,55 +1670,72 @@ function creaMarcadors(finalArray){ // Construeix targes i mostra marcadors en e
       contentString+='</div>';
 
 // Icones dels marcadors
-  
-        if(centres[i][numColNomLlegendaMapa]!="") {   // Inline SVG for HTML de https://materialdesignicons.com         
-               
-           var iniciSVG=llegendes.search("<"+centres[i][numColNomLlegendaMapa]+">")+centres[i][numColNomLlegendaMapa].length;
-           var finalSVG=llegendes.search("</"+centres[i][numColNomLlegendaMapa]+">");
-           var cadenaSVG=llegendes.substring(iniciSVG,finalSVG);
-           
-           var pos1=cadenaSVG.search("d=")+3;   
-           var pos2=cadenaSVG.search(" />")-1;
-           var path =cadenaSVG.substring(pos1,pos2);                    
-               
-           var icon = {
-                  path: path,
-                  fillColor: iColors[i],
-                  fillOpacity: 1,
-                  anchor: new google.maps.Point(12,12),
-                  strokeColor: "black",
-                  strokeWeight: 0,
-                  scale: 2
-           }; 
-           var iconaLlegenda ="<svg style='height:40px; width:40px'><path fill='"+iColors[i]+"' d='"+path+"' stroke='black' stroke-width='0' transform='scale(1.5,1.5)'/></svg>"; 
-         /*else {
-           var icon = {
-             url:"https://maps.google.com/mapfiles/kml/shapes/"+centres[i][numColIconaMark]+".png",  // Nom del fitxer .png de http://kml4earth.appspot.com/icons.html
-             scaledSize: new google.maps.Size(36, 36)
-           };  
-           var iconaLlegenda="<p class='material-icons' style='font-size:24px;color:"+iColors[i]+"'>"+path+"</p>"
-         }*/
-         
-         }
-       else {  // Definició de la icona per defecte dels marcadors. La propietat anchor correspon a les coordenades de la punta del marcador       
-         var path ="m49.969 5c-19.249 0-29.26 15-29.09 30 .236 21.833 21.818 30 29.09 60 7.279-30 29.13-38.642 29.13-60 0-15-11.296-30-29.12-30m.031  ";
-             path +="20.625c4.694 0 8.5 3.806 8.5 8.5 0 4.694-3.806 8.5-8.5 8.5-4.694 0-8.5-3.806-8.5-8.5 0-4.694 3.806-8.5 8.5-8.5"; //50,94
-         var icon = {
-             path: path,
-             fillColor: iColors[i],
-             fillOpacity: 1,
-             anchor: new google.maps.Point(50,94),
-             strokeColor: "black",
-             strokeWeight: 1,
-             scale: 0.4
-         };                 
+    iconaDefinida=false;
+      if(numColNomLlegendaMapa!=-1) {
+        if(centres[i][numColNomLlegendaMapa]!="") { // Icona segons el tipus
+             var iniciSVG=llegendes.search("<"+centres[i][numColNomLlegendaMapa]+">")+centres[i][numColNomLlegendaMapa].length; // Inline SVG for HTML de https://materialdesignicons.com
+             var finalSVG=llegendes.search("</"+centres[i][numColNomLlegendaMapa]+">");
+             var cadenaSVG=llegendes.substring(iniciSVG,finalSVG);
+             
+             var pos1=cadenaSVG.search("d=")+3;   
+             var pos2=cadenaSVG.search(" />")-1;
+             var path =cadenaSVG.substring(pos1,pos2);                    
+                 
+             var icon = {
+                    path: path,
+                    fillColor: iColors[i],
+                    fillOpacity: 1,
+                    anchor: new google.maps.Point(12,12), // en el centre de la icona
+                    strokeWeight: 0,
+                    scale: 1.5
+             }; 
+             var iconaLlegenda ="<svg style='height:40px; width:40px'><path fill='"+iColors[i]+"' d='"+path+"' stroke='black' stroke-width='0' transform='scale(1.5,1.5)'/></svg>"; 
+             iconaDefinida=true;
+        }
+      }
+      
+      if (!iconaDefinida) {
+        if(Marcador_defecte_forma!="") { // Icona per defecte definida per l'usuari
+             var iniciSVG=llegendes.search("<"+Marcador_defecte_forma+">")+Marcador_defecte_forma.length; // Inline SVG for HTML de https://materialdesignicons.com
+             var finalSVG=llegendes.search("</"+Marcador_defecte_forma+">");
+             var cadenaSVG=llegendes.substring(iniciSVG,finalSVG);
+             
+             var pos1=cadenaSVG.search("d=")+3;   
+             var pos2=cadenaSVG.search(" />")-1;
+             var path =cadenaSVG.substring(pos1,pos2);                    
+                 
+             var icon = {
+                    path: path,
+                    fillColor: iColors[i],
+                    fillOpacity: 1,
+                    anchor: new google.maps.Point(12,24), // a la part inferior, centrada, de la icona
+                    strokeWeight: 0,
+                    scale: 1.5
+             }; 
+             var iconaLlegenda ="<svg style='height:40px; width:40px'><path fill='"+iColors[i]+"' d='"+path+"' stroke='black' stroke-width='0' transform='scale(1.5,1.5)'/></svg>";
+             if(numColNomLlegendaMapa!=-1) { // Per tal que mostri el marcador per defecte definit per l'usuari en la llegenda
+               centres[i][numColNomLlegendaMapa]=Marcador_defecte_forma;
+             }
+        }
+         else {  // Definició de la icona per defecte dels marcadors    
+               var path ="m49.969 5c-19.249 0-29.26 15-29.09 30 .236 21.833 21.818 30 29.09 60 7.279-30 29.13-38.642 29.13-60 0-15-11.296-30-29.12-30m.031  ";
+                   path +="20.625c4.694 0 8.5 3.806 8.5 8.5 0 4.694-3.806 8.5-8.5 8.5-4.694 0-8.5-3.806-8.5-8.5 0-4.694 3.806-8.5 8.5-8.5"; //50,94
+               var icon = {
+                   path: path,
+                   fillColor: iColors[i],
+                   fillOpacity: 1,
+                   anchor: new google.maps.Point(50,94),
+                   strokeColor: "black",
+                   strokeWeight: 1,
+                   scale: 0.3
+               };   
+          }
       }
               
       if (Clusters=='S'){        
          marcadors[i]=new google.maps.Marker({
             position: locations[i],
             icon: icon,
-            //label: icon, 
             title: titols[i]
          });  
          
@@ -1684,29 +1743,23 @@ function creaMarcadors(finalArray){ // Construeix targes i mostra marcadors en e
          marcadors[i]=new google.maps.Marker({
             position: locations[i],
             icon: icon,
-            //label: icon,             
             map: map,
             title: titols[i]
           });           
       }       
        
-      infowindow[i] = new google.maps.InfoWindow({content: contentString});  
-      
-       //Llegenda 
+      infowindow[i] = new google.maps.InfoWindow({content: contentString});       
+     
+      //construcció dels elements de la llegenda si té posició 
       if (Posicio_llegenda.toLowerCase()!="sense_llegenda"){
-        if (numColNomLlegendaMapa!=""){
+        if (numColNomLlegendaMapa!=-1){
            if (llgd.indexOf(centres[i][numColNomLlegendaMapa])==-1){
-              divLlegenda= document.createElement('div');
-              divLlegenda.innerHTML = "<center><div style='width:50px;  margin: 5px;'>"+iconaLlegenda+centres[i][numColNomLlegendaMapa]+"</center></div>";
-              try {
-                llegenda.appendChild(divLlegenda);
-              } catch(e) {}
               llgd +="#$#"+centres[i][numColNomLlegendaMapa];
+              contingutLlegenda+="<center><div style='width:60px; margin: 5px;'>"+iconaLlegenda+centres[i][numColNomLlegendaMapa]+"</center></div>";
            }
         }
       } 
-        
-      
+             
 // Listener per a clics sobre l'aranya (marcadors molt propers)
              
       google.maps.event.addListener(marcadors[i], 'spider_click', function(e) {  // 'spider_click', not plain 'click'
@@ -1717,8 +1770,17 @@ function creaMarcadors(finalArray){ // Construeix targes i mostra marcadors en e
       oms.addMarker(marcadors[i]);  // adds the marker to the spiderfier _and_ the map    
    })(k);   
 
-// Visualització d'errades o omissió de dades de latitud i longitud
+//construcció de la llegenda si té posició 
+ if (Posicio_llegenda.toLowerCase()!="sense_llegenda"){
+      if (numColNomLlegendaMapa!=-1){      
+        llegendaMapa=document.createElement('div');
+        llegendaMapa.setAttribute("id", "llegendaMapa");
+        llegendaMapa.innerHTML = contingutLlegenda;
+        document.getElementById('map').appendChild(llegendaMapa);
+      }
+  } 
 
+// Visualització d'errades o omissió de dades de latitud i longitud
    if(numSenseLloc>0){
        if (Visualitzar_errors=="S") {
          mostraErrades(senseLloc);
@@ -1726,9 +1788,7 @@ function creaMarcadors(finalArray){ // Construeix targes i mostra marcadors en e
    }
       
 // Determinació dels límits del mapa
-
    bounds = new google.maps.LatLngBounds(); 
-   
    google.maps.event.addListener(map, 'bounds_changed', function() {
      if (iniciantMapa) {        
          bounds_all=map.getBounds(); // límits del mapa, considerant tots els registres
@@ -1743,7 +1803,6 @@ function creaMarcadors(finalArray){ // Construeix targes i mostra marcadors en e
      } 
       
      // Determinació dels límits del mapa inicial      
-
      if (iniciantMapa) {      
         bounds_all=bounds;
         var $mapDiv = $('#map');
@@ -1752,7 +1811,6 @@ function creaMarcadors(finalArray){ // Construeix targes i mostra marcadors en e
         var centreMapa=bounds.getCenter(); // centre del mapa determinat per tots els marcadors
 
         // Recull de variables relacionades amb el mapa inicial
-
         if (Centre_mapa!='A') {
            var cadenaCentre=Centre_mapa.split(',');
            var latInicial=parseFloat(cadenaCentre[0]);
@@ -1761,7 +1819,7 @@ function creaMarcadors(finalArray){ // Construeix targes i mostra marcadors en e
         var zoomInicial=parseFloat(Zoom_inicial);
     
         // Tipus de mapa inicial
-    
+  
         if (zoomInicial==0 && Centre_mapa=='A') { // tot automàtic
            iniciantMapa=false;
         }
@@ -1797,7 +1855,7 @@ function creaMarcadors(finalArray){ // Construeix targes i mostra marcadors en e
         markerCluster = new MarkerClusterer(map, marcadors,{imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
         markerCluster.setMaxZoom(Clusters_max_zoom);
    }  
-   
+
    //situar la llegenda al mapa
    if (Posicio_llegenda.toLowerCase()!="sense_llegenda"){
       pos_lle=[["dalt_esquerra","top_left"],["dalt_centre","top_center"],["dalt_dreta","top_right"],["esquerra_dalt","left_top"],["esquerra_centre","left_center"],["esquerra_baix","left_bottom"],["dreta_dalt","right_top"],["dreta_centre","right_center"],["dreta_baix","right_bottom"],["baix_esquerra","bottom_left"],["baix_centre","bottom_center"],["baix_dreta","bottom_right"]];
@@ -1827,6 +1885,7 @@ function limitsMapa(){  // Actualitza el mapa segons els límits establerts
             this.setZoom(parseFloat(Zoom_max));  
         }
     });
+          
     setTimeout(function(){google.maps.event.removeListener(zoomChangeBoundsListener)}, 2000);         
 }
 
@@ -1857,9 +1916,6 @@ function centrar(){  // Actualitza el mapa segons els filtres actius en mode zoo
   }
   limitsMapa();
 }
-
-
-
 
 function aplica_plantilla(plantilla,row_dad){
   if (row_dad==undefined){
@@ -1955,7 +2011,7 @@ function addslashes(str) {
   //str=str.replace("'","\'");
   str=str.replace(/\\/g,'\\\\');
   str=str.replace(/\'/g,'\\\'');
-  str=str.replace(/\"/g,'\\"');
+  str=str.replace(/\"/g,'\\"');llegenda
   str=str.replace(/\0/g,'\\0');
   str=str.replace("\n","\\n");
   return str;
@@ -2299,8 +2355,9 @@ function formatDate(date) {
     return new Date(year, month, day);
 }
 
-
-
+function gm_authFailure() {
+  missatgeError('El mapa no es pot mostrar perquè la clau API del full de configuració no és correcta. Si us plau, substituiu-la per una de vàlida');
+};
 
 </script>
 
@@ -2314,10 +2371,10 @@ function formatDate(date) {
 
 <div id="divDiv">
 </div>
-<script async defer src="bin/oms.min.js?spiderfier_callback=mapLibReadyHandler"></script>
+<!--<script async defer src="bin/oms.min.js?spiderfier_callback=mapLibReadyHandler"></script>-->
 <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyANTZUP7RPqwaCdyiFp2XhWcJLQxRDRX5U&callback=inicia"></script>
-
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=<?= Clau_API ?>&callback=inicia"></script>
+<script async defer src="https://cdnjs.cloudflare.com/ajax/libs/OverlappingMarkerSpiderfier/1.0.3/oms.min.js?spiderfier_callback=mapLibReadyHandler"></script>
 
 </html>
 
