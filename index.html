@@ -329,6 +329,9 @@ h3 {
                 <p style="background-color: #DEDCDC">Codi de l'enllaç</p>              
                    <textarea id='codiEnllac' rows='2' style='background-color: #FEFFCF; width:100%'></textarea>            
                 <br>
+                <p style="background-color: #DEDCDC">Codi de l'enllaç curt</p>              
+                   <textarea id='codiShort' rows='2' style='background-color: #FEFFCF; width:100%'></textarea>            
+                <br>                
                 <p style="background-color: #DEDCDC">Codi per inserir en un web</p>                           
                     <textarea id='codiEmbed' rows='2' style='background-color:  #FEFFCF; width:100%'></textarea>
             </div>
@@ -345,9 +348,104 @@ h3 {
 
 
 <script>
+/*
+function shortenUrl(enll) {
+  /*
+  var url = UrlShortener.Url.insert({
+    longUrl: enll,
+  });
+  Logger.log('Shortened URL is "%s".', url.id);
+  //*/
+/*
+  $.ajax({
+        url: 'https://www.googleapis.com/urlshortener/v1/url?shortUrl=http://goo.gl/fbsS&key=AIzaSyB7puuqILKQHNsaniLs-KxxyY7FeMD-IVQ',
+        type: 'POST',
+        contentType: 'application/json; charset=utf-8',
+        data: '{ longUrl: "' + enll +'"}',
+        dataType: 'json',
+        success: function(response) {
+            var result = JSON.parse(response); // Evaluate the J-Son response object.
+            alert(response);
+        }
+     });
+}
+
+
+function makeShort(enll) {
+   var longUrl=document.getElementById("longurl").value;
+   var request = gapi.client.urlshortener.url.insert({
+      'resource': {
+        'longUrl': longUrl
+      }
+   });
+   alert(longUrl);
+   request.execute(function(response) {
+      if(response.id != null) {
+		str ="<b>Long URL:</b>"+longUrl+"<br>";
+		str +="<b>Short URL:</b> <a href='"+response.id+"'>"+response.id+"</a><br>";
+		document.getElementById("output").innerHTML = str;
+	  } else {
+		alert("error en la creació de la url curta");
+	  }
+    });
+}
+
+
+function getShortInfo(){
+    var shortUrl=document.getElementById("shorturl").value;
+    var request = gapi.client.urlshortener.url.get({
+      'shortUrl': shortUrl,
+	  'projection':'FULL'
+    });
+    request.execute(function(response){
+		if(response.longUrl!= null){
+			str ="<b>Long URL:</b>"+response.longUrl+"<br>";
+			str +="<b>Create On:</b>"+response.created+"<br>";
+			document.getElementById("output").innerHTML = str;
+		} else {
+			alert("error: unable to get URL information");
+		}
+    });
+}
+
+
+function load(){
+	gapi.client.setApiKey('AIzaSyB7puuqILKQHNsaniLs-KxxyY7FeMD-IVQ'); //get your ownn Browser API KEY
+	gapi.client.load('urlshortener', 'v1',function(){});
+    alert(1);
+}
+window.onload = load;
+//*/
+</script>
+<script src="https://apis.google.com/js/client.js"> </script>
+
+<!--
+URL: <input type="text" id="longurl" name="url" value="http://www.hayageek.com" /> <br/>
+<input type="button" value="Create Short" onclick="makeShort();" /> <br/> <br/>
+
+URL: <input type="text" id="shorturl" name="url" value="http://www.hayageek.com" /> <br/>
+<input type="button" value="Get Short  URL Info" onclick="getShortInfo();" />
+
+<div id="output"></div>
+-->
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
 var idFullModel="1NpyfKlvJ3_SSowkg0QFQfZZOA_kbuFufda21NXCfEUY";
 var urlModel="https://docs.google.com/spreadsheets/d/1NpyfKlvJ3_SSowkg0QFQfZZOA_kbuFufda21NXCfEUY/edit?usp=sharing";
-var urlAplicacio="https://script.google.com/a/macros/xtec.cat/s/AKfycbyaz-KrhOESpoUOrGHncEnSSWixoxXJ6Zvh4Xm7tgO32Az4TIpd/exec";
+//var urlAplicacio="https://script.google.com/a/macros/xtec.cat/s/AKfycbyaz-KrhOESpoUOrGHncEnSSWixoxXJ6Zvh4Xm7tgO32Az4TIpd/exec";
+var urlAplicacio="https://script.google.com/a/macros/xtec.cat/s/AKfycbxHRlIiK-j2CfC9jqGE0cG84_7TG8OATAxdmI3pzJ2fdYnoTDE/exec";
+
 
 
 function presenta_dades() {
@@ -398,8 +496,10 @@ function crear_enllacos(){
   var urlUsuari=$("#urlUsuari").val();  
   var cfgUsuari=$("#cfgUsuari").val();
   var enll=urlAplicacio+"?ID="+urlUsuari+"&config="+cfgUsuari;
+  //var short=shortenUrl(enll);
   var embed="<iframe src='"+urlAplicacio+"?ID="+urlUsuari+"&config="+cfgUsuari+"' style='width: 90%; height: 600px'></icframe>";  
   $("#codiEnllac").html(enll);
+  //$("#codiShort").html(short);  
   $("#codiEmbed").html(embed);  
 }
 
