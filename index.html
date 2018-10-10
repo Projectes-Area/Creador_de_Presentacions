@@ -82,6 +82,7 @@ h3 {
 <body onload="presenta_dades()">
 <div class="container">
 <header id="main-header">
+    <input hidden id="urlModel" value="<?= urlModel ?>"/>
 
     <!-- Carousel
     ================================================== -->
@@ -110,7 +111,7 @@ h3 {
             <img src="https://drive.google.com/uc?id=1hSKEGc2JyxdA5nMcF6zlwo5wtC8_Ik3D" alt="Second slide">
           </div>
           <div class="carousel-caption">
-            <h3 style="color: #428bca">Presentació en forma de targes.</h3>            
+            <h3 style="color: #428bca">Presentació en forma de targetes.</h3>            
           </div>
         </div>
         <div class="item">
@@ -130,8 +131,8 @@ h3 {
     </div>
 
     <div class="container">    
-      <h4 style='text-align: center;'><a href="https://script.google.com/a/macros/xtec.cat/s/AKfycbyaz-KrhOESpoUOrGHncEnSSWixoxXJ6Zvh4Xm7tgO32Az4TIpd/exec?ID=<?= idFullModel ?>&config=Config_1" target="_blank" >Aplicació</a> que us permetrà crear presentacions de mapes, targes i taules per publicar a partir de fulls de càlcul de Google  (<a href="https://docs.google.com/spreadsheets/d/1NpyfKlvJ3_SSowkg0QFQfZZOA_kbuFufda21NXCfEUY/view#gid=0" target="_blank">MODEL</a>) declarats públics</h4>    
-      <span style="text-align: center;font-family: Arial;">Amb aquesta eina podeu crear un mapa mapa, una taula o una presentació de targes a partir d'un full de dades d'un document de </span> <span style="font-weight: bold; font-style: italic; font-family: Arial;">Google Sheets</span>.
+      <h4 style='text-align: center;'><a href="<?= urlAplicacio ?>?ID=<?= idFullModel ?>&config=Config_1" target="_blank" >Aplicació</a> que us permetrà crear presentacions de mapes, targetes i taules per publicar a partir de fulls de càlcul de Google  (<a href="https://docs.google.com/spreadsheets/d/1NpyfKlvJ3_SSowkg0QFQfZZOA_kbuFufda21NXCfEUY/view#gid=0" target="_blank">MODEL</a>) declarats públics</h4>    
+      <span style="text-align: center;font-family: Arial;">Amb aquesta eina podeu crear un mapa mapa, una taula o una presentació de targetes a partir d'un full de dades d'un document de </span> <span style="font-weight: bold; font-style: italic; font-family: Arial;">Google Sheets</span>.
     </div>
 </header>                         
     <!-- /.carousel -->
@@ -441,11 +442,10 @@ URL: <input type="text" id="shorturl" name="url" value="http://www.hayageek.com"
 
 
 <script>
-var idFullModel="1NpyfKlvJ3_SSowkg0QFQfZZOA_kbuFufda21NXCfEUY";
-var urlModel="https://docs.google.com/spreadsheets/d/1NpyfKlvJ3_SSowkg0QFQfZZOA_kbuFufda21NXCfEUY/edit?usp=sharing";
-//var urlAplicacio="https://script.google.com/a/macros/xtec.cat/s/AKfycbyaz-KrhOESpoUOrGHncEnSSWixoxXJ6Zvh4Xm7tgO32Az4TIpd/exec";
-var urlAplicacio="https://script.google.com/a/macros/xtec.cat/s/AKfycbxHRlIiK-j2CfC9jqGE0cG84_7TG8OATAxdmI3pzJ2fdYnoTDE/exec";
-
+//var idFullModel="1NpyfKlvJ3_SSowkg0QFQfZZOA_kbuFufda21NXCfEUY";
+//var urlModel="https://docs.google.com/spreadsheets/d/1NpyfKlvJ3_SSowkg0QFQfZZOA_kbuFufda21NXCfEUY/edit?usp=sharing";
+//var urlAplicacio="https://script.google.com/a/macros/xtec.cat/s/AKfycbxHRlIiK-j2CfC9jqGE0cG84_7TG8OATAxdmI3pzJ2fdYnoTDE/exec";
+var urlModel=$("#urlModel").val()
 
 
 function presenta_dades() {
