@@ -5,13 +5,21 @@ var colconfig;
 var tipus;
 var Pestanya_configuracio;
 var fltr; 
+var fltrPol; 
+
+var idFullModel="1NpyfKlvJ3_SSowkg0QFQfZZOA_kbuFufda21NXCfEUY";
+var urlModel="https://docs.google.com/spreadsheets/d/1NpyfKlvJ3_SSowkg0QFQfZZOA_kbuFufda21NXCfEUY/edit?usp=sharing";
+//var urlAplicacio="https://script.google.com/a/macros/xtec.cat/s/AKfycbyaz-KrhOESpoUOrGHncEnSSWixoxXJ6Zvh4Xm7tgO32Az4TIpd/exec";
+var urlAplicacio="https://script.google.com/a/macros/xtec.cat/s/AKfycbxHRlIiK-j2CfC9jqGE0cG84_7TG8OATAxdmI3pzJ2fdYnoTDE/exec";
 
 
 function doGet(e) {
   
   	if (e.queryString.localeCompare("")==0) {
     	var template0 = HtmlService.createTemplateFromFile('index');
-      	template0.idFullModel = "1NpyfKlvJ3_SSowkg0QFQfZZOA_kbuFufda21NXCfEUY";        
+      	template0.idFullModel = idFullModel;      
+      	template0.urlModel = urlModel;         
+        template0.urlAplicacio = urlAplicacio
         return template0.evaluate().setTitle("Eina de creació de presentacions")
                                 .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);                           
   	} else { 
@@ -71,29 +79,12 @@ function doGet(e) {
             var data = first.getDataRange().getValues();
             var colconfig=5;
             for (c=0;c<data[0].length; c++) {
-              //if (data[0][c].indexOf(e.parameter.config)>-1){
               if (data[0][c]==e.parameter.config){              
                 colconfig=c;
               }
             }
-            
-	        //Salvar les dades a la cache per recollir-les despres en diverses parts de l'aplicació
-            /*
-            //var cache = CacheService.getPublicCache();
-			var cache = CacheService.getPublicCache();          
-			cache.put("id", id,300);        
-            cache.put("Pestanya_configuracio",config); 
-			cache.put("config",config);    
-			cache.put("tipus",e.parameter.tipus,300);  
-            cache.put("colconfig",colconfig,300);
 
-            cache.put("fltr","",300); 
-			if (e.parameter.fltr!=undefined){
-				cache.put("fltr",e.parameter.fltr,300);            
-	        }
-            //*/
-            
-          	//cache.put("id", id,300);        
+
             var Pestanya_configuracio=config; 
 			var config=config;    
 			var tipus=e.parameter.tipus;  
@@ -104,6 +95,10 @@ function doGet(e) {
 				fltr=e.parameter.fltr;            
 	        }
                     
+            fltrPol=""; 
+			if (e.parameter.fltrPol!=undefined){
+				fltrPol=e.parameter.fltrPol;            
+	        }          
            
           var spread = SpreadsheetApp.openById(id);
            try {
@@ -165,14 +160,18 @@ function doGet(e) {
 	            ssControl.getRange(f+1,4).setValue(e.parameter.config);               
 	            ssControl.getRange(f+1,5).setValue(numPet);
 	            ssControl.getRange(f+1,10).setValue(Titol_aplicacio);
-	            ssControl.getRange(f+1,11).setValue(Correu_gestors);            
+	            ssControl.getRange(f+1,11).setValue(Correu_gestors.replace(",",", "));    
+                ssControl.getRange(f+1,12).setValue("Presentacions");                      
 	            pas=true;
 	            break;
 	          }
 	        }
 	        if (pas==false){
 	          var avui=new Date();
-	          ssControl.appendRow([avui,avui,id,config,1,'','','','',Titol_aplicacio,Correu_gestors])          
+              //eliminar el registre dels diaris curriculars 
+              if (Titol_aplicacio.toLowerCase().indexOf("diari curricular")<0){
+                ssControl.appendRow([avui,avui,id,config,1,'','','','',Titol_aplicacio,Correu_gestors,"Presentacions"])          
+              }
 	        }
 	      
 
@@ -271,7 +270,10 @@ function doGet(e) {
               //*/
 	        	template.id=id;              
               	template.colconfig=colconfig;
+              	template.fltr=fltr;              
+              	template.fltrPol=fltrPol;                            
 	        	template.Capçalera = Capçalera;
+                template.Clau_API = Clau_API;
                 
 	        	return template.evaluate().setTitle(Titol_aplicacio).setSandboxMode(HtmlService.SandboxMode.IFRAME)
 			                 .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);       
@@ -399,7 +401,10 @@ function recollidaDades(id,colconfig,fltr){
   
   
   var first = spread.getSheetByName(Pestanya_dades);
-  var data = first.getDataRange().getValues();
+  //var data = first.getDataRange().getValues();
+  var data = first.getDataRange().getDisplayValues();  
+  
+
 
   var row_colPermis=new Array();
   var p=0;
@@ -612,9 +617,7 @@ function ordenaArray(a, b) {
 
 //recollida de les dades des de la pantalla 
 function recollidaDadesSub(pestanya,colCerca,valCerca,id,colconfig){
-  
-  //id="1r22cicGIfhlkLbte2EwLXoAdAWhguEEAOqAHj5zjq-c";
-  //return (pestanya+"\n"+colCerca+"\n"+valCerca+"\n"+id+"\n"+colconfig);
+ //return (pestanya+"\n"+colCerca+"\n"+valCerca+"\n"+id+"\n"+colconfig);
   
   var spread=SpreadsheetApp.openById(id);
 
@@ -631,9 +634,9 @@ function recollidaDadesSub(pestanya,colCerca,valCerca,id,colconfig){
 
 
   var ss = spread.getSheetByName(pestanya);
-  var data = ss.getDataRange().getValues();
+  var data = ss.getDataRange().getDisplayValues(); 
 
-  
+  //return data;
   //var userEmail = Session.getActiveUser().getEmail();  
 
   
@@ -729,7 +732,7 @@ function recollidaDadesSub(pestanya,colCerca,valCerca,id,colconfig){
      //row2=row;
   } else {
      row2[0]=row[0];
-     row2[1]=row[1];  
+     row2[1]=row[1]; 
      row2[2]=row[2];  
      var z=3;  
      for (var f = 0; f < row.length; f++) {
@@ -755,22 +758,33 @@ function recollidaDadesSub(pestanya,colCerca,valCerca,id,colconfig){
 
 
 //Recollida de dades de les presentacions permeses i de les plantilles
-function recollidaPoligons(id,colconfig){
+function recollidaPoligons(id,colconfig,fltrPol){
 //*
   var spread=SpreadsheetApp.openById(id);
   var cnf_fll = spread.getSheetByName('config'); 
   var cnf_rows = cnf_fll.getDataRange();
   var cnf_values = cnf_rows.getValues();
   var pestanya='';
+
   for (var v = 1; v < cnf_values.length; v++) {
     if (cnf_values[v][1]=="Pestanya_poligons"){
-      pestanya=cnf_values[v][4];
+      pestanya=cnf_values[v][colconfig];
     }    
+    if (cnf_values[v][1]=="Filtre_inicial_poligons"){
+      var Filtre_inicial_poligons=cnf_values[v][colconfig];
+    }        
   }
- 
+  
   if (pestanya==''){
     return;
   }
+  
+  //per si es pasa un filtre en la url
+  if (fltrPol=="" &&  Filtre_inicial_poligons.length>0 ){
+     fltrPol=Filtre_inicial_poligons;
+  }
+  
+
   
   //existeis la pestanya de poligons
   var ss = spread.getSheetByName(pestanya);  
@@ -808,15 +822,88 @@ function recollidaPoligons(id,colconfig){
     }
   }
   
+
+//des d'aquí
+//* 
+  //var fltr = cache.get('fltr');
+  if (fltrPol!=""){
+    var Filtre=fltrPol;
+  } else if (Filtre_inicial_poligons!=""){
+    var Filtre=Filtre_inicial_poligons;
+  } else {
+    var Filtre="";  
+  }
+
+  var  row_flt=[];
+  if (Filtre!=""){
+    Filtre=Filtre.substr(1,Filtre.length-2)
+    if (Filtre.indexOf("**and**")>-1){
+      var tipoFiltre="and";
+      row_flt=Filtre.split("**and**");      
+    } else if (Filtre.indexOf("**or**")>-1){
+      var tipoFiltre="or";
+      row_flt=Filtre.split("**or**");      
+    } else {
+      var tipoFiltre="and";
+      row_flt[0]=Filtre;      
+    }      
+
+    var cmp=[];
+    var row_colFiltre=[];
+    for (var f=0;f<row_flt.length;f++){
+      cmp[f]=row_flt[f].split("=");
+      for (var c=0;c<data[0].length; c++) {
+        if (data[0][c].toLowerCase()==cmp[f][0].toLowerCase()){
+          row_colFiltre[f]=c;
+        }
+      }
+    }    
+  }
+  
+  
+  //selecionar els registres que compleixen el filtre inicial si n'hi ha
+  var row_data=new Array();
+  //if (typeof(Filtre_inicial) != 'undefined' && Filtre_inicial!=""){  
+  if (Filtre!=""){      
+     row_data[0]=data[0];
+     row_data[1]=data[1];  
+     row_data[2]=data[2];  
+     var z=3;  
+     for (var i = 3; i < data.length; i++) {
+       var pas=0;
+       for (f=0;f<row_colFiltre.length; f++){
+         if (data[i][row_colFiltre[f]]==cmp[f][1] ) {
+           pas +=1;           
+         }
+       }
+       if (tipoFiltre=="and"){
+         if (pas==row_colFiltre.length){
+           row_data[z]=data[i];
+           z +=1;    
+         }
+       } else if (tipoFiltre=="or"){
+         if (pas>0){
+           row_data[z]=data[i];
+           z +=1;    
+         }
+       }         
+     }    
+  } else {
+    row_data=data;
+  }
+//fins aquí
+
+//*/
+
  //selecionar els registres buscats
   var row=new Array();
-  row[0]=data[0];
-  row[1]=data[1];  
-  row[2]=data[2]; 
+  row[0]=row_data[0];
+  row[1]=row_data[1];  
+  row[2]=row_data[2]; 
   var z=3;
-  for (r=3; r<data.length;r++){
-    if (data[r][colGeo].length>0){
-      row[z]=data[r];
+  for (r=3; r<row_data.length;r++){
+    if (row_data[r][colGeo].length>0){
+      row[z]=row_data[r];
       z +=1;          
     }
   }
@@ -1068,6 +1155,93 @@ function salvarDades(id,colconfig,row_dad){
     return missatge;    
   }
 }
+
+
+
+//*
+function crear_fitxer(idElement,nomColFitxa,idModel,idCarpeta,nomFitxer,id,colconfig,url) {
+  //return id_element_apadrinat;
+  // Obtenim l'usuari 
+  var userEmail = Session.getActiveUser().getEmail();
+
+  var spread=SpreadsheetApp.openById(id);
+  //recollir les variables de configuracio 
+
+  var cnf_values = spread.getSheetByName('config').getDataRange().getDisplayValues();  
+  for (var v = 1; v < cnf_values.length; v++) {
+      eval("var "+cnf_values[v][1]+"=\""+cnf_values[v][colconfig]+"\"");
+  }
+   
+  var data = spread.getSheetByName(Pestanya_dades).getDataRange().getDisplayValues();
+  for (c=0;c<data[0].length; c++) {
+    if (data[1][c].toLowerCase()=='id'){
+      var columna_id=c;
+      break;
+    }
+  }
+  
+  var ss_url = "";
+  var row_gest=new Array(); 
+  var row_reg=new Array();
+  Correu_gestors=Correu_gestors.replace(new RegExp(";", 'g'),","); 
+  row_gest=Correu_gestors.split(",");
+  
+  //Determinem la forma d'actuar en funció del tipus de distribucció que ha fet l'administrador llista oberta o tancada
+  for (var i = 0; i < data.length; i++) {
+     if ( idElement == data[i][columna_id]) {
+       row_reg = data[i];       
+       var fila_registre=i;
+       for (c=0;c<data[i].length;c++) {
+         if (data[0][c].toLowerCase()==nomColFitxa){
+             var columna_fitxa=c;
+             var ss_url=data[i][c];
+         }         
+         if ((data[1][c].toLowerCase()).indexOf('permis')>-1){
+           if (data[i][c].slice(-9)=="@xtec.cat"){
+                row_gest.push(data[i][c]);
+           }
+         }             
+       }
+       break;
+     }
+   }
+   // Carpeta desti
+  /*
+   var idCarpeta=ID_carpeta_desti_fitxers;
+   var idModel=ID_plantilla_model;
+   //*/
+  
+   var carpeta = DriveApp.getFolderById(idCarpeta);
+   var model = DriveApp.getFileById(idModel);
+
+   
+   // Copia el full de càlcul i dona permissos d'edició a l'usuari si encara no esta fet
+  if (ss_url==""){
+    var SS = model.makeCopy(nomFitxer,carpeta);
+    SS.addEditors(row_gest);
+    var ss_url = SS.getUrl();
+    var idFtxCreat=SS.getId();
+  }
+ 
+  //return (Pestanya_dades,fila_registre,columna_fitxa,ss_url);  
+  //Salvar la url de la fitxa
+   ss_url="https://docs.google.com/spreadsheets/d/16LsLj5CxQ30Gg3SJAWEzJt-YoNqlZbWXRYM11M9b70U/edit#gid=1787670486";
+   var fila=parseInt(fila_registre+1);
+   var columna=parseInt(columna_fitxa+1);
+   //spread.getSheetByName(Pestanya_dades).getRange(fila,columna).setValue(ss_url);    
+   spread.getSheetByName("Respostes").getRange(5,16).setValue(ss_url);      
+
+   var resposta=new Array();
+   resposta[0]=fila_registre;  
+   resposta[1]=columna_fitxa;  
+   resposta[2]=ss_url;    
+   resposta[3]=nomFitxer;
+   resposta[4]=idElement;
+   resposta[5]=idFtxCreat;  
+   resposta[6]=row_gest;  
+   return resposta;
+}
+//*/
 
 
 
