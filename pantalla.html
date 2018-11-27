@@ -27,6 +27,8 @@
    
 <script src="https://maps.googleapis.com/maps/api/js?key=<?= Clau_API ?>" async defer></script>
 <script src='https://unpkg.com/leaflet.gridlayer.googlemutant@latest/Leaflet.GoogleMutant.js'></script>   
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/leaflet.heat/0.2.0/leaflet-heat.js'></script>
   
 <link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.3.0/MarkerCluster.css">
 <link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.3.0/MarkerCluster.Default.css">
@@ -68,21 +70,21 @@
 
 <!--scrips relacionats amb el TimeLineMap -->
 <!--    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAVxmW5MSmBXNniGfdBkiojV16y4_9E5_Q&v=3.exp&sensor=false&language=ca"></script> -->
-	<!---<script src="https://openlayers.org/api/OpenLayers.js"></script>-->
+  <!---<script src="https://openlayers.org/api/OpenLayers.js"></script>-->
 
-    <script type="text/javascript" src="https://edumet.cat/areatac/cartografia/lib/mxn/mxn.js?(googlev3)"></script>	
+    <script type="text/javascript" src="https://edumet.cat/areatac/cartografia/lib/mxn/mxn.js?(googlev3)"></script> 
 
-	<script type="text/javascript" src="https://edumet.cat/areatac/cartografia/lib/timeline-2.3.0.js"></script>
+  <script type="text/javascript" src="https://edumet.cat/areatac/cartografia/lib/timeline-2.3.0.js"></script>
     <script type="text/javascript" src="https://edumet.cat/areatac/cartografia/src/timemap.js"></script>
-	<script type="text/javascript" src="https://edumet.cat/areatac/cartografia/src/param.js"></script>	
-	<script type="text/javascript" src="https://edumet.cat/areatac/cartografia/src/manipulation.js"></script>	
+  <script type="text/javascript" src="https://edumet.cat/areatac/cartografia/src/param.js"></script>  
+  <script type="text/javascript" src="https://edumet.cat/areatac/cartografia/src/manipulation.js"></script> 
     <script type="text/javascript" src="https://edumet.cat/areatac/cartografia/src/state.js" ></script>
 
-<!---google_spreadsheet	-->
+<!---google_spreadsheet -->
     <script src="https://edumet.cat/areatac/cartografia/src/loaders/json.js" type="text/javascript"></script>
-    <script src="https://edumet.cat/areatac/cartografia/src/loaders/google_spreadsheet.js" type="text/javascript"></script>	
-<!---google_spreadsheet-->		
-	<script src="https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization', 'version':'1','packages':['timeline']}]}" type="text/javascript" ></script>
+    <script src="https://edumet.cat/areatac/cartografia/src/loaders/google_spreadsheet.js" type="text/javascript"></script> 
+<!---google_spreadsheet-->    
+  <script src="https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization', 'version':'1','packages':['timeline']}]}" type="text/javascript" ></script>
 
 <!--script TimeLine-->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -261,17 +263,17 @@ tr:hover {
     div#timelinecontainer{
     width: 100%;
     height: 60%;
-	background: #B7C1CF;	
+  background: #B7C1CF;  
     }
-	
+  
     div#mapcontainer {
     width: 100%;
     height: 40%;
-	background: #CFB7B7;	
-    }	
+  background: #CFB7B7;  
+    } 
     
     div#timeline{
-	left:2%;	
+  left:2%;  
     width: 98%;
     height: 100%;
     font-size: 11px;
@@ -279,53 +281,53 @@ tr:hover {
     }        
     
     div#map {
-	left:2%;	
+  left:2%;  
     width: 98%;
     height: 100%;
     background: #EEEEEE;
     }
-	
-	div#global_menys_alçada{
-	position:absolute;
-	left:1%;
-	top:150px;	
-	z-index:100;
-	}
+  
+  div#global_menys_alçada{
+  position:absolute;
+  left:1%;
+  top:150px;  
+  z-index:100;
+  }
     
-	div#global_mes_alçada{
-	position:absolute;
-	left:1%;
-	top:164px;	
-	z-index:100;
-	}
+  div#global_mes_alçada{
+  position:absolute;
+  left:1%;
+  top:164px;  
+  z-index:100;
+  }
 
-	div#mapa_menys_alçada{
-	position:absolute;
-	left:1%;
-	top:440px;	
-	z-index:100;
-	}
+  div#mapa_menys_alçada{
+  position:absolute;
+  left:1%;
+  top:440px;  
+  z-index:100;
+  }
 
-	div#mapa_mes_alçada{
-	position:absolute;
-	left:1%;
-	top:454px;	
-	z-index:100;
-	}
+  div#mapa_mes_alçada{
+  position:absolute;
+  left:1%;
+  top:454px;  
+  z-index:100;
+  }
 
-	div#timeline_amplada_text {
-	/*position:absolute;*/
-	left:4%;
-	top:60px;	
-	z-index:200;
-	}
+  div#timeline_amplada_text {
+  /*position:absolute;*/
+  left:4%;
+  top:60px; 
+  z-index:200;
+  }
 
-	div#timeline_amplada {
-	/*position:absolute;*/
-	left:4%;
-	top:75px;	
-	z-index:300;
-	}
+  div#timeline_amplada {
+  /*position:absolute;*/
+  left:4%;
+  top:75px; 
+  z-index:300;
+  }
     
     div.infodescription {
     font-style: normal;
@@ -338,7 +340,7 @@ tr:hover {
     .dret{padding-left:10px;margin-left: 130px;}
     a{text-decoration: none;color:#AD2114;}
     a:hover{text-decoration: none;color:grey;}
-</style>	
+</style>  
 
 </head>
 
@@ -466,7 +468,12 @@ var arrayCheckboxesID;
 var arrayCheckboxesValue;
 var numCheckboxes=0;
 var checkboxPoligonsValue;
+var checkboxClustersValue;
+var checkboxHeatmapValue;
+var checkboxMarcadorsValue;
 var oms;
+var heat;
+var locations=[];
 
 //variables relacionades amb la presentació de targetes
 var Num_files=0;
@@ -499,7 +506,13 @@ var Centre_mapa="41.71,1.82";
 var Zoom_automatic="S";
 var Zoom_inicial=0;
 var Zoom_max=19;
-var Clusters="S";
+var Clusters;
+var Mostra_clusters="S";
+var Mostra_poligons="N";
+var Mostra_densitat="N";
+var Casella_clusters="N";
+var Casella_poligons="N";
+var Casella_densitat="N";
 var Visualitzar_errors="N";
 var bounds;
 var bounds_all;
@@ -513,7 +526,7 @@ var markers;
 var proveidor;
 var nomProveidor=["OpenStreetMap.Mapnik","OpenStreetMap.BlackAndWhite","OpenStreetMap.HOT",
 "Google Maps (roadmap)","Google Maps (satellite)","Google Maps (hybrid)","Google Maps (terrain)",
-"ICGC (serveiTopoCache)","ICGC (serveitopoGrisCache)","ICGC (serveiOrtoCache)",
+"ICGC (Topogràfic)","ICGC (Topogràfic_Gris)","ICGC (Topogràfic_1_5000)","ICGC (OrtoFoto)","ICGC (OrtoFoto_Infraroja)","ICGC (Vol_Americà_1945)",
 "Wikimedia",
 "Esri.WorldStreetMap","Esri.WorldTopoMap","Esri.WorldImagery","Esri.WorldShadedRelief","Esri.WorldGrayCanvas",
 "OpenTopoMap",
@@ -525,7 +538,7 @@ var nomProveidor=["OpenStreetMap.Mapnik","OpenStreetMap.BlackAndWhite","OpenStre
 "HikeBike.HikeBike","HikeBike.HillShading"];
 var proveidorWMS=[0,0,0,
 0,0,0,0,
-1,1,1,
+1,1,1,1,1,1, // ICGC
 0,
 0,0,0,0,0,
 0,
@@ -539,6 +552,7 @@ var tipusICGC;
 
 var pixelsIco=24;
 var escalaIco=1.5;
+var path_defecte="M12,11.5A2.5,2.5 0 0,1 9.5,9A2.5,2.5 0 0,1 12,6.5A2.5,2.5 0 0,1 14.5,9A2.5,2.5 0 0,1 12,11.5M12,2A7,7 0 0,0 5,9C5,14.25 12,22 12,22C12,22 19,14.25 19,9A7,7 0 0,0 12,2Z";
 
 // ICGC
 var crs25831 = new L.Proj.CRS('EPSG:25831','+proj=utm +zone=31 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs',
@@ -547,7 +561,7 @@ resolutions: [1100, 550, 275, 100, 50, 25, 10, 5, 2, 1, 0.5, 0.25]
 }
 );
 
-var serveiTopoCache = L.tileLayer.wms("http://mapcache.icc.cat/map/bases/service?", {
+var Topogràfic = L.tileLayer.wms("http://mapcache.icc.cat/map/bases/service?", {
 layers: 'topo',
 format: 'image/jpeg',
 crs: crs25831,
@@ -555,15 +569,7 @@ continuousWorld: true,
 attribution: 'Institut Cartogràfic i Geològic de Catalunya -ICGC',
 });
 
-var serveiOrtoCache = L.tileLayer.wms("http://mapcache.icc.cat/map/bases/service?", {
-layers: 'orto',
-format: 'image/jpeg',
-crs: crs25831,
-continuousWorld: true,
-attribution: 'Institut Cartogràfic i Geològic de Catalunya -ICGC',
-});
-
-var serveitopoGrisCache = L.tileLayer.wms("http://mapcache.icc.cat/map/bases/service?", {
+var Topogràfic_Gris = L.tileLayer.wms("http://mapcache.icc.cat/map/bases/service?", {
 layers: 'topogris',
 format: 'image/jpeg',
 crs: crs25831,
@@ -571,15 +577,37 @@ continuousWorld: true,
 attribution: 'Institut Cartogràfic i Geològic de Catalunya -ICGC',
 });
 
-var wmsComarques = L.tileLayer.wms("http://geoserveis.icc.cat/icc_limadmin/wms/service?", {
-layers: '5,1',
-format: 'image/png',
+var Topogràfic_1_5000 = L.tileLayer.wms("http://geoserveis.icgc.cat/icc_mapesbase/wms/service?", { // Mapa topogràfic de Catalunya 1:5.000 vigent
+layers: 'mtc5m',
+format: 'image/jpeg',
+crs: crs25831,
+continuousWorld: true,
+attribution: 'Institut Cartogràfic i Geològic de Catalunya -ICGC',
+});
+
+var OrtoFoto = L.tileLayer.wms("http://mapcache.icc.cat/map/bases/service?", {
+layers: 'orto',
+format: 'image/jpeg',
+crs: crs25831,
+continuousWorld: true,
+attribution: 'Institut Cartogràfic i Geològic de Catalunya -ICGC',
+});
+
+var OrtoFoto_Infraroja = L.tileLayer.wms("http://geoserveis.icgc.cat/icc_mapesbase/wms/service?", { // Ortofoto infraroja de Catalunya 1:2.500 vigent
+layers: 'ortoi25c',
+format: 'image/jpeg',
+crs: crs25831,
+continuousWorld: true,
+attribution: 'Institut Cartogràfic i Geològic de Catalunya -ICGC',});
+
+var Vol_Americà_1945 = L.tileLayer.wms("http://geoserveis.icgc.cat/icc_ortohistorica/wms/service?", { // Ortofoto de Catalunya del Vol americà sèrie A 1:10.000 (1945-46)
+layers: 'ovaa10m',
+format: 'image/jpeg',
 crs: crs25831,
 transparent: true,
 continuousWorld: true,
-attribution: 'Base Comarcal 1:50.000 -ICGC',
+attribution: 'Institut Cartogràfic i Geològic de Catalunya -ICGC',
 });
-
 
 //Variables relacionades amb timeLineMap
 //var tm="";
@@ -639,8 +667,8 @@ bloc_nom = [];
 bloc_color = [];
 bloc_color= ['green', 'orange', 'blue','red','purple','ltblue','pink','green', 'orange', 'blue','red','yelow'];
 //bloc_unic = [[1,1]];
-lat = [];	
-lon = [];	
+lat = []; 
+lon = []; 
 media= [];
 text= [];
 poblacio= [];
@@ -689,12 +717,65 @@ function test() {
 
 
 
+
+function carregaDades(opc,valors){
+  /*
+  console.log(opc,valors);
+  var valors=JSON.stringify(valors);
+  console.log(valors)  
+  valors=valors.split();
+  console.log(valors)    
+  //*/
+  switch (opc){
+    case 'recollidaVariables':    
+      //google.script.run.withSuccessHandler(onVariables).recollidaVariables(id,colconfig,fltr);    
+      google.script.run.withSuccessHandler(onVariables).recollidaVariables(valors);    
+      break;
+
+    case 'recollidaPlantilles':    
+      //google.script.run.withSuccessHandler(onPlantilles).recollidaPlantilles(id,colconfig);  
+      google.script.run.withSuccessHandler(onPlantilles).recollidaPlantilles(valors);        
+      break;
+
+    case 'recollidaPoligons':
+      //google.script.run.withSuccessHandler(onPoligons).recollidaPoligons(id,colconfig,fltrPol);          
+      google.script.run.withSuccessHandler(onPoligons).recollidaPoligons(valors);                
+      break;
+
+    case 'recollidaDades':
+      //google.script.run.withSuccessHandler(onDades).recollidaDades(id,colconfig,fltr); 
+      google.script.run.withSuccessHandler(onDades).recollidaDades(valors);       
+      break;
+
+    case 'comprovacioPermis':
+      //google.script.run.withSuccessHandler(onPermis).comprovacioPermis(id,colconfig);   
+      google.script.run.withSuccessHandler(onPermis).comprovacioPermis(valors);   
+      break;
+
+    case 'salvarDades':
+      //google.script.run.withSuccessHandler(onSalvarDades).salvarDades(id,colconfig,regArray);             
+      google.script.run.withSuccessHandler(onSalvarDades).salvarDades(valors);             
+      break;
+    case 'recollidaDadesSub':
+      //google.script.run.withSuccessHandler(onTimeLine).recollidaDadesSub(pestanya,nomColCerca,valCerca,id,colconfig);
+      google.script.run.withSuccessHandler(onTimeLine).recollidaDadesSub(valors);      
+      break;
+
+    case 'obreHistoria':
+      //google.script.run.withSuccessHandler(onHistoryMap).recollidaDadesSub(pestanya,nomColCerca,valCerca,id,colconfig);
+      google.script.run.withSuccessHandler(onHistoryMap).recollidaDadesSub(valors);      
+      break;      
+      
+  }
+}
+
+
 function inicia(){
-    //map = L.map('map');  
     var id=$("#idFullCalcul").val();
     var colconfig=$("#colconfig").val();      
-    var fltr=$("#fltr").val();          
-    google.script.run.withSuccessHandler(onVariables).recollidaVariables(id,colconfig,fltr);    
+    var fltr=$("#fltr").val();            
+    var valors=[id,colconfig,fltr];
+    carregaDades('recollidaVariables',valors);
 }
 
 function obrirFullCalcul(id_full){
@@ -819,6 +900,10 @@ function onVariables(variables) {
    if (Visualitzar_boto_tancar=='S'){
       $("#btnTancarApl").css("visibility","visible");         
    }
+   
+   if(Clusters!=undefined) {
+      Mostra_clusters=Clusters;
+   }
 
    //var plantilla=plantilles[0][1];   
    //recollir les dades despres de les variables per garantir que està el nombre de files a mostrar
@@ -853,14 +938,17 @@ function onVariables(variables) {
         tipus_mapa_actual=0;
     }
     markers = L.markerClusterGroup(); 
-    if (Clusters=='N') {
+    if (Mostra_clusters=='N') {
         oms = new OverlappingMarkerSpiderfier(map,{nearbyDistance:1});
         oms.addListener('spiderfy', function(markers) {
             map.closePopup();
         });
     }
-    google.script.run.withSuccessHandler(onPlantilles).recollidaPlantilles(id,colconfig);  
+    //google.script.run.withSuccessHandler(onPlantilles).recollidaPlantilles(id,colconfig);  
+    var valors=[id,colconfig];
+    carregaDades('recollidaPlantilles',valors);      
 }
+
 
 function canviaMapaBase(numMapa) {
     if(tipus_mapa_actual==0){
@@ -886,6 +974,8 @@ function canviaMapaBase(numMapa) {
         tipus_mapa_actual=1;
     }
 }
+
+
 
 //Càrrega dels estils de la plantilla
 function onPlantilles(plt) {
@@ -944,7 +1034,7 @@ function onPlantilles(plt) {
               plantilles[p][2][5] +=plt[p][3][1][c];   
               break;              
            case "llegenda":
-              llegendes=plt[p][3][1][c];  
+              plantilles[p][2][6]=plt[p][3][1][c];
               break;
            }
         }
@@ -955,7 +1045,9 @@ function onPlantilles(plt) {
    var colconfig=$("#colconfig").val();
    var fltrPol=$("#fltrPol").val();             
    //console.log(id+"\n"+colconfig);
-   google.script.run.withSuccessHandler(onPoligons).recollidaPoligons(id,colconfig,fltrPol);      
+   //google.script.run.withSuccessHandler(onPoligons).recollidaPoligons(id,colconfig,fltrPol);      
+   valors=[id,colconfig,fltrPol];
+   carregaDades("recollidaPoligons",valors);         
 }
 
 
@@ -966,8 +1058,11 @@ function onPoligons(dad) {
   var id=$("#idFullCalcul").val();
   var colconfig=$("#colconfig").val();
   var fltr=$("#fltr").val();             
-  google.script.run.withSuccessHandler(onDades).recollidaDades(id,colconfig,fltr);   
+  //google.script.run.withSuccessHandler(onDades).recollidaDades(id,colconfig,fltr);   
+  var valors=[id,colconfig,fltr];
+  carregaDades('recollidaDades',valors);     
 }
+
 
 
 
@@ -1021,6 +1116,11 @@ function aplicaTipus(){
           $("#imgInfo").css("visibility","hidden");                                   
        }
 
+
+       if (plantilles[p][2][6]!="undefined"){              
+          llegendes=plantilles[p][2][6];                 
+       }
+
        break;
     }
   }
@@ -1029,6 +1129,7 @@ function aplicaTipus(){
   }
   creaTipus();  
 }
+
 
 function creaTipus(){
    $('#imgtemp').css('display','block');
@@ -1101,13 +1202,17 @@ function creaTipus(){
    $('#imgtemp').css('display','none');
 }
 
+
 //Comprovació dels permisos 
 function comprovacioPermis(){
     var id=$("#idFullCalcul").val();
     var colconfig=$("#colconfig").val();  
     //console.log(id+"----"+colconfig);
-    google.script.run.withSuccessHandler(onPermis).comprovacioPermis(id,colconfig);   
+    //google.script.run.withSuccessHandler(onPermis).comprovacioPermis(id,colconfig);   
+    var valors=[id,colconfig];
+    carregaDades('comprovacioPermis',valors);       
 }
+
 
 //Càrrega de les variables 
 function onPermis(permis) {
@@ -1293,15 +1398,23 @@ function aplicacioFiltres(id){
              strCamp=strCamp.replace(new RegExp(' ', 'g'),'_')
              strCamp=strCamp.replace(new RegExp('/', 'g'),'_')             
              //strCamp=strCamp.normalize('NFD').replace(/[\u0300-\u036f]/g, "_")
-             if(strCamp.indexOf($("#sel_"+nomCamp).val())>-1){             
-                arr[n]=finalArray[r];
-                n +=1;
+             if (finalArray[1][c].toLowerCase().indexOf("selfiltre")>-1){
+                if(strCamp==$("#sel_"+nomCamp).val()){             
+                    arr[n]=finalArray[r];
+                    n +=1;
+                }
+             } else if (finalArray[1][c].toLowerCase().indexOf("csvfiltre")>-1){
+                if(strCamp.indexOf($("#sel_"+nomCamp).val())>-1){             
+                    arr[n]=finalArray[r];
+                    n +=1;
+                }             
              }
          }
          finalArray=arr;
        }
     }
   }
+  
   switch (tipus){
   case "mapa":
      creaMarcadors(finalArray);
@@ -1642,7 +1755,9 @@ function enviarGenerar(){
     //alert("1:\n"+regArray);
     var id=$("#idFullCalcul").val();
     var colconfig=$("#colconfig").val();   
-    google.script.run.withSuccessHandler(onSalvarDades).salvarDades(id,colconfig,regArray);         
+    //google.script.run.withSuccessHandler(onSalvarDades).salvarDades(id,colconfig,regArray);         
+    var valors=[id,colconfig,regArray];
+    carregaDades('salvarDades',valors);         
 }
 
 
@@ -1653,7 +1768,9 @@ function enviarGenerarRegistre(){
     //console.log(regArray);    
     var id=$("#idFullCalcul").val();
     var colconfig=$("#colconfig").val();  
-    google.script.run.withSuccessHandler(onSalvarDades).salvarDades(id,colconfig,regArray);             
+    //google.script.run.withSuccessHandler(onSalvarDades).salvarDades(id,colconfig,regArray);             
+    var valors=[id,colconfig,regArray]    
+    carregaDades('salvarDades',valors);                 
 }
 
 
@@ -1859,7 +1976,7 @@ function creaMarcadors(finalArray){ // Construeix targes i mostra marcadors en e
    }        
    var numCentres=0; 
    for(i=0;i<marcadors.length;i++) {
-      if (Clusters=='S'){  
+      if (Mostra_clusters=='S'){  
          markers.removeLayer(marcadors[i]);         
       } else {  
          map.removeLayer(marcadors[i]);
@@ -1876,6 +1993,8 @@ function creaMarcadors(finalArray){ // Construeix targes i mostra marcadors en e
    agrupaCentres=[];
    marcadors=[]; 
    row_rep=[];  
+   
+   var numLlegendes=0;
          
 // Agrupament de registres segons el criteri d'agrupament     
      
@@ -1911,7 +2030,7 @@ function creaMarcadors(finalArray){ // Construeix targes i mostra marcadors en e
    var senseLloc=[];
    senseLloc[0]=[stringSenseLloc,finalArray[0][numColAgrupa],finalArray[0][numColLatitud],finalArray[0][numColLongitud]]
  
-   var locations=new Array();  
+   //var locations=new Array();  
    var iColors=new Array(); 
    var titols=[];
    var llgd =""; //cadena on s'afegiran les icones de la llegenda per no repetir-les
@@ -1919,17 +2038,33 @@ function creaMarcadors(finalArray){ // Construeix targes i mostra marcadors en e
    var white = { r: 255, g: 255, b: 255 };
    
 // Agrupament de registres en marcadors i creació de les targeta dels marcadors   
+   var contingutLlegenda="";
+   var filaLlegenda=[];
 
-   var contingutLlegenda=""; 
    if (iniciantMapa) {
           arrayCheckboxesId=[];
           arrayCheckboxesValue=[];
           numCheckboxes=0;
-          checkboxPoligonsValue=true;
+          if(Mostra_poligons=='S') {
+            checkboxPoligonsValue=true;
+          } else {
+            checkboxPoligonsValue=false;
+          }
+          if(Mostra_clusters=='S') {
+            checkboxClustersValue=true;
+          } else {
+            checkboxClustersValue=false;
+          }
+          if(Mostra_densitat=='S') {
+            checkboxHeatmapValue=true;
+          } else {
+            checkboxHeatmapValue=false;
+          }
+          checkboxMarcadorsValue=true;
    }
   
-   for (k=0;k<centres.length;k++) (function(i){  
-   
+   //for (k=0;k<centres.length;k++) (function(i){  
+   for (i=0;i<centres.length;i++) {
       var laLatitud=parseFloat(centres[i][numColLatitud]);
       var laLongitud=parseFloat(centres[i][numColLongitud]);
 
@@ -1979,23 +2114,50 @@ function creaMarcadors(finalArray){ // Construeix targes i mostra marcadors en e
       contentString+='</div>';          
 
 // Icones dels marcadors
-
     iconaDefinida=false;
       if(numColNomLlegendaMapa!=-1) {
-        if(centres[i][numColNomLlegendaMapa]!="") { // Icona segons el tipus
-        
+        if(centres[i][numColNomLlegendaMapa]!="") { // Icona segons el tipus indicat
+             
              var iniciSVG=llegendes.search("<"+centres[i][numColNomLlegendaMapa]+">")+centres[i][numColNomLlegendaMapa].length; // Inline SVG for HTML de https://materialdesignicons.com
              var finalSVG=llegendes.search("</"+centres[i][numColNomLlegendaMapa]+">");
              var cadenaSVG=llegendes.substring(iniciSVG,finalSVG); 
              
              var vertAnchor=pixelsIco*escalaIco/2;
-             if (cadenaSVG.search("marcador")!=-1) {
-                vertAnchor= pixelsIco*escalaIco;
+             if (cadenaSVG.search("marcador")!=-1) {  // Si inclou la paraula "marcador"
+                vertAnchor = pixelsIco*escalaIco;
              }
              
              var pos1=cadenaSVG.search("d=")+3;   
              var pos2=cadenaSVG.search(" />")-1;
-             var path =cadenaSVG.substring(pos1,pos2); 
+             var path=cadenaSVG.substring(pos1,pos2); 
+             
+             if (path.length<3) { // Si no es troba la definició a la plantilla
+               if(Marcador_defecte_forma!="") { // Si s'ha indicat el marcador per defecte
+             
+                 iniciSVG=llegendes.search("<"+Marcador_defecte_forma+">")+Marcador_defecte_forma.length;
+                 finalSVG=llegendes.search("</"+Marcador_defecte_forma+">");
+                 cadenaSVG=llegendes.substring(iniciSVG,finalSVG);
+                 
+                 var vertAnchor=pixelsIco*escalaIco/2;
+                 if (cadenaSVG.search("marcador")!=-1) {
+                    vertAnchor= pixelsIco*escalaIco;
+                 }
+                              
+                 var pos1=cadenaSVG.search("d=")+3;   
+                 var pos2=cadenaSVG.search(" />")-1;
+                 var path =cadenaSVG.substring(pos1,pos2);
+                 
+                 if (path.length<3) { // Si s'ha indicat marcador per defecte però no es troba la definició a la plantilla
+                   path=path_defecte;                           
+                   vertAnchor = pixelsIco*escalaIco;
+                 }                                  
+               } else { // Si no s'ha indicat marcador per defecte      */            
+                 path=path_defecte;                           
+                 vertAnchor = pixelsIco*escalaIco;
+               }
+           }
+             
+             
              
              cadenaSVG='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 '+pixelsIco+' '+pixelsIco+'"><path d="'+path+'" fill="'+iColors[i]+'" /></svg>';
              
@@ -2007,15 +2169,14 @@ function creaMarcadors(finalArray){ // Construeix targes i mostra marcadors en e
              } );
 
              var iconaLlegenda ="<input type='checkbox' checked id='ico_"+centres[i][numColNomLlegendaMapa]+"' value='"+centres[i][numColNomLlegendaMapa]+"' style=\"vertical-align:-3px\" onchange=\"desactivaCapa('ico_"+centres[i][numColNomLlegendaMapa]+"')\"/><svg style='height:24px; width:24px; vertical-align:-4px'><path fill='"+iColors[i]+"' d='"+path+"' stroke='black' stroke-width='0' /></svg>"; 
-             //var iconaLlegenda ="<input type='checkbox' checked id='ico_"+centres[i][numColNomLlegendaMapa]+"' value='"+centres[i][numColNomLlegendaMapa]+"' onchange=\"desactivaCapa('ico_"+centres[i][numColNomLlegendaMapa]+"')\"/><svg style='height:40px; width:40px'><path fill='"+iColors[i]+"' d='"+path+"' stroke='black' stroke-width='0' transform='scale(1.5,1.5)'/></svg>"; 
              
-             iconaDefinida=true;             
+             iconaDefinida=true;                
         }
       }
       
       if (!iconaDefinida) {
-        if(Marcador_defecte_forma!="") { // Icona per defecte definida per l'usuari
-        
+        if(Marcador_defecte_forma!="") { // Icona per defecte definida per l'usuari 
+                     
              var iniciSVG=llegendes.search("<"+Marcador_defecte_forma+">")+Marcador_defecte_forma.length; // Inline SVG for HTML de https://materialdesignicons.com
              var finalSVG=llegendes.search("</"+Marcador_defecte_forma+">");
              var cadenaSVG=llegendes.substring(iniciSVG,finalSVG);
@@ -2024,7 +2185,7 @@ function creaMarcadors(finalArray){ // Construeix targes i mostra marcadors en e
              if (cadenaSVG.search("marcador")!=-1) {
                 vertAnchor= pixelsIco*escalaIco;
              }
-             
+                          
              var pos1=cadenaSVG.search("d=")+3;   
              var pos2=cadenaSVG.search(" />")-1;
              var path =cadenaSVG.substring(pos1,pos2); 
@@ -2039,16 +2200,13 @@ function creaMarcadors(finalArray){ // Construeix targes i mostra marcadors en e
              } );
                  
              var iconaLlegenda ="<input type='checkbox' checked id='ico_"+centres[i][numColNomLlegendaMapa]+"' value='"+centres[i][numColNomLlegendaMapa]+"' style=\"vertical-align:-3px\" onchange=\"desactivaCapa('ico_"+centres[i][numColNomLlegendaMapa]+"')\"/><svg style='height:24px; width:24px; vertical-align:-4px'><path fill='"+iColors[i]+"' d='"+path+"' stroke='black' stroke-width='0' /></svg>";
-             //var iconaLlegenda ="<input type='checkbox' checked id='ico_"+centres[i][numColNomLlegendaMapa]+"' value='"+centres[i][numColNomLlegendaMapa]+"' onchange=\"desactivaCapa('ico_"+centres[i][numColNomLlegendaMapa]+"')\"/><svg style='height:40px; width:40px'><path fill='"+iColors[i]+"' d='"+path+"' stroke='black' stroke-width='0' transform='scale(1.5,1.5)'/></svg>";
-             
-             
+                          
              if(numColNomLlegendaMapa!=-1) { // Per tal que mostri el marcador per defecte definit per l'usuari en la llegenda
                centres[i][numColNomLlegendaMapa]=Marcador_defecte_forma;
-             }             
+             } 
              
         } else {  // Definició de la icona per defecte dels marcadors  
-             path="M12,11.5A2.5,2.5 0 0,1 9.5,9A2.5,2.5 0 0,1 12,6.5A2.5,2.5 0 0,1 14.5,9A2.5,2.5 0 0,1 12,11.5M12,2A7,7 0 0,0 5,9C5,14.25 12,22 12,22C12,22 19,14.25 19,9A7,7 0 0,0 12,2Z";                   
-             cadenaSVG='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 '+pixelsIco+' '+pixelsIco+'"><path d="'+path+'" fill="'+iColors[i]+'" /></svg>';
+             cadenaSVG='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 '+pixelsIco+' '+pixelsIco+'"><path d="'+path_defecte+'" fill="'+iColors[i]+'" /></svg>';
              var myIconUrl = encodeURI("data:image/svg+xml," + cadenaSVG).replace('#','%23');             
              var icon = L.icon( {
                   iconUrl: myIconUrl,
@@ -2056,38 +2214,64 @@ function creaMarcadors(finalArray){ // Construeix targes i mostra marcadors en e
                   iconAnchor: [pixelsIco*escalaIco/2, pixelsIco*escalaIco]
              } );
         }        
-      }
-             
+      }      
+      
       marcadors[i]=L.marker(locations[i],{icon:icon});
       marcadors[i].bindPopup(contentString);
           
-      if (Clusters=='S'){  
+      if (Mostra_clusters=='S'){  
          markers.addLayer(marcadors[i]);         
       } else {  
          marcadors[i].addTo(map);
          oms.addMarker(marcadors[i]);
-      }       
+      }
 
-      //construcció dels elements de la llegenda si té posició 
+      //construcció dels elements de la llegenda si té posició       
+      
       if (Posicio_llegenda.toLowerCase()!="sense_llegenda"){
         if (numColNomLlegendaMapa!=-1){
            if (llgd.indexOf(centres[i][numColNomLlegendaMapa])==-1){
               llgd +="#$#"+centres[i][numColNomLlegendaMapa];
-              contingutLlegenda+="<div style='width:150px; margin: 5px; vertical-align:middle; horizontal-align:left'>"+iconaLlegenda+centres[i][numColNomLlegendaMapa]+"</div>";
-              //contingutLlegenda+="<center><div style='width:60px; margin: 5px; vertical-align:middle'>"+iconaLlegenda+centres[i][numColNomLlegendaMapa]+"</div></center>";
+              filaLlegenda[numLlegendes]="<div style='width:150px; margin: 5px; vertical-align:middle; horizontal-align:left'>"+iconaLlegenda+centres[i][numColNomLlegendaMapa]+"</div>";
+              numLlegendes++;
               // Array Checkboxes
               if (iniciantMapa) {
                  arrayCheckboxesId[numCheckboxes]=centres[i][numColNomLlegendaMapa];
                  arrayCheckboxesValue[numCheckboxes]=true;
-                 console.log(numCheckboxes,arrayCheckboxesId[numCheckboxes],arrayCheckboxesValue[numCheckboxes]);
                  numCheckboxes++;
               }
-
            }
-        }
+        }        
       }      
-   })(k);   
+   }//)(k);      
+   
    map.addLayer(markers);
+   
+        if(numLlegendes==0) {
+             cadenaSVG='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 '+pixelsIco+' '+pixelsIco+'"><path d="'+path_defecte+'" fill="'+Marcador_defecte_color+'" /></svg>';
+             //console.log(cadenaSVG);
+             var myIconUrl = encodeURI("data:image/svg+xml," + cadenaSVG).replace('#','%23');             
+             var icon = L.icon( {
+                  iconUrl: myIconUrl,
+                  iconSize: [pixelsIco*escalaIco, pixelsIco*escalaIco],
+                  iconAnchor: [pixelsIco*escalaIco/2, pixelsIco*escalaIco]
+             } );
+             var iconaLlegenda ="<input type='checkbox' checked id='marcadors' value='Marcadors' style=\"vertical-align:-3px\" onchange=\"desactivaCapa('marcadors')\"/><svg style='height:24px; width:24px; vertical-align:-4px'><path fill='"+Marcador_defecte_color+"' d='"+path_defecte+"' stroke='black' stroke-width='0' /></svg>";         
+             numLlegendes=1;
+             filaLlegenda[0]="<div style='width:150px; margin: 5px; vertical-align:middle; horizontal-align:left'>"+iconaLlegenda+"Marcadors</div>";                
+        }   
+   
+   filaLlegenda.sort(function (a,b){
+       return naturalSort(a,b);
+   });   
+   
+   for(i=0;i<numLlegendes;i++){   
+      contingutLlegenda+=filaLlegenda[i];
+   }
+   
+   if(Casella_poligons=='S'||Casella_clusters=='S'||Casella_densitat=='S') {
+     contingutLlegenda+="<hr/>";
+   }
    
   //poligons
   
@@ -2151,7 +2335,9 @@ function creaMarcadors(finalArray){ // Construeix targes i mostra marcadors en e
                      strokeWidth: 2,
                      strokeOpacity: 0.8
                   });
-                  poligons[p].addTo(map);                                         
+                  if(checkboxPoligonsValue) {
+                    poligons[p].addTo(map); 
+                  }
                } 
             }
           }
@@ -2159,11 +2345,26 @@ function creaMarcadors(finalArray){ // Construeix targes i mostra marcadors en e
           llgd +="#$#Polígons";    
           path="M17,15.7V13H19V17L10,21L3,14L7,5H11V7H8.3L5.4,13.6L10.4,18.6L17,15.7M22,5V7H19V10H17V7H14V5H17V2H19V5H22Z";
           var iconaLlegenda ="<svg style='height:24px; width:24px; vertical-align:-4px'><path fill='#CC00CC' d='"+path+"' stroke='black' stroke-width='0' /></svg>"; 
-          contingutLlegenda+="<div style='width:150px; margin: 5px; vertical-align:middle; horizontal-align:left'><input type='checkbox' checked id='poligons' style='vertical-align:-3px' onchange=\"desactivaCapa(this.id)\"/>"+iconaLlegenda+"Polígons</div>";               
+          if (Casella_poligons=='S') {
+            contingutLlegenda+="<div style='width:150px; margin: 5px; vertical-align:middle; horizontal-align:left'><input type='checkbox' id='poligons' style='vertical-align:-3px' onchange=\"desactivaCapa(this.id)\"/>"+iconaLlegenda+"Polígons</div>";               
+          }
        }
+    } 
+    
+    llgd +="#$#Clusters";    
+    path="M16,12V4H17V2H7V4H8V12L6,14V16H11.2V22H12.8V16H18V14L16,12Z";
+    var iconaLlegenda ="<svg style='height:24px; width:24px; vertical-align:-4px'><path fill='#00FF00' d='"+path+"' stroke='black' stroke-width='0' /></svg>"; 
+    if (Casella_clusters=='S') {
+      contingutLlegenda+="<div style='width:150px; margin: 5px; vertical-align:middle; horizontal-align:left'><input type='checkbox' id='clusters' style='vertical-align:-3px' onchange=\"desactivaClusters(this.id)\"/>"+iconaLlegenda+"Clusters</div>";    
     }
-   
-  
+    
+    llgd +="#$#heatmap";    
+    path="M11.71,19C9.93,19 8.5,17.59 8.5,15.86C8.5,14.24 9.53,13.1 11.3,12.74C13.07,12.38 14.9,11.53 15.92,10.16C16.31,11.45 16.5,12.81 16.5,14.2C16.5,16.84 14.36,19 11.71,19M13.5,0.67C13.5,0.67 14.24,3.32 14.24,5.47C14.24,7.53 12.89,9.2 10.83,9.2C8.76,9.2 7.2,7.53 7.2,5.47L7.23,5.1C5.21,7.5 4,10.61 4,14A8,8 0 0,0 12,22A8,8 0 0,0 20,14C20,8.6 17.41,3.8 13.5,0.67Z";
+    var iconaLlegenda ="<svg style='height:24px; width:24px; vertical-align:-4px'><path fill='#FF0000' d='"+path+"' stroke='black' stroke-width='0' /></svg>"; 
+    if (Casella_densitat=='S') {
+      contingutLlegenda+="<div style='width:150px; margin: 5px; vertical-align:middle; horizontal-align:left'><input type='checkbox' id='heatmap' style='vertical-align:-3px' onchange=\"desactivaHeatMap(this.id)\"/>"+iconaLlegenda+"Densitat</div>";    
+    }
+                            
 //construcció de la llegenda si té posició 
  if (Posicio_llegenda.toLowerCase()!="sense_llegenda" && contingutLlegenda!=""){    
           var pos_lle=[["dalt_esquerra","topleft"],["dalt_centre","topright"],["dalt_dreta","topleft"],["esquerra_dalt","topleft"],["esquerra_centre","bottomleft"],["esquerra_baix","bottomleft"],["baix_esquerra","bottomleft"],["dreta_dalt","topleft"],["dreta_centre","bottomright"],["dreta_baix","bottomright"],["baix_centre","bottomright"],["baix_dreta","bottomright"]];
@@ -2172,13 +2373,22 @@ function creaMarcadors(finalArray){ // Construeix targes i mostra marcadors en e
                   posicio=pos_lle[g][1];         
                }
           }      
-          var legend = L.control({position: posicio}); 
+          var legend = L.control({position: posicio});
           legend.onAdd = function (map) { 
               map.legend = this;
               var div = L.DomUtil.create('div', 'laLlegenda'); 
-              div.innerHTML= contingutLlegenda;
+              div.innerHTML= contingutLlegenda;              
+              // Disable dragging when user's cursor enters the element
+              div.addEventListener('mouseover', function () {
+              map.dragging.disable();
+              });              
+              // Re-enable dragging when user's cursor leaves the element
+              div.addEventListener('mouseout', function () {
+              map.dragging.enable();
+              });
               return div;
           }; 
+
        if (iniciantMapa) {
            legend.addTo(map); 
            $(".laLlegenda").attr('id', 'llegendaMapa');           
@@ -2186,10 +2396,8 @@ function creaMarcadors(finalArray){ // Construeix targes i mostra marcadors en e
            $("#llegendaMapa").html(contingutLlegenda);
        }            
   } 
-  
 
   
-
 // Visualització d'errades o omissió de dades de latitud i longitud
    if(numSenseLloc>0){
        if (Visualitzar_errors=="S") {
@@ -2198,7 +2406,6 @@ function creaMarcadors(finalArray){ // Construeix targes i mostra marcadors en e
    }
       
 // Determinació dels límits del mapa 
-
    if (marcadors.length>0) {
      bounds=L.latLngBounds(marcadors[0].getLatLng(), marcadors[0].getLatLng());
      for (var l = 0; l < marcadors.length; l++) {
@@ -2261,60 +2468,183 @@ function creaMarcadors(finalArray){ // Construeix targes i mostra marcadors en e
       $("#llegendaMapa").css("display","block");     
    }
    
+   // Mapa de densitat   
+   creaHeatMap();     
+   
    // Recordar estat checkboxes
    for(k=0;k<numCheckboxes;k++) {
       var mrk="ico_"+arrayCheckboxesId[k];
       $("[id='"+mrk+"']").prop("checked",arrayCheckboxesValue[k]);
       mostraCapa(mrk);
    }
-   $("[id='poligons']").prop("checked",checkboxPoligonsValue);   
+   $("[id='poligons']").prop("checked",checkboxPoligonsValue);
+   $("[id='clusters']").prop("checked",checkboxClustersValue);
+   $("[id='heatmap']").prop("checked",checkboxHeatmapValue);
+   $("[id='marcadors']").prop("checked",checkboxMarcadorsValue);
    
    // Tancament de la finestra d'espera   
    $('#imgtemp').css("display","none");           
-   //$("*").css("cursor","default");           
+   //$("*").css("cursor","default");     
+  
+   if (Mostra_densitat=='S') {
+     map.addLayer(heat);
+     desactivaMarcadors();
+   }
 }
 
 function desactivaCapa(ico){
-  if (ico!="poligons"){  
-    var iconaEscollida=0;    
-    for(j=0;j<numCheckboxes;j++) {
-        if("ico_"+arrayCheckboxesId[j]==ico) {
-           iconaEscollida=j;
-       }      
-    }  
-    arrayCheckboxesValue[iconaEscollida]=!arrayCheckboxesValue[iconaEscollida];
-    console.log("ico_"+arrayCheckboxesId[iconaEscollida],arrayCheckboxesValue[iconaEscollida]);
-  } else {
-    checkboxPoligonsValue=!checkboxPoligonsValue;
-    console.log("poligons",checkboxPoligonsValue);
-  }
-  mostraCapa(ico);
+    if (ico=="poligons"){
+        checkboxPoligonsValue=!checkboxPoligonsValue;
+    } else {
+         if (ico=="marcadors"){
+            checkboxMarcadorsValue=!checkboxMarcadorsValue; 
+         } else {
+                    var iconaEscollida=0;
+                    for(j=0;j<numCheckboxes;j++) { 
+                        if("ico_"+arrayCheckboxesId[j]==ico) { 
+                            iconaEscollida=j; 
+                        }
+                    }
+                    arrayCheckboxesValue[iconaEscollida]=!arrayCheckboxesValue[iconaEscollida];
+                 }
+    } 
+    mostraCapa(ico);
 }
 
-function mostraCapa(ico) {
-   if (ico!="poligons"){          
-    for (var i = 0; i < marcadors.length; i++) {
+function desactivaClusters(ico){
+    if($("#clusters").is(":checked")){
+        checkboxClustersValue=true;
+        Mostra_clusters='S';
+        
+        for(i=0;i<marcadors.length;i++) {
+          map.removeLayer(marcadors[i]);
+          oms.removeMarker(marcadors[i]);             
+        }     
+                
+        for (var i = 0; i < marcadors.length; i++) {
+          var mrk="ico_"+centres[i][numColNomLlegendaMapa];      
+          if ($("[id='"+mrk+"']").is(":checked")) {  
+              markers.addLayer(marcadors[i]);      
+          } else { 
+              markers.removeLayer(marcadors[i]);       
+          }
+        }
+
+    } else {
+        checkboxClustersValue=false;
+        Mostra_clusters='N';  
+        for (var i = 0; i < marcadors.length; i++) {
+            markers.removeLayer(marcadors[i]);
+        }  
+        oms = new OverlappingMarkerSpiderfier(map,{nearbyDistance:1});
+        oms.addListener('spiderfy', function(markers) {
+        map.closePopup();
+        });
+        for (var i = 0; i < marcadors.length; i++) {        
+            marcadors[i].addTo(map);
+            oms.addMarker(marcadors[i]);
+        }
+    }
+}
+
+function activaMarcadors() {
+      for (var i = 0; i < marcadors.length; i++) {
       var mrk="ico_"+centres[i][numColNomLlegendaMapa];
-      if (mrk==ico){
+      
          if ($("[id='"+mrk+"']").is(":checked")) {
-             if (Clusters=='S'){  
-                console.log("Marcadors");
+             if (Mostra_clusters=='S'){  
                 markers.addLayer(marcadors[i]);         
              } else {  
                 marcadors[i].addTo(map);
                 oms.addMarker(marcadors[i]);
              } 
         } else {
-             if (Clusters=='S'){  
+             if (Mostra_clusters=='S'){  
+                markers.removeLayer(marcadors[i]);         
+             } else {  
+                map.removeLayer(marcadors[i]);
+                oms.removeMarker(marcadors[i]);
+             }           
+      }
+    }
+}
+
+function desactivaMarcadors() {
+      for (var i = 0; i < marcadors.length; i++) {
+             if (Mostra_clusters=='S'){  
                 markers.removeLayer(marcadors[i]);         
              } else {  
                 map.removeLayer(marcadors[i]);
                 oms.removeMarker(marcadors[i]);
              } 
-        }  
-      }
-    } 
+        }
+}
+
+function creaHeatMap() {
+    heat = L.heatLayer(locations,{
+            radius: 15,
+            blur: 15, 
+            maxZoom: 10,
+            max: 0.4,
+            gradient: {
+                        0.0: 'blueviolet',
+                        0.1: 'deepskyblue',
+                        0.2: 'dodgerblue',
+                        0.3: 'aquamarine',
+                        0.4: 'green',
+                        0.5: 'lime',
+                        0.6: 'yellow',
+                        0.7: 'lightcoral',
+                        0.8: 'orange',
+                        0.9: 'orangered',
+                        1.0: 'red',
+                    }
+            });
+}
+
+function desactivaHeatMap(ico){
+  if($("#heatmap").is(":checked")){
+    checkboxHeatmapValue=true;
+    Mostra_densitat='S';    
+    map.addLayer(heat);
+    desactivaMarcadors();
+
   } else {
+    checkboxHeatmapValue=false;
+    Mostra_densitat='N';
+    map.removeLayer(heat);
+    activaMarcadors();
+  }  
+}
+
+function mostraCapa(ico) {
+   if (ico!="poligons"){
+      for (var i = 0; i < marcadors.length; i++) {
+        if (ico=="marcadors") {
+             var mrk=ico;
+        } else {
+             var mrk="ico_"+centres[i][numColNomLlegendaMapa];
+        }        
+        
+        if (mrk==ico){
+           if ($("[id='"+mrk+"']").is(":checked")) {
+               if (Mostra_clusters=='S'){  
+                  markers.addLayer(marcadors[i]);         
+               } else {  
+                  marcadors[i].addTo(map);
+                  oms.addMarker(marcadors[i]);
+               } 
+          } else {
+               if (Mostra_clusters=='S'){  
+                  markers.removeLayer(marcadors[i]);         
+               } else {  
+                  map.removeLayer(marcadors[i]);
+                  oms.removeMarker(marcadors[i]);
+               } 
+          }  
+        }
+      }        
+  } else {     
     for (var i = 3; i < poligons.length; i++) {
       if($("#poligons").is(":checked")){
            poligons[i].addTo(map);    
@@ -2331,7 +2661,7 @@ function limitsMapa(){  // Actualitza el mapa segons els límits establerts
       if(map.getZoom()>Zoom_max) {
          map.setZoom(Zoom_max);
       }
-    }     
+    }  
 }
 
 function centrar(){  // Actualitza el mapa segons els filtres actius en mode zoom manual 
@@ -2342,6 +2672,7 @@ function centrar(){  // Actualitza el mapa segons els filtres actius en mode zoo
 }
 
 function aplica_plantilla(plantilla,row_dad,row_cap){
+
   if (row_dad==undefined){
     alert("No hi ha dades al registre");
     return;
@@ -2434,6 +2765,316 @@ function carousel(nomCar,imgCar){
 }
 
 
+
+//HistoryMap
+
+function obreHistoria(pestanya,nomColCerca,valCerca){
+  //$('*').css('cursor','wait');
+  $('#imgtemp').css('display','block');
+  $('#imgtemp').css("visibility","visible");  
+  //valCerca=valCerca.replace(new RegExp("′", 'g'),"'"); 
+  var id=$("#idFullCalcul").val();
+  var colconfig=$("#colconfig").val();      
+  var fltr=$("#fltr").val();   
+  //google.script.run.withSuccessHandler(onHistoryMap).recollidaDadesSub(pestanya,nomColCerca,valCerca,id,colconfig);
+  var valors=[pestanya,nomColCerca,valCerca,id,colconfig];
+  //carregaDades('withSuccessHandler',valors);  
+  carregaDades('obreHistoria',valors);   
+}
+
+
+
+
+
+function onHistoryMap(row_sub){
+  console.log(row_sub);
+  if (row_sub.length<4){
+    alert("No hi ha dades a representar d'aquest fet.")
+    return;
+  }
+
+  var mpas=false;
+  var historia=''; //informació de la columna lateral dreta
+  var titolFinestra="<h3 style='text-align:center'>Mapa del recurregut històric de: "+row_sub[3][2]+"</h3>";  
+  var coord="[";
+  for (i=3;i<row_sub.length;i++){
+    coord +="["+row_sub[i][7]+","+row_sub[i][8]+"],";
+    if (mpas==false){
+      mpas=true;
+      historia +="<h3>"+row_sub[i][2]+"</h3>";
+      historia +="<img src='"+row_sub[i][9]+"' style='height:300px;border: 1px solid grey; display: block; margin: 0px auto; box-shadow: 10px 15px #ab9680'>"; 
+    }
+    historia +="<div style='margin-top:20px'>"+row_sub[i][6]+"</div>";   
+  };
+
+  if( coord.length>2){
+     coord=coord.substr(0,coord.length-1);     
+  }
+  coord +="]";
+  var coordenades=JSON.parse(coord);
+
+  //console.log(coordenades.length);
+
+  if(map2!=undefined) {
+    map2.remove();
+  }
+
+  map2 = L.map('leaflet', {
+  });
+
+  proveidor=L.gridLayer.googleMutant({ type: 'roadmap' }).addTo(map);         
+  map2.addLayer(proveidor); 
+
+  //afegir ruta
+  var polyline = new L.Polyline(
+  coordenades, 
+  {
+    color: 'green',
+    weight: 3,
+    opacity: 0.5
+  }).addTo(map2);
+
+  $('#historyMap').on('shown.bs.modal', function(){
+    setTimeout(function() {
+      map2.invalidateSize();              
+      if (coordenades.length>0){
+        map2.fitBounds(polyline.getBounds());
+      }
+    }, 2);
+   });
+
+
+  //afegir punts
+  var icon = L.icon({
+    iconUrl: 'http://blocs.xtec.cat/llambordes/files/2018/09/triangleBlauS.png',
+    //shadowUrl: 'leaf-shadow.png',
+    iconSize:     [34, 45], // size of the icon
+    //shadowSize:   [50, 64], // size of the shadow
+    iconAnchor:   [17, 45], // point of the icon which will correspond to marker's location
+    //shadowAnchor: [4, 62],  // the same for the shadow
+    popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+  });
+
+  $('#historyMap').on('shown.bs.modal', function(){
+    setTimeout(function() {
+         for (c=0;c<coordenades.length;c++){
+         //*
+        var divHis ="<div style='padding: 0px 5%'>";
+              divHis +="<div><h4>Esdeveniment: </h4></div>";                
+              divHis +="<div><strong>"+row_sub[c+3][5]+"</strong></div>";        
+              divHis +="<img src='"+row_sub[c+3][9]+"' style='width:75px;'>";
+              divHis +="<div style='margin-top:20px'>"+row_sub[c+3][6]+"</div>";
+              divHis +="<div>Data inici: "+row_sub[c+3][3]+"</div>";            
+            divHis +="</div>";
+         /*/
+         //var plan="<div style='padding: 0px 5%'><div><h4>Esdeveniment:</h4></div><div><strong>{{Persona}}</strong></div><img src='{{Imatge}}' style='width:75px;'><div style='margin-top:20px'>{{Descripcio}}</div><div>Data inici: {{Datainici}}</div></div>";
+         var plan="<div style='padding: 0px 5%'><div><h4>Esdeveniment: </h4></div><div><strong>Naixement</strong></div><img src='http://blocs.xtec.cat/llambordes/files/2018/09/triangleBlauS.png' style='width:75px;'><div style='margin-top:20px'>Va nèixer a Alcalá de la Selva (Terol) el 14 de juliol de 1900</div><div>Data inici: 14/07/1900</div></div>";
+         var divHis=aplica_plantilla(plan,row_sub[c+3],row_sub);         
+         var divHis="<div style='padding: 0px 5%'><div><h4>Esdeveniment: </h4></div><div><strong>Naixement</strong></div><img src='http://blocs.xtec.cat/llambordes/files/2018/09/triangleBlauS.png' style='width:75px;'><div style='margin-top:20px'>Va nèixer a Alcalá de la Selva (Terol) el 14 de juliol de 1900</div><div>Data inici: 14/07/1900</div></div>";
+         //*/
+         //console.log(divHis);                  
+        //setTimeout(function() {            
+          marker[c]=L.marker(coordenades[c],{icon:icon},{title:"marker_3"}).addTo(map2);
+          marker[c].bindPopup(divHis); //si es vol obert .openPopup()    
+
+        //},500);
+      }
+    }, 2);
+  });
+  //final afegir punts
+
+  //obrir la targeta en funció de la posició del punter sobre la linia de temps
+  function markerFunction(id){
+    marker[id].openPopup();    
+  }
+
+  //afegir espai per la informació lateral tipus llegenda
+  var superposat = L.control({position: 'topright'}); 
+  superposat.onAdd = function (map2) { 
+    map2.legend = this;
+    var div = L.DomUtil.create('div', 'laSuperposicio'); 
+    return div;
+  }; 
+  superposat.addTo(map2); 
+
+  var numColDataIni=-1;
+  var numColDataFin=-1;
+
+  for (c=0;c<row_sub[0].length;c++) {
+    if (row_sub[1][c].toLowerCase().indexOf("dataini")>-1) {
+      var numColDataIni=c;
+    }   
+    if (row_sub[1][c].toLowerCase().indexOf("datafin")>-1) {
+      var numColDataFin=c;
+    }    
+    if (row_sub[1][c].toLowerCase().indexOf("titol")>-1) {
+      var numColTitol=c;
+    }       
+  }
+
+
+  if (numColDataIni==-1 || numColDataFin==-1){
+    $('#divTimeLine2').html("<div style='width:75%;border: 2px solid; background-color:#eaeaea;  box-shadow: 5px 10px #888888; display:block; margin: 0 auto'><p style='font-size:2rem; color:red; padding:10px;text-align:center'>No es pot representar cap linia de temps perquè no s'han trobat les columnes etiquetades amb els noms de dataIni i/o dataFin a la segona fila.</p></div>");
+
+  } else {
+    google.charts.load('current', {'packages':['timeline']});
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+      var container = document.getElementById('divTimeLine2');
+      var chart = new google.visualization.Timeline(container);
+      var dataTable = new google.visualization.DataTable();
+
+      dataTable.addColumn({ type: 'string', id: 'Position' });
+      dataTable.addColumn({ type: 'string', id: 'Esdeveniment' });
+      dataTable.addColumn({ type: 'date', id: 'Start' });
+      dataTable.addColumn({ type: 'date', id: 'End' });
+
+      var dades=[];
+      for (i=3;i<row_sub.length;i++){
+        etqTimeLine=row_sub[i][numColTitol];
+        dataIni=formatDate(row_sub[i][numColDataIni]);              
+        dataFin=formatDate(row_sub[i][numColDataFin]);              
+        dades[i-3] =["1",etqTimeLine,dataIni,dataFin];
+        //colors[i-3]='#cbb6'+i*10;
+      }
+      dataTable.addRows(dades)
+      
+      //*
+      var options = {
+        //colors: colors
+        timeline: { showRowLabels: false },
+        avoidOverlappingGridLines: false,
+        tooltip: {isHtml: true},
+        tooltip: { trigger: 'selection' }
+      };    
+
+
+      chart.draw(dataTable, options);
+      //chart.draw(dataTable);    
+
+      //per determinar quin és le pèriode de la linia del temps sobre la que esta el punter
+      google.visualization.events.addListener(chart, 'onmouseover', function(e) {
+        idMarkerSel=e["row"];
+      });
+
+      //per cridar a la targeta del mapa del peridoe clicat
+      google.visualization.events.addListener(chart, 'select', function(e) {
+        markerFunction(idMarkerSel);
+      });
+
+    }
+
+  /*
+    function myHandler(e){
+      console.log(e);
+        if(e.row != null){
+            $(".google-visualization-tooltip").html(dataTable.getValue(e.row,4)).css({width:"auto",height:"auto"});
+        }        
+    }
+  //*/  
+
+  }
+
+  $(".laSuperposicio").attr('id', 'Superposicio');           
+  $("#Superposicio").css('heigth','580px');   
+  $("#Superposicio").css('padding','0px 15px');       
+  $("#Superposicio").css('overflow-y','scroll');       
+  $("#Superposicio").css('box-shadow','-5px 0px rgb(0,0,0,0.2');
+  $("#Superposicio").html(historia); 
+
+
+  $("#msgTitol").html(titolFinestra);
+  $('#historyMap').modal('show'); 
+  $('#imgtemp').css('visibility','hidden');  
+
+}
+//Final historyMap
+
+
+
+
+
+//Inici timeLine
+function obreTimeLine(pestanya,nomColCerca,valCerca){
+  //$('*').css('cursor','wait');
+  $('#imgtemp').css('display','block');
+  $('#imgtemp').css("visibility","visible");  
+  //valCerca=valCerca.replace(new RegExp("′", 'g'),"'"); 
+  var id=$("#idFullCalcul").val();
+  var colconfig=$("#colconfig").val();      
+  var fltr=$("#fltr").val();   
+  //google.script.run.withSuccessHandler(onTimeLine).recollidaDadesSub(pestanya,nomColCerca,valCerca,id,colconfig);
+  var valors=[pestanya,nomColCerca,valCerca,id,colconfig];
+  carregaDades('recollidaDadesSub',valors);  
+  
+}
+
+
+function onTimeLine(row_sub){
+  for (c=0;c<row_sub[0].length;c++) {
+    if (row_sub[1][c].toLowerCase().indexOf("dataini")>-1) {
+      var numColDataIni=c;
+    }   
+    if (row_sub[1][c].toLowerCase().indexOf("datafin")>-1) {
+      var numColDataFin=c;
+    }    
+    if (row_sub[1][c].toLowerCase().indexOf("titol")>-1) {
+      var numColTitol=c;
+    }       
+  }
+  //console.log(row_sub);
+  var mpas=false;
+  var historia='';       
+
+  var titolFinestra="<h3>Línia del temps"+row_sub[3][2]+"</h3>";  
+  var coord="[";
+  for (i=3;i<row_sub.length;i++){
+    coord +="["+row_sub[i][7]+","+row_sub[i][8]+"],";
+    if (mpas==false){
+      mpas=true;
+      historia +="<h3>"+row_sub[i][2]+"</h3>";
+      historia +="<img src='"+row_sub[i][9]+"' style='height:300px; box-shadow:10px 15px;'>"; 
+    }
+    historia +="<div style='heigth:580px;padding; 0px 15px; overflow-y: scroll'>"+row_sub[i][6]+"</div>";   
+  };
+
+
+  google.charts.load('current', {'packages':['timeline']});
+  google.charts.setOnLoadCallback(drawChart);
+  function drawChart() {
+     var container = document.getElementById('divTimeLine');
+     var chart = new google.visualization.Timeline(container);
+     var dataTable = new google.visualization.DataTable();
+     dataTable.addColumn({ type: 'string', id: 'Position' });
+     dataTable.addColumn({ type: 'string', id: 'Esdeveniment' });
+     dataTable.addColumn({ type: 'date', id: 'Start' });
+     dataTable.addColumn({ type: 'date', id: 'End' });
+     var dades=[];
+     for (i=3;i<row_sub.length;i++){
+       dataIni=formatDate(row_sub[i][numColDataIni]);              
+       dataFin=formatDate(row_sub[i][numColDataFin]);              
+       dades[i-3] =["dades",row_sub[i][numColTitol],dataIni, dataFin];
+     }
+     dataTable.addRows(dades)
+     chart.draw(dataTable);
+  }
+
+    //*
+    $("#msgTitolTimeline").html(titolFinestra);
+    $('#timeLine').modal('show'); 
+    $('#imgtemp').css('visibility','hidden');  
+
+    /*/
+    $("#timeLine").draggable({
+      handle: ".modal-header"
+    });
+    //*/
+}
+//fin del timeLine
+
+
+
+
 function hexToRgb(hex) {
     var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
     return result ? {
@@ -2453,165 +3094,165 @@ function addslashes(str) {
   str=str.replace("\n","\\n");
   return str;
 }
-	
+  
 
 function getGeoLocation(direccio,i){
-		//alert (direccio);
-		geocoder = new google.maps.Geocoder();
-		geocoder.geocode( { 'address': direccio}, function(results, status) {
-			lat[i] = results[0].geometry.location.lat();
-			lon[i] = results[0].geometry.location.lng();
-			alert("Coordenades de l'adreça: "+direccio+"\n\nlatitud: "+lat[i]+"\nlongitud: "+lon[i]+"\n\n\nIntroduiu les coordenades al full de càlcul per poder representar les dades\n\n");			
-			return lat[i];
-		});
+    //alert (direccio);
+    geocoder = new google.maps.Geocoder();
+    geocoder.geocode( { 'address': direccio}, function(results, status) {
+      lat[i] = results[0].geometry.location.lat();
+      lon[i] = results[0].geometry.location.lng();
+      alert("Coordenades de l'adreça: "+direccio+"\n\nlatitud: "+lat[i]+"\nlongitud: "+lon[i]+"\n\n\nIntroduiu les coordenades al full de càlcul per poder representar les dades\n\n");     
+      return lat[i];
+    });
 }
 
 
 function centrar_avui () { 
-	x="document.location.href='#date="+avui+"';";		
-	document.location.reload();
-	//alert(2);
+  x="document.location.href='#date="+avui+"';";   
+  document.location.reload();
+  //alert(2);
 }
 
-	
+  
 function banda_amplada(valor) {
-	if (!valor) { 
-		z=ban_select.selectedIndex-1;
-		bandaTemps=z;
-	} else {
-		bandaTemps =bandaTemps+valor;
-		z= bandaTemps % 11; 
-	}
-	switch(z){
-	case 0:
-		tm.changeTimeIntervals([Timeline.DateTime.MILLISECOND,Timeline.DateTime.SECOND]);
-		break;	
-	case 1:
-		tm.changeTimeIntervals([Timeline.DateTime.SECOND,Timeline.DateTime.MINUTE]);
-		break;				
-	case 2:
-		tm.changeTimeIntervals([Timeline.DateTime.MINUTE,Timeline.DateTime.HOUR]);
-		break;	
-	case 3:
-		tm.changeTimeIntervals([Timeline.DateTime.HOUR,Timeline.DateTime.DAY]);
-		break;		
-	case 4:
-		tm.changeTimeIntervals([Timeline.DateTime.DAY,Timeline.DateTime.WEEK]);
-		break;			
-	case 5:
-		tm.changeTimeIntervals([Timeline.DateTime.WEEK,Timeline.DateTime.MONTH]);
-		break;
-	case 6:
-		tm.changeTimeIntervals([Timeline.DateTime.MONTH,Timeline.DateTime.YEAR]);
-		break;
-	case 7:
-		tm.changeTimeIntervals([Timeline.DateTime.YEAR,Timeline.DateTime.DECADE]);
-		break;
-	case 8:
-		tm.changeTimeIntervals([Timeline.DateTime.DECADE,Timeline.DateTime.CENTURY]);
-		break;		
-	case 9:
-		tm.changeTimeIntervals([Timeline.DateTime.CENTURY,Timeline.DateTime.MILLENNIUM]);
-		break;
-	default:
-		if (valor > 0) {
-			alert("Ha arribat al límit superior: "+banda[z] );
-		} else {
-			alert("Ha arribat al límit inferior: "+banda[z+1] );
-		}
-		bandaTemps -=valor;
-	}
+  if (!valor) { 
+    z=ban_select.selectedIndex-1;
+    bandaTemps=z;
+  } else {
+    bandaTemps =bandaTemps+valor;
+    z= bandaTemps % 11; 
+  }
+  switch(z){
+  case 0:
+    tm.changeTimeIntervals([Timeline.DateTime.MILLISECOND,Timeline.DateTime.SECOND]);
+    break;  
+  case 1:
+    tm.changeTimeIntervals([Timeline.DateTime.SECOND,Timeline.DateTime.MINUTE]);
+    break;        
+  case 2:
+    tm.changeTimeIntervals([Timeline.DateTime.MINUTE,Timeline.DateTime.HOUR]);
+    break;  
+  case 3:
+    tm.changeTimeIntervals([Timeline.DateTime.HOUR,Timeline.DateTime.DAY]);
+    break;    
+  case 4:
+    tm.changeTimeIntervals([Timeline.DateTime.DAY,Timeline.DateTime.WEEK]);
+    break;      
+  case 5:
+    tm.changeTimeIntervals([Timeline.DateTime.WEEK,Timeline.DateTime.MONTH]);
+    break;
+  case 6:
+    tm.changeTimeIntervals([Timeline.DateTime.MONTH,Timeline.DateTime.YEAR]);
+    break;
+  case 7:
+    tm.changeTimeIntervals([Timeline.DateTime.YEAR,Timeline.DateTime.DECADE]);
+    break;
+  case 8:
+    tm.changeTimeIntervals([Timeline.DateTime.DECADE,Timeline.DateTime.CENTURY]);
+    break;    
+  case 9:
+    tm.changeTimeIntervals([Timeline.DateTime.CENTURY,Timeline.DateTime.MILLENNIUM]);
+    break;
+  default:
+    if (valor > 0) {
+      alert("Ha arribat al límit superior: "+banda[z] );
+    } else {
+      alert("Ha arribat al límit inferior: "+banda[z+1] );
+    }
+    bandaTemps -=valor;
+  }
 }
 
 
 //modificar l'alçada de la línia del temps
 function  global_alçada (valor) {
-	var divHeight;
-	var obj = document.getElementById('timelinecontainer');
-	if (obj.offsetHeight) {timelinecontainer_alçada=obj.offsetHeight;} else if(obj.style.pixelHeight){timelinecontainer_alçada=obj.style.pixelHeight;}
-	timelinecontainer_alçada +=valor;
-    timelinecontainer.style.height =timelinecontainer_alçada+"px";		
-	
-	var divHeight;
-	var obj = document.getElementById('timeline');
-	if (obj.offsetHeight) {timeline_alçada=obj.offsetHeight;} else if(obj.style.pixelHeight){timeline_alçada=obj.style.pixelHeight;}	
-	timeline_alçada +=valor;
-	timeline.style.height =timeline_alçada+"px";
-	
-	
-	var divTop;
-	var obj = document.getElementById('mapa_mes_alçada');
-	if (obj.offsetTop) {obj_top=obj.offsetTop;} else if(obj.style.pixelTop){obj_top=obj.style.pixelTop;}	
-	obj_top +=valor;
-	mapa_mes_alçada.style.top =obj_top+"px";
+  var divHeight;
+  var obj = document.getElementById('timelinecontainer');
+  if (obj.offsetHeight) {timelinecontainer_alçada=obj.offsetHeight;} else if(obj.style.pixelHeight){timelinecontainer_alçada=obj.style.pixelHeight;}
+  timelinecontainer_alçada +=valor;
+    timelinecontainer.style.height =timelinecontainer_alçada+"px";    
+  
+  var divHeight;
+  var obj = document.getElementById('timeline');
+  if (obj.offsetHeight) {timeline_alçada=obj.offsetHeight;} else if(obj.style.pixelHeight){timeline_alçada=obj.style.pixelHeight;}  
+  timeline_alçada +=valor;
+  timeline.style.height =timeline_alçada+"px";
+  
+  
+  var divTop;
+  var obj = document.getElementById('mapa_mes_alçada');
+  if (obj.offsetTop) {obj_top=obj.offsetTop;} else if(obj.style.pixelTop){obj_top=obj.style.pixelTop;}  
+  obj_top +=valor;
+  mapa_mes_alçada.style.top =obj_top+"px";
 
-	
-	var divTop;
-	var obj = document.getElementById('mapa_menys_alçada');
-	if (obj.offsetTop) {obj_top=obj.offsetTop;} else if(obj.style.pixelTop){obj_top=obj.style.pixelTop;}	
-	obj_top +=valor;
-	mapa_menys_alçada.style.top =obj_top+"px";
+  
+  var divTop;
+  var obj = document.getElementById('mapa_menys_alçada');
+  if (obj.offsetTop) {obj_top=obj.offsetTop;} else if(obj.style.pixelTop){obj_top=obj.style.pixelTop;}  
+  obj_top +=valor;
+  mapa_menys_alçada.style.top =obj_top+"px";
 
-	banda_amplada(0);
+  banda_amplada(0);
 }
 
 
 //modificar l'alçada del mapa
 function  mapa_alçada (valor) {
-	var divHeight;
-	var obj = document.getElementById('map');
-	if (obj.offsetHeight) {map_alçada=obj.offsetHeight;} else if(obj.style.pixelHeight){map_alçada=obj.style.pixelHeight;}
-	map_alçada +=valor;
-    map.style.height =map_alçada+"px";		
-	
-	var divHeight;
-	var obj = document.getElementById('mapcontainer');
-	if (obj.offsetHeight) {mapcontainer_alçada=obj.offsetHeight;} else if(obj.style.pixelHeight){mapcontainer_alçada=obj.style.pixelHeight;}	
-	mapcontainer_alçada +=valor;
-	mapcontainer.style.height =mapcontainer_alçada+"px";
-	
+  var divHeight;
+  var obj = document.getElementById('map');
+  if (obj.offsetHeight) {map_alçada=obj.offsetHeight;} else if(obj.style.pixelHeight){map_alçada=obj.style.pixelHeight;}
+  map_alçada +=valor;
+    map.style.height =map_alçada+"px";    
+  
+  var divHeight;
+  var obj = document.getElementById('mapcontainer');
+  if (obj.offsetHeight) {mapcontainer_alçada=obj.offsetHeight;} else if(obj.style.pixelHeight){mapcontainer_alçada=obj.style.pixelHeight;}  
+  mapcontainer_alçada +=valor;
+  mapcontainer.style.height =mapcontainer_alçada+"px";
+  
 }
 
 
 function creaTimeMap(finalArray){
     inici=[]; fin=[]; titol=[]; titol_curs=[]; text=[]; bloc=[]; lat=[]; lon=[]; targetes=[];
-	for(i=3; i<finalArray.length; i++) {
-		inici[i-3] = finalArray[i][numColDataIni];
-		fin[i-3] = finalArray[i][numColDataFin];
-		titol[i-3] = finalArray[i][numColTitol];
-		titol_curt[i-3] = finalArray[i][numColTitol];								
-		text[i-3]= finalArray[i][numColDescripcio];
-		bloc[i-3]= finalArray[i][numColBloc];
-		lat[i-3] = finalArray[i][numColLatitud];
-		lon[i-3] = finalArray[i][numColLongitud];
-		
-		targetes[i-3]="<div class=finestra>";
+  for(i=3; i<finalArray.length; i++) {
+    inici[i-3] = finalArray[i][numColDataIni];
+    fin[i-3] = finalArray[i][numColDataFin];
+    titol[i-3] = finalArray[i][numColTitol];
+    titol_curt[i-3] = finalArray[i][numColTitol];               
+    text[i-3]= finalArray[i][numColDescripcio];
+    bloc[i-3]= finalArray[i][numColBloc];
+    lat[i-3] = finalArray[i][numColLatitud];
+    lon[i-3] = finalArray[i][numColLongitud];
+    
+    targetes[i-3]="<div class=finestra>";
         /*
-		if (media[i]) {
-			targetes[i] +="<div class=esq><img src="+media[i]+" height=125 width=125></div>";
-		}
-		targetes[i] +="<div class=dret><p style=font-weight:bold;font-size:0.9em>"+titol[i]+"</p>";
-		if (inici[i]==fin[i]) {
-			targetes[i] +="<p style=font-size:0.85em>Data: "+inici[i]+"</p>";
-		} else {
-			targetes[i] +="<p style=font-size:0.85em>Del "+inici[i]+" al "+fin[i]+"</p>";
-		}
-		targetes[i] +="<p style=font-size:0.85em>adreça: "+adreça[i]+" ("+poblacio[i]+")</p>";
-		if (enllaç[i]) {
-			targetes[i] +="<p style=font-size:0.85em><a href="+enllaç[i]+" target=_blank>Informació addicional</a></p></div>";
-		}
-		targetes[i-3] +="</div>";
+    if (media[i]) {
+      targetes[i] +="<div class=esq><img src="+media[i]+" height=125 width=125></div>";
+    }
+    targetes[i] +="<div class=dret><p style=font-weight:bold;font-size:0.9em>"+titol[i]+"</p>";
+    if (inici[i]==fin[i]) {
+      targetes[i] +="<p style=font-size:0.85em>Data: "+inici[i]+"</p>";
+    } else {
+      targetes[i] +="<p style=font-size:0.85em>Del "+inici[i]+" al "+fin[i]+"</p>";
+    }
+    targetes[i] +="<p style=font-size:0.85em>adreça: "+adreça[i]+" ("+poblacio[i]+")</p>";
+    if (enllaç[i]) {
+      targetes[i] +="<p style=font-size:0.85em><a href="+enllaç[i]+" target=_blank>Informació addicional</a></p></div>";
+    }
+    targetes[i-3] +="</div>";
         //*/
         
-		poblacio[i] ="Barcelona";
-		adreça[i]= "";				
+    poblacio[i] ="Barcelona";
+    adreça[i]= "";        
 
-		media[i]= "Media";
-		enllaç[i]= "";				
+    media[i]= "Media";
+    enllaç[i]= "";        
         
         targetes[i-3] ="Prova";     
         //console.log(i+"---"+lat[i-3])
-	}
+  }
 
 
   var str="";
@@ -2803,6 +3444,49 @@ function getRandomColor() {
     color += letters[Math.floor(Math.random() * 16)];
   }
   return color;
+}
+
+/*
+ * Natural Sort algorithm for Javascript - Version 0.7 - Released under MIT license
+ * Author: Jim Palmer (based on chunking idea from Dave Koelle)
+ */
+ function naturalSort (a, b) {
+    var re = /(^-?[0-9]+(\.?[0-9]*)[df]?e?[0-9]?$|^0x[0-9a-f]+$|[0-9]+)/gi,
+        sre = /(^[ ]*|[ ]*$)/g,
+        dre = /(^([\w ]+,?[\w ]+)?[\w ]+,?[\w ]+\d+:\d+(:\d+)?[\w ]?|^\d{1,4}[\/\-]\d{1,4}[\/\-]\d{1,4}|^\w+, \w+ \d+, \d{4})/,
+        hre = /^0x[0-9a-f]+$/i,
+        ore = /^0/,
+        i = function(s) { return naturalSort.insensitive && (''+s).toLowerCase() || ''+s },
+        // convert all to strings strip whitespace
+        x = i(a).replace(sre, '') || '',
+        y = i(b).replace(sre, '') || '',
+        // chunk/tokenize
+        xN = x.replace(re, '\0$1\0').replace(/\0$/,'').replace(/^\0/,'').split('\0'),
+        yN = y.replace(re, '\0$1\0').replace(/\0$/,'').replace(/^\0/,'').split('\0'),
+        // numeric, hex or date detection
+        xD = parseInt(x.match(hre)) || (xN.length != 1 && x.match(dre) && Date.parse(x)),
+        yD = parseInt(y.match(hre)) || xD && y.match(dre) && Date.parse(y) || null,
+        oFxNcL, oFyNcL;
+    // first try and sort Hex codes or Dates
+    if (yD)
+        if ( xD < yD ) return -1;
+        else if ( xD > yD ) return 1;
+    // natural sorting through split numeric strings and default strings
+    for(var cLoc=0, numS=Math.max(xN.length, yN.length); cLoc < numS; cLoc++) {
+        // find floats not starting with '0', string or 0 if not defined (Clint Priest)
+        oFxNcL = !(xN[cLoc] || '').match(ore) && parseFloat(xN[cLoc]) || xN[cLoc] || 0;
+        oFyNcL = !(yN[cLoc] || '').match(ore) && parseFloat(yN[cLoc]) || yN[cLoc] || 0;
+        // handle numeric vs string comparison - number < string - (Kyle Adams)
+        if (isNaN(oFxNcL) !== isNaN(oFyNcL)) { return (isNaN(oFxNcL)) ? 1 : -1; }
+        // rely on string comparison if different types - i.e. '02' < 2 != '02' < '2'
+        else if (typeof oFxNcL !== typeof oFyNcL) {
+            oFxNcL += '';
+            oFyNcL += '';
+        }
+        if (oFxNcL < oFyNcL) return -1;
+        if (oFxNcL > oFyNcL) return 1;
+    }
+    return 0;
 }
 
 </script>

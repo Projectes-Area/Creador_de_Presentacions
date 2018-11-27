@@ -134,6 +134,10 @@ h3 {
       <h4 style='text-align: center;'><a href="<?= urlAplicacio ?>?ID=<?= idFullModel ?>&config=Config_1" target="_blank" >Aplicació</a> que us permetrà crear presentacions de mapes, targetes i taules per publicar a partir de fulls de càlcul de Google  (<a href="https://docs.google.com/spreadsheets/d/1NpyfKlvJ3_SSowkg0QFQfZZOA_kbuFufda21NXCfEUY/view#gid=0" target="_blank">MODEL</a>) declarats públics</h4>    
       <span style="text-align: center;font-family: Arial;">Amb aquesta eina podeu crear un mapa mapa, una taula o una presentació de targetes a partir d'un full de dades d'un document de </span> <span style="font-weight: bold; font-style: italic; font-family: Arial;">Google Sheets</span>.
     </div>
+    <div hidden>
+       <input id="urlAplicacio" value="<?= urlAplicacio ?>"/>
+       <input id="idFullModel" value="<?= idFullModel ?>"/>
+    </div>
 </header>                         
     <!-- /.carousel -->
 
@@ -176,21 +180,20 @@ h3 {
         </div>
         <div id="divVisuGraf" class="modal-body"> 
           <div class="col-md-8">
-              <p style="background-color: #DEDCDC">Dades a representar (veure <a href="https://docs.google.com/spreadsheets/d/1NpyfKlvJ3_SSowkg0QFQfZZOA_kbuFufda21NXCfEUY/view#gid=0" target="_blank">MODEL</a>).</p>
-              <div id="data">
-                <table id="dataTABLE" >
-                  <tbody id="dataTBODY">
-                  </tbody>
-                </table>
-              </div>
+              <p style="background-color: #DEDCDC">Dades a representar (veure <a href="<?= urlModel ?>" target="_blank">MODEL</a>).</p>
+              <ul>
+                <li>Feu una còpia del model de full de càlcul</li>
+                <li>Ompliu la informació</li>
+                <li>Publiqueu el full de càlcul</li>
+              </ul>                   
           </div>
           <div class="col-md-4">
-            <p style="background-color: #DEDCDC">Publicar el full de càlcul.</p>
+            <p style="background-color: #DEDCDC">Publiqueu el full de càlcul.</p>
             <img class="featurette-image img-responsive" src="https://drive.google.com/uc?id=1LjreVv1ZrZ-uWds0tkOYynRk7E86r3in" style="width: 100%; border: solid 1px #cacaca"/>
           </div>          
         </div>        
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal"  style="float:rigth; margin:20px;">Close</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal"  style="float:rigth; margin:20px;">Tanca</button>
         </div>
       </div>
     </div>
@@ -210,8 +213,8 @@ h3 {
               <li><strong>Segona filera:</strong> la forma en que serà presentada la informació, els filtres els agrupaments  que s'utilitzaran, si hi haurà o no agrupaments de registres, les imatges....</li>
               <li><strong>Tercera filera:</strong> les columnes que es visualitzaran en les presentacions en forma de taula.</li>
            </ul>
-           <p>A la següent taula, podeu trobar informació especifica dels diferents comportaments que poden tenir els valors de cada columna (vuere <a href="https://docs.google.com/spreadsheets/d/1BTFM2CIU7_51pfFdBHA5vJUWuqmirl23Gy9gLu1UdO0/edit#gid=362729893" target="_blank">MODEL</a>):
-           <a href="https://docs.google.com/spreadsheets/d/1BTFM2CIU7_51pfFdBHA5vJUWuqmirl23Gy9gLu1UdO0/edit#gid=362729893" target="_blank"><img src='https://drive.google.com/uc?id=1tK8pCJg4rG-UyBlHbnDaMQezKYGetCn3' style='margin: 10px 0px; width:100%; height:600px'></a></p>
+           <p>A la següent taula, podeu trobar informació especifica dels diferents comportaments que poden tenir els valors de cada columna (vuere <a href="<?= urlInstruccions ?>" target="_blank">MODEL</a>):
+           <a href="<?= urlInstruccions ?>" target="_blank"><img src='https://drive.google.com/uc?id=1tK8pCJg4rG-UyBlHbnDaMQezKYGetCn3' style='margin: 10px 0px; width:100%; height:600px'></a></p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -234,7 +237,7 @@ h3 {
            <p>Les presentacions han d'anar acompanyades d'una pestanya on caldrà construir, en format HTML, l'estructura que voleu que adopti la informació quan es presenti al web.</p>
            <p>Modifiqueu les plantilles del model o creeu unes de noves seguint per les pautes del llenguatge HTML5.</p>
            <p>Tot i que poden haver altres columnes (<strong>informacio, &lt;script&gt;,&lt;div&gt;</strong>), la mínima configuració de cada plantilla consta de dues fileres i 3 columnes (<strong>plantilla,botons,&lt;style&gt;</strong>).</p>
-           <p>Al fitxer <a href="https://docs.google.com/spreadsheets/d/1NpyfKlvJ3_SSowkg0QFQfZZOA_kbuFufda21NXCfEUY/edit#gid=1450176318" target="_blank">MODEL</a> podreu trobar diverses plantilles de configuració</p>           
+           <p>Al fitxer <a href="<?= urlTemplate ?>" target="_blank">MODEL</a> podreu trobar diverses plantilles de configuració</p>           
            <p>Exemple:</p>                      
            <table style="width: 100%; margin: 5px 0;">
               <tr>
@@ -303,7 +306,7 @@ h3 {
           <h3 class="modal-title" id="myModal" ><span class="badge" style="background-color: #428bca;"> 4 </span>Codi per compartir la presentació</h3>          
         </div>
         <div id="divVisuGraf" class="modal-body"> 
-            <p>Amb els paràmetres de la pestanya <a href="https://docs.google.com/spreadsheets/d/1BTFM2CIU7_51pfFdBHA5vJUWuqmirl23Gy9gLu1UdO0/edit#gid=1541066440" target="blank">Configuracio</a> es pot controlar la forma de presentar les dades de l'aplicació</p>                           
+            <p>Amb els paràmetres de la pestanya <a href="<?=  urlConfig ?>" target="blank">Configuracio</a> es pot controlar la forma de presentar les dades de l'aplicació</p>                           
             <p>Es poden crear diverses pestanyes de configuració diferents (Config_1,Config_2...). Cridant l'aplicació amb el nom d'aquestes, s'executarà seguint els valors dels paràmetres indicats a la pestanya</p>
             <ul>
                <li><p>Escriu a sota l'enllaç del document de Google Sheets que conté les dades, i el nom del full que conté informació de configuració addicional per a la creació de ñes presentacions.</p></li>
@@ -442,11 +445,8 @@ URL: <input type="text" id="shorturl" name="url" value="http://www.hayageek.com"
 
 
 <script>
-//var idFullModel="1NpyfKlvJ3_SSowkg0QFQfZZOA_kbuFufda21NXCfEUY";
-//var urlModel="https://docs.google.com/spreadsheets/d/1NpyfKlvJ3_SSowkg0QFQfZZOA_kbuFufda21NXCfEUY/edit?usp=sharing";
-//var urlAplicacio="https://script.google.com/a/macros/xtec.cat/s/AKfycbxHRlIiK-j2CfC9jqGE0cG84_7TG8OATAxdmI3pzJ2fdYnoTDE/exec";
 var urlModel=$("#urlModel").val()
-
+var urlAplicacio=$("#urlAplicacio").val();     
 
 function presenta_dades() {
     $("#urlUsuari").val(urlModel);

@@ -81,18 +81,25 @@ function enviarGenerar(){
     regArray=JSON.parse(regArray);
     alert(regArray);    
     //*/
+    var id=$("#idFullCalcul").val();
+    var colconfig=$("#colconfig").val();       
     var nom=$('#usuariNom').val();
     var contrasenya=$('#usuariContrasenya').val();
-    google.script.run.withSuccessHandler(onSalvarDades).entradaNoXTEC(nom,contrasenya);         
+    //alert(nom+"--"+contrasenya+"--"+id+"----"+colconfig);
+    var valors=[nom,contrasenya,id,colconfig];    
+    google.script.run.withSuccessHandler(onSalvarDades).entradaNoXTEC(valors);         
 }
 
 //preparar parametres i enviar 
-function onSalvarDades(missatge){
-   //alert(missatge);
-   google.script.run.usuariCorrecte();
+function onSalvarDades(valors){
+   alert(valors[0]+"\n"+valors[1]+"\n"+valors[2]+"\n"+valors[3]);
+   google.script.run.usuariCorrecte(valors);
+   window.close();
+   document.close();
+   /*
    $("#missatge").html(missatge);
    $('#finestraInfo').modal('show');
-
+   //*/
 }
 
 </script>
@@ -102,7 +109,10 @@ function onSalvarDades(missatge){
 
 
 <body>
-  <div class="panel panel-default centered">
+ <input hidden id='idFullCalcul' name='idFullCalcul' value='<?= id ?>'/>
+ <input hidden id='colconfig' name='colconfig' value='<?= colconfig ?>'/>
+ <div class="panel panel-default centered">
+  
   <? if (Capçalera=="S"){ ?>
     <div class="panel-heading" id="Capçalera">
         <h3 class="panel-title">
@@ -142,6 +152,14 @@ function onSalvarDades(missatge){
                         <p>L'usuari que està actualment actiu, <strong><i><?= userEmail ?> </i></strong>, no està al llistat dels autoritzats per executar aquesta aplicació.</p>
                          <br><br>
                          Per continuar, tanqueu l'usuari actual, obriu la sessió amb un usuari autoritzat i torneu a executar aquesta aplicació.
+                        <p>O si no esteu donat d'alta a l'aplicació amb un usuari i contrasenya no <strong>@xtec</strong> podeu provar d'entrar les dades al següent formulari</p>
+                        <form id='frmDades'>
+                            <div style='width:90px; text-align:right; float: left'>Usuari:</div><div style='width:50px; float: left'><input type='text' name='usuariNom' id='usuariNom' value='Josep'/></div>
+                            <br><br><div style='width:90px; text-align:right; float: left'>Contrasenya:</div><div style='width:50px; float: left'><input type='text' name='usuariContrasenya' id='usuariContrasenya' value='12345'/></div>
+                            <input type='button' class='btn btn-primary' style='width: 25%; display: block; margin: 0 auto;' onclick="enviarGenerar();" value='Enviar respostes'/>
+                        </form>                         
+                         
+
                      <? } ?>
                      
                      <? if (Tipus_missatge=="id_full_incorrecta") {?>                              
