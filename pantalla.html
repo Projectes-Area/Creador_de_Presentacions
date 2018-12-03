@@ -35,7 +35,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.3.0/leaflet.markercluster-src.js" ></script> 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-providers/1.3.1/leaflet-providers.js" ></script> 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/OverlappingMarkerSpiderfier-Leaflet/0.2.6/oms.min.js"></script>
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/OverlappingMarkerSpiderfier-Leaflet/0.2.6/oms.min.js"></script>-->
+<script src="https://edumet.cat/areatac/presentacions/oms-circleMarker.js"></script> <!-- llibreria modificada amb un error corregit de la versió final-->
 
 <!-- Per als mapes del Cartogràfic -->
 <script src="https://rawgithub.com/kartena/Proj4Leaflet/master/lib/proj4-compressed.js" type="text/javascript"></script>
@@ -474,6 +475,7 @@ var checkboxMarcadorsValue;
 var oms;
 var heat;
 var locations=[];
+var max_marcadors=1000; // per sobre d'aquest valor es mostraran cercles en comptes de svg de marcador
 
 //variables relacionades amb la presentació de targetes
 var Num_files=0;
@@ -486,6 +488,7 @@ var Capçalera='N';
 var permisEdit='N';
 
 //relacionats amb el tipus mapa
+var myRenderer;
 var numColAgrupa=-1;
 var numColLatitud=0;
 var numColLongitud=0;
@@ -937,6 +940,9 @@ function onVariables(variables) {
         map.addLayer(proveidor); 
         tipus_mapa_actual=0;
     }
+    myRenderer = L.svg();
+    map.createPane('poligons');
+    map.getPane('poligons').style.zIndex = 250;
     markers = L.markerClusterGroup(); 
     if (Mostra_clusters=='N') {
         oms = new OverlappingMarkerSpiderfier(map,{nearbyDistance:1});
@@ -1373,7 +1379,7 @@ function aplicacioFiltres(id){
  
   $('#botoCentrar').attr( "src", "https://drive.google.com/uc?id=1jVkYeRZiImemNB9QVHJjkbR2xaYgz4mz" );
  
-  var finalArray=new Array();
+  finalArray=new Array();
   finalArray=row_org;
 
   filtresActius=0;
@@ -1417,7 +1423,7 @@ function aplicacioFiltres(id){
   
   switch (tipus){
   case "mapa":
-     creaMarcadors(finalArray);
+     creaMarcadors();
      break;
   case "taula":
      creaTaula(finalArray);  
@@ -1969,7 +1975,8 @@ function creaTarges(targes) {
 
 
 
-function creaMarcadors(finalArray){ // Construeix targes i mostra marcadors en el mapa
+function creaMarcadors(){ // Construeix targes i mostra marcadors en el mapa
+   temps1=Math.floor(Date.now() / 1000);
    var repetit=[];
    for (var i=0;i<finalArray.length;i++) {
      repetit[i]=false;
@@ -2021,6 +2028,9 @@ function creaMarcadors(finalArray){ // Construeix targes i mostra marcadors en e
        }  
    }
    
+// Alliberar repetit
+   repetit=[];
+   
    if(numCentres==0) {
       missatgeError("No hi ha cap marcador en el mapa com a resultat dels filtres aplicats.");
    }
@@ -2063,7 +2073,6 @@ function creaMarcadors(finalArray){ // Construeix targes i mostra marcadors en e
           checkboxMarcadorsValue=true;
    }
   
-   //for (k=0;k<centres.length;k++) (function(i){  
    for (i=0;i<centres.length;i++) {
       var laLatitud=parseFloat(centres[i][numColLatitud]);
       var laLongitud=parseFloat(centres[i][numColLongitud]);
@@ -2086,50 +2095,34 @@ function creaMarcadors(finalArray){ // Construeix targes i mostra marcadors en e
             senseLloc[numSenseLloc]=[agrupaCentres[i],centres[i][numColLatitud],centres[i][numColLongitud]];        
         }
       } 
-         
-      locations[i]={lat: laLatitud, lng: laLongitud}; 
-      iColors[i]=clr;
-      titols[i]="";      
+      
+      locations[i]={lat: laLatitud, lng: laLongitud};       
+     
+      iColors[i]=clr;         
+      /*titols[i]="";      
       if (numColTitol!=""){
           titols[i]=centres[i][numColTitol];
-      }
-      var row_dad=centres[i];
-      var Capçalera=aplica_plantilla(plantilla_1,row_dad);
-      
-      //creació dels botons de cada registre agrupat
-      var botons="";            
-      var str=row_rep[i].substr(0,row_rep[i].length-1);
-      var llistaReg=str.split(",");        
-      for(var j=0;j<llistaReg.length;j++) { 
-         var nId=llistaReg[j];
-         var row_dad=finalArray[nId];
-         var boto=aplica_plantilla(plantilla_2,row_dad);
-         botons+=boto;
-         botons+="<br>";
-      }        
-   
-      Capçalera=Capçalera.replace("{{#Botons#}}",botons);                
-      contentString='<div id="content">';               
-      contentString+=Capçalera;
-      contentString+='</div>';          
+      }*/
+                 
+// Icones dels marcadors    
 
-// Icones dels marcadors
+    var iniciSVG,finalSVG,cadenaSVG,vertAnchor,pos1,pos2,path,myIconUrl,icon,iconaLlegenda;
     iconaDefinida=false;
       if(numColNomLlegendaMapa!=-1) {
         if(centres[i][numColNomLlegendaMapa]!="") { // Icona segons el tipus indicat
              
-             var iniciSVG=llegendes.search("<"+centres[i][numColNomLlegendaMapa]+">")+centres[i][numColNomLlegendaMapa].length; // Inline SVG for HTML de https://materialdesignicons.com
-             var finalSVG=llegendes.search("</"+centres[i][numColNomLlegendaMapa]+">");
-             var cadenaSVG=llegendes.substring(iniciSVG,finalSVG); 
+             iniciSVG=llegendes.search("<"+centres[i][numColNomLlegendaMapa]+">")+centres[i][numColNomLlegendaMapa].length; // Inline SVG for HTML de https://materialdesignicons.com
+             finalSVG=llegendes.search("</"+centres[i][numColNomLlegendaMapa]+">");
+             cadenaSVG=llegendes.substring(iniciSVG,finalSVG); 
              
-             var vertAnchor=pixelsIco*escalaIco/2;
+             vertAnchor=pixelsIco*escalaIco/2;
              if (cadenaSVG.search("marcador")!=-1) {  // Si inclou la paraula "marcador"
                 vertAnchor = pixelsIco*escalaIco;
              }
              
-             var pos1=cadenaSVG.search("d=")+3;   
-             var pos2=cadenaSVG.search(" />")-1;
-             var path=cadenaSVG.substring(pos1,pos2); 
+             pos1=cadenaSVG.search("d=")+3;   
+             pos2=cadenaSVG.search(" />")-1;
+             path=cadenaSVG.substring(pos1,pos2); 
              
              if (path.length<3) { // Si no es troba la definició a la plantilla
                if(Marcador_defecte_forma!="") { // Si s'ha indicat el marcador per defecte
@@ -2138,68 +2131,64 @@ function creaMarcadors(finalArray){ // Construeix targes i mostra marcadors en e
                  finalSVG=llegendes.search("</"+Marcador_defecte_forma+">");
                  cadenaSVG=llegendes.substring(iniciSVG,finalSVG);
                  
-                 var vertAnchor=pixelsIco*escalaIco/2;
+                 vertAnchor=pixelsIco*escalaIco/2;
                  if (cadenaSVG.search("marcador")!=-1) {
                     vertAnchor= pixelsIco*escalaIco;
                  }
                               
-                 var pos1=cadenaSVG.search("d=")+3;   
-                 var pos2=cadenaSVG.search(" />")-1;
-                 var path =cadenaSVG.substring(pos1,pos2);
+                 pos1=cadenaSVG.search("d=")+3;   
+                 pos2=cadenaSVG.search(" />")-1;
+                 path =cadenaSVG.substring(pos1,pos2);
                  
                  if (path.length<3) { // Si s'ha indicat marcador per defecte però no es troba la definició a la plantilla
                    path=path_defecte;                           
                    vertAnchor = pixelsIco*escalaIco;
                  }                                  
-               } else { // Si no s'ha indicat marcador per defecte      */            
+               } else { // Si no s'ha indicat marcador per defecte                 
                  path=path_defecte;                           
                  vertAnchor = pixelsIco*escalaIco;
                }
-           }
-             
-             
-             
+           }            
+                         
              cadenaSVG='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 '+pixelsIco+' '+pixelsIco+'"><path d="'+path+'" fill="'+iColors[i]+'" /></svg>';
              
-             var myIconUrl = encodeURI("data:image/svg+xml," + cadenaSVG).replace('#','%23');             
-             var icon = L.icon( {
+             myIconUrl = encodeURI("data:image/svg+xml," + cadenaSVG).replace('#','%23');             
+             icon = L.icon( {
                   iconUrl: myIconUrl,
                   iconSize: [pixelsIco*escalaIco, pixelsIco*escalaIco],
                   iconAnchor: [pixelsIco*escalaIco/2, vertAnchor]
              } );
-
-             var iconaLlegenda ="<input type='checkbox' checked id='ico_"+centres[i][numColNomLlegendaMapa]+"' value='"+centres[i][numColNomLlegendaMapa]+"' style=\"vertical-align:-3px\" onchange=\"desactivaCapa('ico_"+centres[i][numColNomLlegendaMapa]+"')\"/><svg style='height:24px; width:24px; vertical-align:-4px'><path fill='"+iColors[i]+"' d='"+path+"' stroke='black' stroke-width='0' /></svg>"; 
-             
-             iconaDefinida=true;                
+           
+             iconaLlegenda ="<input type='checkbox' checked id='ico_"+centres[i][numColNomLlegendaMapa]+"' value='"+centres[i][numColNomLlegendaMapa]+"' style=\"vertical-align:-3px\" onchange=\"desactivaCapa('ico_"+centres[i][numColNomLlegendaMapa]+"')\"/><svg style='height:24px; width:24px; vertical-align:-4px'><path fill='"+iColors[i]+"' d='"+path+"' stroke='black' stroke-width='0' /></svg>";   
+             iconaDefinida=true;  
         }
       }
       
       if (!iconaDefinida) {
-        if(Marcador_defecte_forma!="") { // Icona per defecte definida per l'usuari 
-                     
-             var iniciSVG=llegendes.search("<"+Marcador_defecte_forma+">")+Marcador_defecte_forma.length; // Inline SVG for HTML de https://materialdesignicons.com
-             var finalSVG=llegendes.search("</"+Marcador_defecte_forma+">");
-             var cadenaSVG=llegendes.substring(iniciSVG,finalSVG);
+        if(Marcador_defecte_forma!="") { // Icona per defecte definida per l'usuari                      
+             iniciSVG=llegendes.search("<"+Marcador_defecte_forma+">")+Marcador_defecte_forma.length; // Inline SVG for HTML de https://materialdesignicons.com
+             finalSVG=llegendes.search("</"+Marcador_defecte_forma+">");
+             cadenaSVG=llegendes.substring(iniciSVG,finalSVG);
              
-             var vertAnchor=pixelsIco*escalaIco/2;
+             vertAnchor=pixelsIco*escalaIco/2;
              if (cadenaSVG.search("marcador")!=-1) {
                 vertAnchor= pixelsIco*escalaIco;
              }
                           
-             var pos1=cadenaSVG.search("d=")+3;   
-             var pos2=cadenaSVG.search(" />")-1;
-             var path =cadenaSVG.substring(pos1,pos2); 
+             pos1=cadenaSVG.search("d=")+3;   
+             pos2=cadenaSVG.search(" />")-1;
+             path =cadenaSVG.substring(pos1,pos2); 
              
              cadenaSVG='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 '+pixelsIco+' '+pixelsIco+'"><path d="'+path+'" fill="'+iColors[i]+'" /></svg>';
              
-             var myIconUrl = encodeURI("data:image/svg+xml," + cadenaSVG).replace('#','%23');             
-             var icon = L.icon( {
+             myIconUrl = encodeURI("data:image/svg+xml," + cadenaSVG).replace('#','%23');             
+             icon = L.icon( {
                   iconUrl: myIconUrl,
                   iconSize: [pixelsIco*escalaIco, pixelsIco*escalaIco],
                   iconAnchor: [pixelsIco*escalaIco/2, vertAnchor]
              } );
                  
-             var iconaLlegenda ="<input type='checkbox' checked id='ico_"+centres[i][numColNomLlegendaMapa]+"' value='"+centres[i][numColNomLlegendaMapa]+"' style=\"vertical-align:-3px\" onchange=\"desactivaCapa('ico_"+centres[i][numColNomLlegendaMapa]+"')\"/><svg style='height:24px; width:24px; vertical-align:-4px'><path fill='"+iColors[i]+"' d='"+path+"' stroke='black' stroke-width='0' /></svg>";
+             iconaLlegenda ="<input type='checkbox' checked id='ico_"+centres[i][numColNomLlegendaMapa]+"' value='"+centres[i][numColNomLlegendaMapa]+"' style=\"vertical-align:-3px\" onchange=\"desactivaCapa('ico_"+centres[i][numColNomLlegendaMapa]+"')\"/><svg style='height:24px; width:24px; vertical-align:-4px'><path fill='"+iColors[i]+"' d='"+path+"' stroke='black' stroke-width='0' /></svg>";
                           
              if(numColNomLlegendaMapa!=-1) { // Per tal que mostri el marcador per defecte definit per l'usuari en la llegenda
                centres[i][numColNomLlegendaMapa]=Marcador_defecte_forma;
@@ -2207,24 +2196,36 @@ function creaMarcadors(finalArray){ // Construeix targes i mostra marcadors en e
              
         } else {  // Definició de la icona per defecte dels marcadors  
              cadenaSVG='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 '+pixelsIco+' '+pixelsIco+'"><path d="'+path_defecte+'" fill="'+iColors[i]+'" /></svg>';
-             var myIconUrl = encodeURI("data:image/svg+xml," + cadenaSVG).replace('#','%23');             
-             var icon = L.icon( {
+             myIconUrl = encodeURI("data:image/svg+xml," + cadenaSVG).replace('#','%23');             
+             icon = L.icon( {
                   iconUrl: myIconUrl,
                   iconSize: [pixelsIco*escalaIco, pixelsIco*escalaIco],
                   iconAnchor: [pixelsIco*escalaIco/2, pixelsIco*escalaIco]
              } );
         }        
-      }      
+      } 
       
-      marcadors[i]=L.marker(locations[i],{icon:icon});
-      marcadors[i].bindPopup(contentString);
-          
+      if (centres.length<max_marcadors) {
+        marcadors[i]=L.marker(locations[i],{icon:icon});     
+      } else {
+        marcadors[i]=L.circleMarker(locations[i], {
+          radius : 6,
+          color : iColors[i],
+          renderer: myRenderer
+        });
+      }
+              
       if (Mostra_clusters=='S'){  
          markers.addLayer(marcadors[i]);         
       } else {  
          marcadors[i].addTo(map);
          oms.addMarker(marcadors[i]);
       }
+      
+      //marcadors[i].bindPopup(contentString);   
+      
+      marcadors[i].index=i;
+      marcadors[i].on('click',function(e) {carregaPopup(this.index)});           
 
       //construcció dels elements de la llegenda si té posició       
       
@@ -2243,20 +2244,25 @@ function creaMarcadors(finalArray){ // Construeix targes i mostra marcadors en e
            }
         }        
       }      
-   }//)(k);      
-   
-   map.addLayer(markers);
-   
+   }   
+
+// Alliberar agrupaCentres
+  agrupaCentres=[];
+     
+  map.addLayer(markers);
+  console.log("Marcadors:" + marcadors.length);
+    
         if(numLlegendes==0) {
              cadenaSVG='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 '+pixelsIco+' '+pixelsIco+'"><path d="'+path_defecte+'" fill="'+Marcador_defecte_color+'" /></svg>';
              //console.log(cadenaSVG);
-             var myIconUrl = encodeURI("data:image/svg+xml," + cadenaSVG).replace('#','%23');             
-             var icon = L.icon( {
+             myIconUrl = encodeURI("data:image/svg+xml," + cadenaSVG).replace('#','%23');             
+             icon = L.icon( {
+                  //renderer: myRenderer,
                   iconUrl: myIconUrl,
                   iconSize: [pixelsIco*escalaIco, pixelsIco*escalaIco],
                   iconAnchor: [pixelsIco*escalaIco/2, pixelsIco*escalaIco]
              } );
-             var iconaLlegenda ="<input type='checkbox' checked id='marcadors' value='Marcadors' style=\"vertical-align:-3px\" onchange=\"desactivaCapa('marcadors')\"/><svg style='height:24px; width:24px; vertical-align:-4px'><path fill='"+Marcador_defecte_color+"' d='"+path_defecte+"' stroke='black' stroke-width='0' /></svg>";         
+             iconaLlegenda ="<input type='checkbox' checked id='marcadors' value='Marcadors' style=\"vertical-align:-3px\" onchange=\"desactivaCapa('marcadors')\"/><svg style='height:24px; width:24px; vertical-align:-4px'><path fill='"+Marcador_defecte_color+"' d='"+path_defecte+"' stroke='black' stroke-width='0' /></svg>";         
              numLlegendes=1;
              filaLlegenda[0]="<div style='width:150px; margin: 5px; vertical-align:middle; horizontal-align:left'>"+iconaLlegenda+"Marcadors</div>";                
         }   
@@ -2274,7 +2280,7 @@ function creaMarcadors(finalArray){ // Construeix targes i mostra marcadors en e
    }
    
   //poligons
-  
+      
     if(row_poligons!=null) {
       if (row_poligons.length>3){
         if(iniciantMapa) {
@@ -2333,10 +2339,12 @@ function creaMarcadors(finalArray){ // Construeix targes i mostra marcadors en e
                      fillOpacity: 0.5,
                      color: color,
                      strokeWidth: 2,
-                     strokeOpacity: 0.8
+                     strokeOpacity: 0.8,
+                     pane: 'poligons'
+                     //interactive: false
                   });
                   if(checkboxPoligonsValue) {
-                    poligons[p].addTo(map); 
+                    poligons[p].addTo(map);
                   }
                } 
             }
@@ -2350,12 +2358,12 @@ function creaMarcadors(finalArray){ // Construeix targes i mostra marcadors en e
           }
        }
     } 
-    
+       
     llgd +="#$#Clusters";    
     path="M16,12V4H17V2H7V4H8V12L6,14V16H11.2V22H12.8V16H18V14L16,12Z";
     var iconaLlegenda ="<svg style='height:24px; width:24px; vertical-align:-4px'><path fill='#00FF00' d='"+path+"' stroke='black' stroke-width='0' /></svg>"; 
     if (Casella_clusters=='S') {
-      contingutLlegenda+="<div style='width:150px; margin: 5px; vertical-align:middle; horizontal-align:left'><input type='checkbox' id='clusters' style='vertical-align:-3px' onchange=\"desactivaClusters(this.id)\"/>"+iconaLlegenda+"Clusters</div>";    
+      contingutLlegenda+="<div style='width:150px; margin: 5px; vertical-align:middle; horizontal-align:left'><input type='checkbox' id='clusters' style='vertical-align:-3px' onchange=\"desactivaClusters()\"/>"+iconaLlegenda+"Clusters</div>";    
     }
     
     llgd +="#$#heatmap";    
@@ -2490,7 +2498,33 @@ function creaMarcadors(finalArray){ // Construeix targes i mostra marcadors en e
      map.addLayer(heat);
      desactivaMarcadors();
    }
+   var durada=Math.floor(Date.now() / 1000)-temps1;
+   console.log("creaMarcadors - Durada (segons):"+durada);
 }
+
+function carregaPopup(i) {
+      var row_dad=centres[i];
+      var Capçalera=aplica_plantilla(plantilla_1,row_dad);
+      
+      //creació dels botons de cada registre agrupat
+      var botons="";            
+      var str=row_rep[i].substr(0,row_rep[i].length-1);
+      var llistaReg=str.split(",");  
+      for(var j=0;j<llistaReg.length;j++) { 
+         var nId=llistaReg[j];
+         var row_dad=finalArray[nId];
+         var boto=aplica_plantilla(plantilla_2,row_dad);
+         botons+=boto;
+         botons+="<br>";
+      }         
+      Capçalera=Capçalera.replace("{{#Botons#}}",botons);       
+      contentString='<div id="content">';               
+      contentString+=Capçalera;
+      contentString+='</div>';        
+      marcadors[i].bindPopup(contentString).openPopup();
+}
+
+
 
 function desactivaCapa(ico){
     if (ico=="poligons"){
@@ -2511,40 +2545,49 @@ function desactivaCapa(ico){
     mostraCapa(ico);
 }
 
-function desactivaClusters(ico){
-    if($("#clusters").is(":checked")){
-        checkboxClustersValue=true;
-        Mostra_clusters='S';
-        
-        for(i=0;i<marcadors.length;i++) {
-          map.removeLayer(marcadors[i]);
-          oms.removeMarker(marcadors[i]);             
-        }     
-                
-        for (var i = 0; i < marcadors.length; i++) {
-          var mrk="ico_"+centres[i][numColNomLlegendaMapa];      
-          if ($("[id='"+mrk+"']").is(":checked")) {  
-              markers.addLayer(marcadors[i]);      
-          } else { 
-              markers.removeLayer(marcadors[i]);       
-          }
-        }
-
-    } else {
-        checkboxClustersValue=false;
-        Mostra_clusters='N';  
-        for (var i = 0; i < marcadors.length; i++) {
-            markers.removeLayer(marcadors[i]);
-        }  
-        oms = new OverlappingMarkerSpiderfier(map,{nearbyDistance:1});
-        oms.addListener('spiderfy', function(markers) {
-        map.closePopup();
-        });
-        for (var i = 0; i < marcadors.length; i++) {        
-            marcadors[i].addTo(map);
-            oms.addMarker(marcadors[i]);
-        }
+function desactivaClusters(){
+  var elNom;
+  if($("#clusters").is(":checked")){
+    checkboxClustersValue=true;
+    Mostra_clusters='S';        
+    for (var i = 0; i < marcadors.length; i++) {
+      map.removeLayer(marcadors[i]);
+      oms.removeMarker(marcadors[i]); 
+      if(numColNomLlegendaMapa!=-1) {
+        var mrk="ico_"+centres[i][numColNomLlegendaMapa];
+        elNom= mrk+"']";
+      } else {
+        elNom="marcadors']";
+      }             
+      if ($("[id='"+elNom).is(":checked")) {  
+          markers.addLayer(marcadors[i]);      
+      } else { 
+          markers.removeLayer(marcadors[i]);       
+      }             
     }
+  } else {
+      checkboxClustersValue=false;
+      Mostra_clusters='N';  
+      for (var i = 0; i < marcadors.length; i++) {
+        markers.removeLayer(marcadors[i]);
+      }  
+      oms = new OverlappingMarkerSpiderfier(map,{nearbyDistance:1});
+      oms.addListener('spiderfy', function(markers) {
+        map.closePopup();
+      });
+      for (var i = 0; i < marcadors.length; i++) {      
+        if(numColNomLlegendaMapa!=-1) {
+          var mrk="ico_"+centres[i][numColNomLlegendaMapa];
+          elNom= mrk+"']";
+        } else {
+          elNom="marcadors']";
+        } 
+        if ($("[id='"+elNom).is(":checked")) {  
+          marcadors[i].addTo(map);
+          oms.addMarker(marcadors[i]);
+        } 
+      }
+  }
 }
 
 function activaMarcadors() {
